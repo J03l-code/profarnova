@@ -182,7 +182,22 @@
         .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
         .cert-card { background: white; border-radius: var(--radius-lg); padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--color-gray-100); transition: all 0.3s ease; }
         .cert-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary-light); }
-        .cert-card .cert-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cert-card .cert-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--color-primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            color: var(--color-primary-dark);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .cert-card:hover .cert-icon {
+            background: var(--color-primary);
+            color: white;
+        }
         .cert-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--color-gray-800); margin-bottom: 0.4rem; }
         .cert-card p { font-size: 0.82rem; color: var(--color-gray-500); }
 
@@ -402,22 +417,56 @@
             <p>Calidad verificada por los organismos de control más exigentes.</p>
             <div class="certs-grid">
                 <div class="cert-card">
-                    <div class="cert-icon">🏛️</div>
+                    <div class="cert-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 21h18" />
+                            <path d="M3 10h18" />
+                            <path d="M5 6h14" />
+                            <path d="M4 10v11" />
+                            <path d="M20 10v11" />
+                            <path d="M8 14v3" />
+                            <path d="M12 14v3" />
+                            <path d="M16 14v3" />
+                            <path d="M4 6l8-4 8 4" />
+                        </svg>
+                    </div>
                     <h4>Registro ARCSA</h4>
                     <p>Agencia Nacional de Regulación, Control y Vigilancia Sanitaria del Ecuador</p>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-icon">🔬</div>
+                    <div class="cert-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4.5 16.5c-1.5 1.26-2 2.76-2 3.5 0 1 1 1 1 1s3-.5 4.5-2" />
+                            <path d="M12 5l9 9" />
+                            <path d="M9 8l9 9" />
+                            <path d="M18 3l3 3" />
+                            <path d="M14 7l3-3" />
+                            <path d="M9.7 11.3l-5.2 5.2" />
+                            <path d="M12.7 8.3l5.2-5.2" />
+                        </svg>
+                    </div>
                     <h4>BPM</h4>
                     <p>Buenas Prácticas de Manufactura certificadas en todas las líneas de producción</p>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-icon">✅</div>
+                    <div class="cert-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <polyline points="9 12 11 14 15 10"/>
+                        </svg>
+                    </div>
                     <h4>Control de Calidad</h4>
                     <p>Análisis fisicoquímico y microbiológico en cada lote de producción</p>
                 </div>
                 <div class="cert-card">
-                    <div class="cert-icon">🌿</div>
+                    <div class="cert-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 22c1.25-3.66 4.5-6.04 8.5-6.04s7.25 2.38 8.5 6.04" />
+                            <path d="M12.5 6.5C14.7 3.5 19 3 19 3s-.5 4.3-3.5 6.5" />
+                            <path d="M11.5 6.5C9.3 3.5 5 3 5 3s.5 4.3 3.5 6.5" />
+                            <path d="M12 16V9" />
+                        </svg>
+                    </div>
                     <h4>Ingredientes Naturales</h4>
                     <p>Materias primas certificadas de proveedores especializados y auditados</p>
                 </div>
