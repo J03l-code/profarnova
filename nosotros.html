@@ -1,15 +1,20 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Conoce la historia, misión, visión y valores de PROFARNOVA, laboratorio farmacéutico ecuatoriano comprometido con la calidad y la innovación.">
-    <meta name="keywords" content="PROFARNOVA nosotros, laboratorio farmacéutico Ecuador, misión visión, calidad farmacéutica">
+    <meta name="description"
+        content="Conoce la historia, misión, visión y valores de PROFARNOVA, laboratorio farmacéutico ecuatoriano comprometido con la calidad y la innovación.">
+    <meta name="keywords"
+        content="PROFARNOVA nosotros, laboratorio farmacéutico Ecuador, misión visión, calidad farmacéutica">
     <title>Nosotros | PROFARNOVA - Laboratorio Farmacéutico</title>
     <link rel="icon" type="image/png" sizes="32x32" href="assets/profarnovaicon.ico">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="profarnova-main.css">
     <style>
         /* ── Page Hero ── */
@@ -21,16 +26,18 @@
             position: relative;
             overflow: hidden;
         }
+
         .page-hero::before {
             content: '';
             position: absolute;
             inset: 0;
             background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='15'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
+
         .page-hero-tag {
             display: inline-block;
-            background: rgba(255,255,255,0.15);
-            border: 1px solid rgba(255,255,255,0.3);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
             color: white;
             font-size: 0.8rem;
             font-weight: 600;
@@ -40,12 +47,14 @@
             border-radius: 100px;
             margin-bottom: 1.5rem;
         }
+
         .page-hero h1 {
             font-size: clamp(2.2rem, 5vw, 3.5rem);
             font-weight: 800;
             line-height: 1.15;
             margin-bottom: 1.2rem;
         }
+
         .page-hero p {
             font-size: 1.15rem;
             opacity: 0.88;
@@ -53,6 +62,7 @@
             margin: 0 auto;
             line-height: 1.7;
         }
+
         .breadcrumb {
             display: flex;
             align-items: center;
@@ -62,12 +72,26 @@
             font-size: 0.85rem;
             opacity: 0.75;
         }
-        .breadcrumb a { color: white; text-decoration: none; }
-        .breadcrumb a:hover { opacity: 1; text-decoration: underline; }
-        .breadcrumb span { opacity: 0.6; }
+
+        .breadcrumb a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .breadcrumb a:hover {
+            opacity: 1;
+            text-decoration: underline;
+        }
+
+        .breadcrumb span {
+            opacity: 0.6;
+        }
 
         /* ── Sections ── */
-        .about-full { padding: 5rem 0; }
+        .about-full {
+            padding: 5rem 0;
+        }
+
         .about-full .about-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -75,13 +99,42 @@
             align-items: center;
             margin-bottom: 5rem;
         }
-        .about-full .about-content.reverse { direction: rtl; }
-        .about-full .about-content.reverse > * { direction: ltr; }
 
-        .about-full h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: var(--color-gray-900); }
-        .about-full h2 span { color: var(--color-primary); }
-        .about-full p { color: var(--color-gray-600); line-height: 1.8; margin-bottom: 1rem; font-size: 1.0rem; }
-        .about-full .section-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.75rem; }
+        .about-full .about-content.reverse {
+            direction: rtl;
+        }
+
+        .about-full .about-content.reverse>* {
+            direction: ltr;
+        }
+
+        .about-full h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--color-gray-900);
+        }
+
+        .about-full h2 span {
+            color: var(--color-primary);
+        }
+
+        .about-full p {
+            color: var(--color-gray-600);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            font-size: 1.0rem;
+        }
+
+        .about-full .section-tag {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--color-primary);
+            margin-bottom: 0.75rem;
+        }
 
         .img-placeholder {
             background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-50));
@@ -93,7 +146,12 @@
             align-items: center;
             justify-content: center;
         }
-        .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+
+        .img-placeholder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
 
         /* Mission / Vision cards */
         .mv-grid {
@@ -102,6 +160,7 @@
             gap: 2rem;
             margin: 3rem 0;
         }
+
         .mv-card {
             background: white;
             border-radius: var(--radius-xl);
@@ -110,17 +169,68 @@
             border-top: 4px solid var(--color-primary);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-        .mv-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
-        .mv-icon { width: 56px; height: 56px; background: var(--color-primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; color: var(--color-primary-dark); }
-        .mv-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--color-gray-900); }
-        .mv-card p { font-size: 0.95rem; color: var(--color-gray-600); line-height: 1.7; }
+
+        .mv-card:hover {
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .mv-icon {
+            width: 56px;
+            height: 56px;
+            background: var(--color-primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1.25rem;
+            color: var(--color-primary-dark);
+        }
+
+        .mv-card h3 {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+            color: var(--color-gray-900);
+        }
+
+        .mv-card p {
+            font-size: 0.95rem;
+            color: var(--color-gray-600);
+            line-height: 1.7;
+        }
 
         /* Values section */
-        .values-section { background: var(--color-gray-50); padding: 5rem 0; }
-        .values-section h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .values-section h2 span { color: var(--color-primary); }
-        .values-section > .container > .values-intro { text-align: center; color: var(--color-gray-500); max-width: 640px; margin: 0 auto 3rem; line-height: 1.7; }
-        .values-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1.5rem; }
+        .values-section {
+            background: var(--color-gray-50);
+            padding: 5rem 0;
+        }
+
+        .values-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .values-section h2 span {
+            color: var(--color-primary);
+        }
+
+        .values-section>.container>.values-intro {
+            text-align: center;
+            color: var(--color-gray-500);
+            max-width: 640px;
+            margin: 0 auto 3rem;
+            line-height: 1.7;
+        }
+
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 1.5rem;
+        }
+
         .value-card {
             background: white;
             border-radius: var(--radius-xl);
@@ -132,14 +242,22 @@
             position: relative;
             overflow: hidden;
         }
+
         .value-card::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0;
+            top: 0;
+            left: 0;
+            right: 0;
             height: 3px;
             background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
         }
-        .value-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
+
+        .value-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-xl);
+        }
+
         .value-icon-wrap {
             width: 64px;
             height: 64px;
@@ -152,36 +270,178 @@
             color: var(--color-primary-dark);
             transition: background 0.3s ease;
         }
-        .value-card:hover .value-icon-wrap { background: var(--color-primary); color: white; }
-        .value-card h4 { font-size: 1.05rem; font-weight: 800; color: var(--color-primary-dark); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
-        .value-card p { font-size: 0.85rem; color: var(--color-gray-600); line-height: 1.65; }
-        @media (max-width: 1024px) { .values-grid { grid-template-columns: repeat(3, 1fr); } }
-        @media (max-width: 640px) { .values-grid { grid-template-columns: repeat(2, 1fr); } }
+
+        .value-card:hover .value-icon-wrap {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .value-card h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--color-primary-dark);
+            margin-bottom: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .value-card p {
+            font-size: 0.85rem;
+            color: var(--color-gray-600);
+            line-height: 1.65;
+        }
+
+        @media (max-width: 1024px) {
+            .values-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .values-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
 
         /* Timeline */
-        .timeline-section { background: var(--color-gray-50); padding: 5rem 0; }
-        .timeline-section h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .timeline-section h2 span { color: var(--color-primary); }
-        .timeline-section > .container > p { text-align: center; color: var(--color-gray-500); margin-bottom: 3rem; }
-        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
-        .timeline-item { display: flex; gap: 2rem; margin-bottom: 3rem; align-items: flex-start; }
-        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
-        .timeline-item:nth-child(even) .timeline-content { text-align: right; }
-        .timeline-content { flex: 1; background: white; padding: 1.5rem 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); transition: all 0.3s ease; }
-        .timeline-content:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-        .timeline-dot { width: 48px; height: 48px; flex-shrink: 0; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.85rem; z-index: 1; margin-top: 0.5rem; }
-        .timeline-year { font-size: 0.75rem; font-weight: 700; color: var(--color-primary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.4rem; }
-        .timeline-content h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--color-gray-900); }
-        .timeline-content p { font-size: 0.9rem; color: var(--color-gray-600); line-height: 1.6; }
+        .timeline-section {
+            background: var(--color-gray-50);
+            padding: 5rem 0;
+        }
+
+        .timeline-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-section h2 span {
+            color: var(--color-primary);
+        }
+
+        .timeline-section>.container>p {
+            text-align: center;
+            color: var(--color-gray-500);
+            margin-bottom: 3rem;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .timeline-item {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            align-items: flex-start;
+        }
+
+        .timeline-item:nth-child(even) {
+            flex-direction: row-reverse;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            text-align: right;
+        }
+
+        .timeline-content {
+            flex: 1;
+            background: white;
+            padding: 1.5rem 2rem;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timeline-dot {
+            width: 48px;
+            height: 48px;
+            flex-shrink: 0;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85rem;
+            z-index: 1;
+            margin-top: 0.5rem;
+        }
+
+        .timeline-year {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 0.4rem;
+        }
+
+        .timeline-content h4 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+            color: var(--color-gray-900);
+        }
+
+        .timeline-content p {
+            font-size: 0.9rem;
+            color: var(--color-gray-600);
+            line-height: 1.6;
+        }
 
         /* Certifications */
-        .certs-section { padding: 5rem 0; }
-        .certs-section h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .certs-section h2 span { color: var(--color-primary); }
-        .certs-section > .container > p { text-align: center; color: var(--color-gray-500); margin-bottom: 3rem; }
-        .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
-        .cert-card { background: white; border-radius: var(--radius-lg); padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--color-gray-100); transition: all 0.3s ease; }
-        .cert-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary-light); }
+        .certs-section {
+            padding: 5rem 0;
+        }
+
+        .certs-section h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .certs-section h2 span {
+            color: var(--color-primary);
+        }
+
+        .certs-section>.container>p {
+            text-align: center;
+            color: var(--color-gray-500);
+            margin-bottom: 3rem;
+        }
+
+        .certs-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1.5rem;
+        }
+
+        .cert-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem 1.5rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--color-gray-100);
+            transition: all 0.3s ease;
+        }
+
+        .cert-card:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--color-primary-light);
+        }
+
         .cert-card .cert-icon {
             width: 56px;
             height: 56px;
@@ -194,33 +454,98 @@
             color: var(--color-primary-dark);
             transition: background 0.3s ease, color 0.3s ease;
         }
+
         .cert-card:hover .cert-icon {
             background: var(--color-primary);
             color: white;
         }
-        .cert-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--color-gray-800); margin-bottom: 0.4rem; }
-        .cert-card p { font-size: 0.82rem; color: var(--color-gray-500); }
+
+        .cert-card h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-gray-800);
+            margin-bottom: 0.4rem;
+        }
+
+        .cert-card p {
+            font-size: 0.82rem;
+            color: var(--color-gray-500);
+        }
 
         /* CTA band */
-        .cta-band { background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary)); padding: 4rem 0; text-align: center; color: white; }
-        .cta-band h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; }
-        .cta-band p { opacity: 0.85; margin-bottom: 2rem; font-size: 1.05rem; }
-        .btn-white-outline { display: inline-flex; align-items: center; gap: 0.5rem; border: 2px solid white; color: white; font-weight: 600; padding: 0.9rem 2rem; border-radius: var(--radius-md); text-decoration: none; transition: all 0.25s ease; }
-        .btn-white-outline:hover { background: white; color: var(--color-primary-dark); }
+        .cta-band {
+            background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .cta-band h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .cta-band p {
+            opacity: 0.85;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+        }
+
+        .btn-white-outline {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            border: 2px solid white;
+            color: white;
+            font-weight: 600;
+            padding: 0.9rem 2rem;
+            border-radius: var(--radius-md);
+            text-decoration: none;
+            transition: all 0.25s ease;
+        }
+
+        .btn-white-outline:hover {
+            background: white;
+            color: var(--color-primary-dark);
+        }
 
         @media (max-width: 768px) {
-            .about-full .about-content { grid-template-columns: 1fr; gap: 2rem; }
-            .about-full .about-content.reverse { direction: ltr; }
-            .mv-grid { grid-template-columns: 1fr; }
-            .certs-grid { grid-template-columns: repeat(2, 1fr); }
-            .timeline-item, .timeline-item:nth-child(even) { flex-direction: row; }
-            .timeline-item:nth-child(even) .timeline-content { text-align: left; }
+            .about-full .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .about-full .about-content.reverse {
+                direction: ltr;
+            }
+
+            .mv-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .certs-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .timeline-item,
+            .timeline-item:nth-child(even) {
+                flex-direction: row;
+            }
+
+            .timeline-item:nth-child(even) .timeline-content {
+                text-align: left;
+            }
         }
+
         @media (max-width: 576px) {
-            .certs-grid { grid-template-columns: 1fr; }
+            .certs-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
+
 <body>
     <!-- Header -->
     <header class="header" id="header">
@@ -253,7 +578,8 @@
             </div>
             <div class="page-hero-tag">Quiénes Somos</div>
             <h1>Ciencia, compromiso y <br><span style="color: #7fffd4;">calidez humana</span></h1>
-            <p>Combinamos ciencia, compromiso y calidez humana para ofrecer medicamentos de alta calidad que cuidan la salud y el bienestar de los ecuatorianos.</p>
+            <p>Combinamos ciencia, compromiso y calidez humana para ofrecer medicamentos de alta calidad que cuidan la
+                salud y el bienestar de los ecuatorianos.</p>
         </div>
     </section>
 
@@ -261,30 +587,50 @@
     <section class="about-full">
         <div class="container">
             <div style="text-align:center; margin-bottom: 3rem;">
-                <span class="section-tag" style="font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-primary);">Nuestros Pilares</span>
-                <h2 style="font-size:2rem;font-weight:700;margin-top:0.5rem;">Lo que nos <span style="color:var(--color-primary);">define</span></h2>
+                <span class="section-tag"
+                    style="font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-primary);">Nuestros
+                    Pilares</span>
+                <h2 style="font-size:2rem;font-weight:700;margin-top:0.5rem;">Lo que nos <span
+                        style="color:var(--color-primary);">define</span></h2>
             </div>
             <div class="mv-grid">
                 <div class="mv-card">
                     <div class="mv-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        </svg>
                     </div>
                     <h3>Nuestra Misión</h3>
-                    <p>Ser una empresa de prestigio y credibilidad, regida por principios, valores y un modelo de mejora continua, que asegura la satisfacción de nuestros clientes y rentabilidad para nuestros socios.</p>
+                    <p>Ser una empresa de prestigio y credibilidad, regida por principios, valores y un modelo de mejora
+                        continua, que asegura la satisfacción de nuestros clientes y rentabilidad para nuestros socios.
+                    </p>
                 </div>
                 <div class="mv-card">
                     <div class="mv-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <circle cx="12" cy="12" r="10" />
+                            <line x1="12" y1="8" x2="12" y2="12" />
+                            <line x1="12" y1="16" x2="12.01" y2="16" />
+                        </svg>
                     </div>
                     <h3>Nuestra Visión</h3>
-                    <p>Ser reconocida como una de las empresas farmacéuticas más relevantes dentro del mercado local, encaminada a brindar soluciones de salud para la colectividad a costos razonables, con un portafolio diverso de productos a disposición del cuerpo médico del país.</p>
+                    <p>Ser reconocida como una de las empresas farmacéuticas más relevantes dentro del mercado local,
+                        encaminada a brindar soluciones de salud para la colectividad a costos razonables, con un
+                        portafolio diverso de productos a disposición del cuerpo médico del país.</p>
                 </div>
                 <div class="mv-card">
                     <div class="mv-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
+                        </svg>
                     </div>
                     <h3>Nuestros Valores</h3>
-                    <p>Honestidad, Compromiso, Integridad, Confianza y Solidaridad: principios que guían cada decisión y acción dentro de nuestra organización.</p>
+                    <p>Honestidad, Compromiso, Integridad, Confianza y Solidaridad: principios que guían cada decisión y
+                        acción dentro de nuestra organización.</p>
                 </div>
             </div>
 
@@ -293,9 +639,14 @@
                 <div class="about-text">
                     <span class="section-tag">Quiénes Somos</span>
                     <h2>Una empresa <span>farmacéutica con propósito</span></h2>
-                    <p>PROFARNOVA es una empresa farmacéutica con propósito, en donde combinamos ciencia, compromiso y calidez humana para ofrecer medicamentos de alta calidad que cuidan la salud y el bienestar de los ecuatorianos.</p>
-                    <p>Además de fomentar y contribuir al crecimiento económico del país, trabajamos con la firme convicción de que cada ecuatoriano merece acceso a productos farmacéuticos seguros, eficaces y de la más alta calidad.</p>
-                    <p>Contamos con Registro Sanitario ARCSA vigente y distribuimos nuestros productos en puntos de venta a nivel nacional, siempre bajo los más estrictos estándares de manufactura.</p>
+                    <p>PROFARNOVA es una empresa farmacéutica con propósito, en donde combinamos ciencia, compromiso y
+                        calidez humana para ofrecer medicamentos de alta calidad que cuidan la salud y el bienestar de
+                        los ecuatorianos.</p>
+                    <p>Además de fomentar y contribuir al crecimiento económico del país, trabajamos con la firme
+                        convicción de que cada ecuatoriano merece acceso a productos farmacéuticos seguros, eficaces y
+                        de la más alta calidad.</p>
+                    <p>Contamos con Registro Sanitario ARCSA vigente y distribuimos nuestros productos en puntos de
+                        venta a nivel nacional, siempre bajo los más estrictos estándares de manufactura.</p>
                 </div>
                 <div class="img-placeholder">
                     <img src="assets/lab-research.png" alt="Laboratorio de Investigación PROFARNOVA">
@@ -308,61 +659,75 @@
     <!-- Values Section -->
     <section class="values-section">
         <div class="container">
-            <span style="display:block;text-align:center;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-primary);margin-bottom:0.5rem;">Nuestros Valores</span>
+            <span
+                style="display:block;text-align:center;font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-primary);margin-bottom:0.5rem;">Nuestros
+                Valores</span>
             <h2>Principios que nos <span>definen</span></h2>
-            <p class="values-intro">En PROFARNOVA, nuestros valores no son solo palabras: son la guía de cada decisión, cada proceso y cada relación que construimos con nuestros clientes, socios y colaboradores.</p>
+            <p class="values-intro">En PROFARNOVA, nuestros valores no son solo palabras: son la guía de cada decisión,
+                cada proceso y cada relación que construimos con nuestros clientes, socios y colaboradores.</p>
             <div class="values-grid">
                 <div class="value-card">
                     <div class="value-icon-wrap">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path
+                                d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                         </svg>
                     </div>
                     <h4>Honestidad</h4>
-                    <p>Nos comportamos y expresamos con sinceridad y coherencia, respetando los valores de la justicia y la verdad, logrando un ambiente de seguridad con cada uno de nuestros colaboradores.</p>
+                    <p>Nos comportamos y expresamos con sinceridad y coherencia, respetando los valores de la justicia y
+                        la verdad, logrando un ambiente de seguridad con cada uno de nuestros colaboradores.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon-wrap">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                            <polyline points="9 11 12 14 22 4"/>
-                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 11 12 14 22 4" />
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                         </svg>
                     </div>
                     <h4>Compromiso</h4>
-                    <p>Firmeza inquebrantable por cumplir a cabalidad los objetivos de la organización, con trabajo planificado y ejecución acertada en cada área de la empresa.</p>
+                    <p>Firmeza inquebrantable por cumplir a cabalidad los objetivos de la organización, con trabajo
+                        planificado y ejecución acertada en cada área de la empresa.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon-wrap">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <polyline points="9 12 11 14 15 10"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <polyline points="9 12 11 14 15 10" />
                         </svg>
                     </div>
                     <h4>Integridad</h4>
-                    <p>Nuestro personal es honesto, sincero, generoso e intachable en su conducta, sujeto a códigos morales compartidos y positivos que guían cada actuación.</p>
+                    <p>Nuestro personal es honesto, sincero, generoso e intachable en su conducta, sujeto a códigos
+                        morales compartidos y positivos que guían cada actuación.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon-wrap">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                            <circle cx="12" cy="8" r="4"/>
-                            <path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
-                            <line x1="12" y1="12" x2="12" y2="14"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="4" />
+                            <path d="M6 20v-2a6 6 0 0 1 12 0v2" />
+                            <line x1="12" y1="12" x2="12" y2="14" />
                         </svg>
                     </div>
                     <h4>Confianza</h4>
-                    <p>Seguridad en uno mismo y en el equipo de trabajo, consiguiendo los resultados en base a un sistema de trabajo colectivo que fortalece cada área.</p>
+                    <p>Seguridad en uno mismo y en el equipo de trabajo, consiguiendo los resultados en base a un
+                        sistema de trabajo colectivo que fortalece cada área.</p>
                 </div>
                 <div class="value-card">
                     <div class="value-icon-wrap">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
-                            <circle cx="9" cy="7" r="4"/>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                            <circle cx="9" cy="7" r="4" />
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75" />
                         </svg>
                     </div>
                     <h4>Solidaridad</h4>
-                    <p>Trabajamos de manera cooperativa y solidaria con el fin de ayudar a los compañeros y alcanzar los objetivos planteados como compañía.</p>
+                    <p>Trabajamos de manera cooperativa y solidaria con el fin de ayudar a los compañeros y alcanzar los
+                        objetivos planteados como compañía.</p>
                 </div>
             </div>
         </div>
@@ -379,7 +744,8 @@
                     <div class="timeline-content">
                         <div class="timeline-year">Fundación</div>
                         <h4>Creación de PROFARNOVA</h4>
-                        <p>Nace el laboratorio con un equipo fundador especializado en farmacéutica natural y bienestar preventivo.</p>
+                        <p>Nace el laboratorio con un equipo fundador especializado en farmacéutica natural y bienestar
+                            preventivo.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -387,7 +753,8 @@
                     <div class="timeline-content">
                         <div class="timeline-year">Certificación</div>
                         <h4>Registro ARCSA</h4>
-                        <p>Obtenemos el Registro Sanitario de la Agencia Nacional de Regulación, Control y Vigilancia Sanitaria del Ecuador.</p>
+                        <p>Obtenemos el Registro Sanitario de la Agencia Nacional de Regulación, Control y Vigilancia
+                            Sanitaria del Ecuador.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -395,7 +762,9 @@
                     <div class="timeline-content">
                         <div class="timeline-year">Lanzamiento</div>
                         <h4>Primer Producto: CYSPREX®</h4>
-                        <p>Lanzamos al mercado nuestro primer suplemento de bienestar urinario femenino con Proantocianidinas 36mg.</p>
+                        <p>Lanzamos al mercado nuestro primer suplemento de bienestar urinario con Proantocianidinas
+                            36mg, el primero con esta concentración en el mercado ecuatoriano junto con Resveratrol y
+                            Vitamina C.</p>
                     </div>
                 </div>
                 <div class="timeline-item">
@@ -403,7 +772,8 @@
                     <div class="timeline-content">
                         <div class="timeline-year">Expansión</div>
                         <h4>Lubryn-E® al Mercado</h4>
-                        <p>Incorporamos al catálogo el gel hidratante vulvar premium con Ácido Hialurónico, Vitamina E y Aloe Vera.</p>
+                        <p>Incorporamos al catálogo el gel hidratante vulvar premium con Ácido Hialurónico, Vitamina E y
+                            Aloe Vera.</p>
                     </div>
                 </div>
             </div>
@@ -418,7 +788,8 @@
             <div class="certs-grid">
                 <div class="cert-card">
                     <div class="cert-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M3 21h18" />
                             <path d="M3 10h18" />
                             <path d="M5 6h14" />
@@ -435,7 +806,8 @@
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M4.5 16.5c-1.5 1.26-2 2.76-2 3.5 0 1 1 1 1 1s3-.5 4.5-2" />
                             <path d="M12 5l9 9" />
                             <path d="M9 8l9 9" />
@@ -450,9 +822,10 @@
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
-                            <polyline points="9 12 11 14 15 10"/>
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                            <polyline points="9 12 11 14 15 10" />
                         </svg>
                     </div>
                     <h4>Control de Calidad</h4>
@@ -460,7 +833,8 @@
                 </div>
                 <div class="cert-card">
                     <div class="cert-icon">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M2 22c1.25-3.66 4.5-6.04 8.5-6.04s7.25 2.38 8.5 6.04" />
                             <path d="M12.5 6.5C14.7 3.5 19 3 19 3s-.5 4.3-3.5 6.5" />
                             <path d="M11.5 6.5C9.3 3.5 5 3 5 3s.5 4.3 3.5 6.5" />
@@ -481,7 +855,9 @@
             <p>Explora el catálogo de suplementos naturales que hemos desarrollado para tu bienestar.</p>
             <a href="productos.html" class="btn-white-outline">
                 Ver Catálogo
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
             </a>
         </div>
     </section>
@@ -492,7 +868,8 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="footer-logo">
-                    <p>Laboratorio farmacéutico ecuatoriano comprometido con la innovación, la calidad y el bienestar de nuestros clientes.</p>
+                    <p>Laboratorio farmacéutico ecuatoriano comprometido con la innovación, la calidad y el bienestar de
+                        nuestros clientes.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Navegación</h4>
@@ -522,17 +899,26 @@
             </div>
             <div class="footer-bottom">
                 <p>© 2024 PROFARNOVA. Todos los derechos reservados.</p>
-                <p>Registro Sanitario ARCSA | Fabricado en Ecuador<a href="admin.html" id="hidden-admin-dot" style="color: inherit; text-decoration: none; cursor: default; opacity: 0.6; font-size: inherit; display: inline-block;">.</a></p>
+                <p>Registro Sanitario ARCSA | Fabricado en Ecuador<a href="admin.html" id="hidden-admin-dot"
+                        style="color: inherit; text-decoration: none; cursor: default; opacity: 0.6; font-size: inherit; display: inline-block;">.</a>
+                </p>
             </div>
         </div>
     </footer>
 
-    <a href="https://wa.me/593988781166?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20PROFARNOVA" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <a href="https://wa.me/593988781166?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20PROFARNOVA"
+        class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
     </a>
     <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
     </button>
     <script src="scripts.js"></script>
 </body>
+
 </html>
