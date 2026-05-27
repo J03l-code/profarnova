@@ -140,7 +140,19 @@
             background: linear-gradient(90deg, var(--color-primary-dark), var(--color-primary));
         }
         .value-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); }
-        .value-emoji { font-size: 2.5rem; margin-bottom: 1rem; display: block; }
+        .value-icon-wrap {
+            width: 64px;
+            height: 64px;
+            background: var(--color-primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            color: var(--color-primary-dark);
+            transition: background 0.3s ease;
+        }
+        .value-card:hover .value-icon-wrap { background: var(--color-primary); color: white; }
         .value-card h4 { font-size: 1.05rem; font-weight: 800; color: var(--color-primary-dark); margin-bottom: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; }
         .value-card p { font-size: 0.85rem; color: var(--color-gray-600); line-height: 1.65; }
         @media (max-width: 1024px) { .values-grid { grid-template-columns: repeat(3, 1fr); } }
@@ -284,27 +296,54 @@
             <p class="values-intro">En PROFARNOVA, nuestros valores no son solo palabras: son la guía de cada decisión, cada proceso y cada relación que construimos con nuestros clientes, socios y colaboradores.</p>
             <div class="values-grid">
                 <div class="value-card">
-                    <span class="value-emoji">🤝</span>
+                    <div class="value-icon-wrap">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
                     <h4>Honestidad</h4>
                     <p>Nos comportamos y expresamos con sinceridad y coherencia, respetando los valores de la justicia y la verdad, logrando un ambiente de seguridad con cada uno de nuestros colaboradores.</p>
                 </div>
                 <div class="value-card">
-                    <span class="value-emoji">🎯</span>
+                    <div class="value-icon-wrap">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="9 11 12 14 22 4"/>
+                            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+                        </svg>
+                    </div>
                     <h4>Compromiso</h4>
                     <p>Firmeza inquebrantable por cumplir a cabalidad los objetivos de la organización, con trabajo planificado y ejecución acertada en cada área de la empresa.</p>
                 </div>
                 <div class="value-card">
-                    <span class="value-emoji">⭐</span>
+                    <div class="value-icon-wrap">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                            <polyline points="9 12 11 14 15 10"/>
+                        </svg>
+                    </div>
                     <h4>Integridad</h4>
                     <p>Nuestro personal es honesto, sincero, generoso e intachable en su conducta, sujeto a códigos morales compartidos y positivos que guían cada actuación.</p>
                 </div>
                 <div class="value-card">
-                    <span class="value-emoji">🔒</span>
+                    <div class="value-icon-wrap">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="8" r="4"/>
+                            <path d="M6 20v-2a6 6 0 0 1 12 0v2"/>
+                            <line x1="12" y1="12" x2="12" y2="14"/>
+                        </svg>
+                    </div>
                     <h4>Confianza</h4>
                     <p>Seguridad en uno mismo y en el equipo de trabajo, consiguiendo los resultados en base a un sistema de trabajo colectivo que fortalece cada área.</p>
                 </div>
                 <div class="value-card">
-                    <span class="value-emoji">🌱</span>
+                    <div class="value-icon-wrap">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+                            <circle cx="9" cy="7" r="4"/>
+                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+                            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+                        </svg>
+                    </div>
                     <h4>Solidaridad</h4>
                     <p>Trabajamos de manera cooperativa y solidaria con el fin de ayudar a los compañeros y alcanzar los objetivos planteados como compañía.</p>
                 </div>
