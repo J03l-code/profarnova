@@ -773,6 +773,15 @@ h6 {
     height: 100%;
 }
 
+.icon-svg {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    color: var(--color-primary-dark);
+}
+
 .ingrediente-card h3 {
     font-size: 1.25rem;
     margin-bottom: var(--space-md);
