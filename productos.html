@@ -57,7 +57,22 @@
         .why-section > .container > p { text-align:center; color:var(--color-gray-500); margin-bottom:3rem; }
         .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
         .why-card { background:white; border-radius:var(--radius-lg); padding:2rem; text-align:center; box-shadow:var(--shadow-sm); }
-        .why-card .wi { font-size:2.5rem; margin-bottom:1rem; }
+        .why-card .wi {
+            width: 56px;
+            height: 56px;
+            background: var(--color-primary-light);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.25rem;
+            color: var(--color-primary-dark);
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        .why-card:hover .wi {
+            background: var(--color-primary);
+            color: white;
+        }
         .why-card h4 { font-size:1rem; font-weight:700; margin-bottom:0.5rem; }
         .why-card p { font-size:0.88rem; color:var(--color-gray-600); line-height:1.6; }
 
@@ -180,9 +195,50 @@
             <h2>¿Por qué <span>confiar en nosotros</span>?</h2>
             <p>Cada producto PROFARNOVA es el resultado de un proceso riguroso de investigación y control.</p>
             <div class="why-grid">
-                <div class="why-card"><div class="wi">🔬</div><h4>Evidencia Científica</h4><p>Fórmulas respaldadas por estudios clínicos y revisión continua de literatura científica actualizada.</p></div>
-                <div class="why-card"><div class="wi">🏛️</div><h4>Registro ARCSA</h4><p>Todos nuestros productos cuentan con Registro Sanitario vigente de la autoridad ecuatoriana de salud.</p></div>
-                <div class="why-card"><div class="wi">🌿</div><h4>100% Natural</h4><p>Ingredientes de origen natural, seleccionados de proveedores internacionales certificados y auditados.</p></div>
+                <div class="why-card">
+                    <div class="wi">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M4.5 16.5c-1.5 1.26-2 2.76-2 3.5 0 1 1 1 1 1s3-.5 4.5-2" />
+                            <path d="M12 5l9 9" />
+                            <path d="M9 8l9 9" />
+                            <path d="M18 3l3 3" />
+                            <path d="M14 7l3-3" />
+                            <path d="M9.7 11.3l-5.2 5.2" />
+                            <path d="M12.7 8.3l5.2-5.2" />
+                        </svg>
+                    </div>
+                    <h4>Evidencia Científica</h4>
+                    <p>Fórmulas respaldadas por estudios clínicos y revisión continua de literatura científica actualizada.</p>
+                </div>
+                <div class="why-card">
+                    <div class="wi">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 21h18" />
+                            <path d="M3 10h18" />
+                            <path d="M5 6h14" />
+                            <path d="M4 10v11" />
+                            <path d="M20 10v11" />
+                            <path d="M8 14v3" />
+                            <path d="M12 14v3" />
+                            <path d="M16 14v3" />
+                            <path d="M4 6l8-4 8 4" />
+                        </svg>
+                    </div>
+                    <h4>Registro ARCSA</h4>
+                    <p>Todos nuestros productos cuentan con Registro Sanitario vigente de la autoridad ecuatoriana de salud.</p>
+                </div>
+                <div class="why-card">
+                    <div class="wi">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M2 22c1.25-3.66 4.5-6.04 8.5-6.04s7.25 2.38 8.5 6.04" />
+                            <path d="M12.5 6.5C14.7 3.5 19 3 19 3s-.5 4.3-3.5 6.5" />
+                            <path d="M11.5 6.5C9.3 3.5 5 3 5 3s.5 4.3 3.5 6.5" />
+                            <path d="M12 16V9" />
+                        </svg>
+                    </div>
+                    <h4>100% Natural</h4>
+                    <p>Ingredientes de origen natural, seleccionados de proveedores internacionales certificados y auditados.</p>
+                </div>
             </div>
         </div>
     </section>
