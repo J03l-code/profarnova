@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Contacta con PROFARNOVA. Ubícanos en Quito, Ecuador. Escríbenos por WhatsApp o correo para consultas, distribución y más información.">
+    <title>Contacto | PROFARNOVA - Laboratorio Farmacéutico</title>
+    <link rel="icon" type="image/png" href="assets/profarnovaicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="profarnova-main.css">
+    <style>
+        .page-hero { background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #1a6b5a 100%); padding: 8rem 0 5rem; text-align: center; color: white; position: relative; overflow: hidden; }
+        .page-hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='15'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .page-hero-tag { display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white; font-size:0.8rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:0.4rem 1.2rem; border-radius:100px; margin-bottom:1.5rem; }
+        .page-hero h1 { font-size:clamp(2.2rem,5vw,3.5rem); font-weight:800; margin-bottom:1.2rem; }
+        .page-hero p { font-size:1.15rem; opacity:0.88; max-width:600px; margin:0 auto; line-height:1.7; }
+        .breadcrumb { display:flex; align-items:center; justify-content:center; gap:0.5rem; margin-bottom:1.5rem; font-size:0.85rem; opacity:0.75; }
+        .breadcrumb a { color:white; text-decoration:none; } .breadcrumb span { opacity:0.6; }
+
+        /* Contact section */
+        .contact-page { padding: 5rem 0; }
+        .contact-page-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4rem; align-items: start; }
+
+        /* Info cards */
+        .contact-info-stack { display: flex; flex-direction: column; gap: 1.25rem; }
+        .contact-info-block { background: white; border-radius: var(--radius-lg); padding: 1.75rem; box-shadow: var(--shadow-md); display: flex; align-items: flex-start; gap: 1.25rem; transition: all 0.3s ease; }
+        .contact-info-block:hover { transform: translateX(4px); box-shadow: var(--shadow-lg); }
+        .cib-icon { width: 52px; height: 52px; flex-shrink: 0; background: var(--color-primary-light); border-radius: var(--radius-md); display: flex; align-items: center; justify-content: center; color: var(--color-primary-dark); }
+        .cib-body h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-gray-500); margin-bottom: 0.35rem; }
+        .cib-body p, .cib-body a { font-size: 1rem; font-weight: 600; color: var(--color-gray-900); text-decoration: none; line-height: 1.5; }
+        .cib-body a:hover { color: var(--color-primary); }
+        .cib-body small { display: block; font-size: 0.82rem; color: var(--color-gray-500); margin-top: 0.2rem; font-weight: 400; }
+
+        /* WhatsApp CTA card */
+        .wa-card { background: #25D366; border-radius: var(--radius-xl); padding: 2rem; color: white; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 1rem; margin-top: 1.25rem; box-shadow: 0 8px 32px rgba(37,211,102,0.3); transition: all 0.3s ease; text-decoration: none; }
+        .wa-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(37,211,102,0.4); }
+        .wa-card svg { opacity: 0.95; }
+        .wa-card strong { font-size: 1.1rem; font-weight: 700; }
+        .wa-card span { font-size: 0.88rem; opacity: 0.88; }
+
+        /* Form */
+        .contact-form-card { background: white; border-radius: var(--radius-xl); padding: 2.5rem; box-shadow: var(--shadow-md); }
+        .contact-form-card h2 { font-size: 1.6rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--color-gray-900); }
+        .contact-form-card p { color: var(--color-gray-600); font-size: 0.95rem; margin-bottom: 2rem; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+        .form-group { display: flex; flex-direction: column; gap: 0.4rem; margin-bottom: 1.25rem; }
+        .form-group label { font-size: 0.85rem; font-weight: 600; color: var(--color-gray-700); }
+        .form-group input, .form-group select, .form-group textarea { border: 1.5px solid var(--color-gray-200); border-radius: var(--radius-md); padding: 0.75rem 1rem; font-family: var(--font-body); font-size: 0.95rem; color: var(--color-gray-800); transition: border-color 0.2s ease, box-shadow 0.2s ease; outline: none; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(14,150,106,0.12); }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+        .btn-submit { width: 100%; background: var(--color-primary); color: white; font-weight: 700; font-size: 1rem; padding: 1rem; border: none; border-radius: var(--radius-md); cursor: pointer; font-family: var(--font-heading); transition: all 0.25s ease; display: flex; align-items: center; justify-content: center; gap: 0.6rem; }
+        .btn-submit:hover { background: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(14,150,106,0.3); }
+        .form-notice { font-size: 0.8rem; color: var(--color-gray-400); text-align: center; margin-top: 1rem; }
+
+        /* Map placeholder */
+        .map-section { background: var(--color-gray-50); padding: 5rem 0; }
+        .map-section h2 { text-align:center; font-size:2rem; font-weight:700; margin-bottom:0.5rem; }
+        .map-section h2 span { color:var(--color-primary); }
+        .map-section > .container > p { text-align:center; color:var(--color-gray-500); margin-bottom:3rem; }
+        .map-frame { border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-lg); height: 400px; }
+        .map-frame iframe { width: 100%; height: 100%; border: none; }
+
+        @media(max-width:768px) {
+            .contact-page-grid { grid-template-columns:1fr; }
+            .form-row { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo"><img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="logo-img"></a>
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+                    <li><a href="productos.html" class="nav-link">Productos</a></li>
+                    <li><a href="contacto.html" class="nav-link active">Contacto</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span><span>Contacto</span></div>
+            <div class="page-hero-tag">Estamos para ayudarte</div>
+            <h1>Ponte en <span style="color:#7fffd4;">Contacto</span></h1>
+            <p>Nuestro equipo está disponible para responder tus consultas, atender pedidos y orientarte sobre nuestros productos.</p>
+        </div>
+    </section>
+
+    <section class="contact-page">
+        <div class="container">
+            <div class="contact-page-grid">
+                <!-- Left: info + WhatsApp -->
+                <div>
+                    <div class="contact-info-stack">
+                        <div class="contact-info-block">
+                            <div class="cib-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                            </div>
+                            <div class="cib-body">
+                                <h4>Dirección</h4>
+                                <p>Av. De la República E2-214 y Rumipamba<br>Edif. Signature, piso 3 of. 306</p>
+                                <small>Quito, Ecuador</small>
+                            </div>
+                        </div>
+                        <div class="contact-info-block">
+                            <div class="cib-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                            </div>
+                            <div class="cib-body">
+                                <h4>Teléfono</h4>
+                                <a href="tel:+593988781166">+593 9 8878 1166</a>
+                                <small>Lunes a Viernes, 8:00 – 18:00</small>
+                            </div>
+                        </div>
+                        <div class="contact-info-block">
+                            <div class="cib-icon">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                            </div>
+                            <div class="cib-body">
+                                <h4>Correo Electrónico</h4>
+                                <a href="mailto:info@profarnova.com">info@profarnova.com</a>
+                                <small>Respondemos en menos de 24 horas hábiles</small>
+                            </div>
+                        </div>
+                    </div>
+                    <a href="https://wa.me/593988781166?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20los%20productos%20de%20PROFARNOVA" class="wa-card" target="_blank" rel="noopener">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                        <strong>Escríbenos por WhatsApp</strong>
+                        <span>Respuesta inmediata durante horario de atención</span>
+                    </a>
+                </div>
+
+                <!-- Right: form -->
+                <div class="contact-form-card">
+                    <h2>Envíanos un mensaje</h2>
+                    <p>Completa el formulario y nuestro equipo se pondrá en contacto contigo a la brevedad posible.</p>
+                    <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="nombre">Nombre completo *</label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Correo electrónico *</label>
+                                <input type="email" id="email" name="email" placeholder="tu@correo.com" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="telefono">Teléfono</label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="+593 9 0000 0000">
+                            </div>
+                            <div class="form-group">
+                                <label for="asunto">Asunto *</label>
+                                <select id="asunto" name="asunto" required>
+                                    <option value="">Selecciona un tema</option>
+                                    <option value="informacion">Información de productos</option>
+                                    <option value="distribuidor">Programa de distribuidores</option>
+                                    <option value="farmacia">Ventas a farmacias</option>
+                                    <option value="pedido">Realizar un pedido</option>
+                                    <option value="otro">Otro</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="mensaje">Mensaje *</label>
+                            <textarea id="mensaje" name="mensaje" placeholder="Escribe tu consulta aquí..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn-submit" id="submitBtn">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+                            Enviar mensaje
+                        </button>
+                        <p class="form-notice">Tu información es tratada con total confidencialidad. No compartimos tus datos con terceros.</p>
+                    </form>
+                    <div id="formSuccess" style="display:none; text-align:center; padding:2rem 0;">
+                        <div style="font-size:3rem; margin-bottom:1rem;">✅</div>
+                        <h3 style="color:var(--color-primary); margin-bottom:0.5rem;">¡Mensaje enviado!</h3>
+                        <p style="color:var(--color-gray-600);">Gracias por contactarnos. Te responderemos a la brevedad posible.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map -->
+    <section class="map-section">
+        <div class="container">
+            <h2>Encuéntranos en <span>Quito</span></h2>
+            <p>Visítanos en nuestras oficinas en el Edificio Signature, Av. De la República.</p>
+            <div class="map-frame">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7944!2d-78.4836!3d-0.1807!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x91d59a1f5e010167%3A0x47b2af64cc68ba5c!2sAv.%20de%20la%20Rep%C3%BAblica%2C%20Quito!5e0!3m2!1ses!2sec!4v1700000000000" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Ubicación PROFARNOVA Quito Ecuador"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="footer-logo"><p>Laboratorio farmacéutico ecuatoriano comprometido con la innovación, la calidad y el bienestar.</p></div>
+                <div class="footer-links"><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="servicios.html">Servicios</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+                <div class="footer-products"><h4>Productos</h4><ul><li><a href="cysprex.html">CYSPREX®</a></li><li><a href="lubryn-e.html">Lubryn-E®</a></li></ul></div>
+                <div class="footer-contact"><h4>Contacto</h4><ul><li>📍 Quito, Ecuador</li><li>📞 +593 9 8878 1166</li><li>✉️ info@profarnova.com</li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 PROFARNOVA. Todos los derechos reservados.</p>
+                <p>Registro Sanitario ARCSA | Fabricado en Ecuador<a href="admin.html" id="hidden-admin-dot" style="color:inherit;text-decoration:none;cursor:default;opacity:0.6;font-size:inherit;display:inline-block;">.</a></p>
+            </div>
+        </div>
+    </footer>
+    <a href="https://wa.me/593988781166" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <button class="scroll-top" id="scrollTop" aria-label="Volver arriba"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></button>
+    <script src="scripts.js"></script>
+    <script>
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            const nombre = document.getElementById('nombre').value;
+            const asunto = document.getElementById('asunto').value;
+            const mensaje = document.getElementById('mensaje').value;
+            const waText = encodeURIComponent(`Hola PROFARNOVA, soy ${nombre}.\n\nAsunto: ${asunto}\n\n${mensaje}`);
+            window.open(`https://wa.me/593988781166?text=${waText}`, '_blank');
+            document.getElementById('contactForm').style.display = 'none';
+            document.getElementById('formSuccess').style.display = 'block';
+        }
+    </script>
+</body>
+</html>

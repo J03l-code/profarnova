@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Catálogo completo de suplementos naturales de PROFARNOVA: CYSPREX® para bienestar urinario y Lubryn-E® para hidratación íntima.">
+    <title>Productos | PROFARNOVA - Suplementos Naturales</title>
+    <link rel="icon" type="image/png" href="assets/profarnovaicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="profarnova-main.css">
+    <style>
+        .page-hero { background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #1a6b5a 100%); padding: 8rem 0 5rem; text-align: center; color: white; position: relative; overflow: hidden; }
+        .page-hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='15'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
+        .page-hero-tag { display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white; font-size:0.8rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:0.4rem 1.2rem; border-radius:100px; margin-bottom:1.5rem; }
+        .page-hero h1 { font-size:clamp(2.2rem,5vw,3.5rem); font-weight:800; margin-bottom:1.2rem; }
+        .page-hero p { font-size:1.15rem; opacity:0.88; max-width:600px; margin:0 auto; line-height:1.7; }
+        .breadcrumb { display:flex; align-items:center; justify-content:center; gap:0.5rem; margin-bottom:1.5rem; font-size:0.85rem; opacity:0.75; }
+        .breadcrumb a { color:white; text-decoration:none; } .breadcrumb span { opacity:0.6; }
+
+        /* Catalog */
+        .catalog-section { padding: 5rem 0; }
+        .products-full-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3rem; margin-top: 3rem; }
+        .product-full-card { background: white; border-radius: var(--radius-xl); overflow: hidden; box-shadow: var(--shadow-md); transition: all 0.3s ease; }
+        .product-full-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
+        .pfc-image { background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-50)); padding: 3rem; display: flex; align-items: center; justify-content: center; height: 300px; }
+        .pfc-image img { max-height: 220px; max-width: 100%; object-fit: contain; }
+        .pfc-body { padding: 2rem 2.5rem; }
+        .pfc-category { font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.5rem; }
+        .pfc-name { font-size: 2rem; font-weight: 800; color: var(--color-gray-900); margin-bottom: 0.75rem; }
+        .pfc-desc { color: var(--color-gray-600); line-height: 1.8; font-size: 0.97rem; margin-bottom: 1.5rem; }
+        .pfc-ingredients { margin-bottom: 1.5rem; }
+        .pfc-ingredients h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; color: var(--color-gray-700); margin-bottom: 0.75rem; }
+        .ingredient-list { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+        .ingredient-chip { font-size: 0.8rem; background: var(--color-primary-light); color: var(--color-primary-dark); font-weight: 600; padding: 0.3rem 0.85rem; border-radius: 100px; }
+        .pfc-specs-row { display: flex; gap: 1.5rem; margin-bottom: 1.75rem; flex-wrap: wrap; }
+        .pfc-spec { text-align: center; }
+        .pfc-spec .val { font-size: 1.1rem; font-weight: 700; color: var(--color-gray-900); }
+        .pfc-spec .lbl { font-size: 0.72rem; color: var(--color-gray-500); text-transform: uppercase; letter-spacing: 1px; }
+        .pfc-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn-primary-sm { display:inline-flex; align-items:center; gap:0.5rem; background:var(--color-primary); color:white; font-weight:700; padding:0.85rem 1.75rem; border-radius:var(--radius-md); text-decoration:none; transition:all 0.25s ease; font-size:0.95rem; }
+        .btn-primary-sm:hover { background:var(--color-primary-dark); transform:translateY(-2px); }
+        .btn-outline-sm { display:inline-flex; align-items:center; gap:0.5rem; border:2px solid var(--color-primary); color:var(--color-primary); font-weight:700; padding:0.85rem 1.75rem; border-radius:var(--radius-md); text-decoration:none; transition:all 0.25s ease; font-size:0.95rem; }
+        .btn-outline-sm:hover { background:var(--color-primary); color:white; }
+
+        /* Coming soon */
+        .coming-soon-card { background: white; border-radius: var(--radius-xl); padding: 4rem; text-align: center; box-shadow: var(--shadow-sm); border: 2px dashed var(--color-gray-200); display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .coming-soon-card .cs-icon { width: 80px; height: 80px; background: var(--color-gray-100); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem; color: var(--color-gray-400); }
+        .coming-soon-card h3 { font-size: 1.3rem; font-weight: 700; color: var(--color-gray-700); margin-bottom: 0.5rem; }
+        .coming-soon-card p { color: var(--color-gray-500); }
+
+        /* Why section */
+        .why-section { background: var(--color-gray-50); padding: 5rem 0; }
+        .why-section h2 { text-align:center; font-size:2rem; font-weight:700; margin-bottom:0.5rem; }
+        .why-section h2 span { color:var(--color-primary); }
+        .why-section > .container > p { text-align:center; color:var(--color-gray-500); margin-bottom:3rem; }
+        .why-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.5rem; }
+        .why-card { background:white; border-radius:var(--radius-lg); padding:2rem; text-align:center; box-shadow:var(--shadow-sm); }
+        .why-card .wi { font-size:2.5rem; margin-bottom:1rem; }
+        .why-card h4 { font-size:1rem; font-weight:700; margin-bottom:0.5rem; }
+        .why-card p { font-size:0.88rem; color:var(--color-gray-600); line-height:1.6; }
+
+        @media(max-width:768px) {
+            .products-full-grid { grid-template-columns:1fr; }
+            .why-grid { grid-template-columns:1fr; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header" id="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo"><img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="logo-img"></a>
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="nosotros.html" class="nav-link">Nosotros</a></li>
+                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+                    <li><a href="productos.html" class="nav-link active">Productos</a></li>
+                    <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
+        </div>
+    </header>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span><span>Productos</span></div>
+            <div class="page-hero-tag">Catálogo</div>
+            <h1>Nuestros <span style="color:#7fffd4;">Productos</span></h1>
+            <p>Suplementos naturales de alta calidad, desarrollados con ingredientes certificados y respaldados por evidencia científica.</p>
+        </div>
+    </section>
+
+    <section class="catalog-section">
+        <div class="container">
+            <div class="products-full-grid">
+                <!-- CYSPREX -->
+                <div class="product-full-card">
+                    <div class="pfc-image">
+                        <img src="assets/cysprex-product.png" alt="CYSPREX Bienestar Urinario Femenino">
+                    </div>
+                    <div class="pfc-body">
+                        <div class="pfc-category">Bienestar Urinario Femenino</div>
+                        <div class="pfc-name">CYSPREX®</div>
+                        <p class="pfc-desc">Suplemento especializado en la salud del tracto urinario femenino. Su fórmula con Proantocianidinas 36mg de arándano rojo actúa inhibiendo la adhesión de bacterias a las paredes del tracto urinario, mientras que la Vitamina C y el Resveratrol potencian sus efectos antioxidantes y de protección celular.</p>
+                        <div class="pfc-ingredients">
+                            <h4>Ingredientes Activos</h4>
+                            <div class="ingredient-list">
+                                <span class="ingredient-chip">Proantocianidinas 36mg</span>
+                                <span class="ingredient-chip">Arándano Rojo</span>
+                                <span class="ingredient-chip">Vitamina C</span>
+                                <span class="ingredient-chip">Resveratrol</span>
+                            </div>
+                        </div>
+                        <div class="pfc-specs-row">
+                            <div class="pfc-spec"><div class="val">15</div><div class="lbl">Cápsulas</div></div>
+                            <div class="pfc-spec"><div class="val">560mg</div><div class="lbl">Por cápsula</div></div>
+                            <div class="pfc-spec"><div class="val">ARCSA</div><div class="lbl">Certificado</div></div>
+                        </div>
+                        <div class="pfc-cta">
+                            <a href="cysprex.html" class="btn-primary-sm">
+                                Ver detalles completos
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                            <a href="https://wa.me/593988781166?text=Hola,%20quiero%20información%20sobre%20CYSPREX" class="btn-outline-sm" target="_blank" rel="noopener">Consultar precio</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- LUBRYN-E -->
+                <div class="product-full-card">
+                    <div class="pfc-image">
+                        <img src="assets/lubrine.png" alt="Lubryn-E Hidratación Íntima">
+                    </div>
+                    <div class="pfc-body">
+                        <div class="pfc-category">Salud Femenina</div>
+                        <div class="pfc-name">Lubryn-E®</div>
+                        <p class="pfc-desc">Gel hidratante y lubricante vulvar premium diseñado para el alivio integral de la sequedad íntima. Formulado con Ácido Hialurónico de alto peso molecular para hidratación profunda y duradera, Vitamina E antioxidante, Aloe Vera calmante y Ácido Láctico para mantener el pH fisiológico natural.</p>
+                        <div class="pfc-ingredients">
+                            <h4>Ingredientes Activos</h4>
+                            <div class="ingredient-list">
+                                <span class="ingredient-chip">Ácido Hialurónico</span>
+                                <span class="ingredient-chip">Vitamina E</span>
+                                <span class="ingredient-chip">Aloe Vera</span>
+                                <span class="ingredient-chip">Ácido Láctico</span>
+                            </div>
+                        </div>
+                        <div class="pfc-specs-row">
+                            <div class="pfc-spec"><div class="val">60g</div><div class="lbl">Contenido</div></div>
+                            <div class="pfc-spec"><div class="val">Tópico</div><div class="lbl">Tipo</div></div>
+                            <div class="pfc-spec"><div class="val">pH ✓</div><div class="lbl">Fisiológico</div></div>
+                        </div>
+                        <div class="pfc-cta">
+                            <a href="lubryn-e.html" class="btn-primary-sm">
+                                Ver detalles completos
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                            </a>
+                            <a href="https://wa.me/593988781166?text=Hola,%20quiero%20información%20sobre%20Lubryn-E" class="btn-outline-sm" target="_blank" rel="noopener">Consultar precio</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coming soon -->
+                <div class="coming-soon-card">
+                    <div class="cs-icon">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                    </div>
+                    <h3>Próximamente</h3>
+                    <p>Nuevas soluciones de salud en desarrollo. Síguenos para ser el primero en conocerlos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why buy -->
+    <section class="why-section">
+        <div class="container">
+            <h2>¿Por qué <span>confiar en nosotros</span>?</h2>
+            <p>Cada producto PROFARNOVA es el resultado de un proceso riguroso de investigación y control.</p>
+            <div class="why-grid">
+                <div class="why-card"><div class="wi">🔬</div><h4>Evidencia Científica</h4><p>Fórmulas respaldadas por estudios clínicos y revisión continua de literatura científica actualizada.</p></div>
+                <div class="why-card"><div class="wi">🏛️</div><h4>Registro ARCSA</h4><p>Todos nuestros productos cuentan con Registro Sanitario vigente de la autoridad ecuatoriana de salud.</p></div>
+                <div class="why-card"><div class="wi">🌿</div><h4>100% Natural</h4><p>Ingredientes de origen natural, seleccionados de proveedores internacionales certificados y auditados.</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="footer-logo"><p>Laboratorio farmacéutico ecuatoriano comprometido con la innovación, la calidad y el bienestar.</p></div>
+                <div class="footer-links"><h4>Navegación</h4><ul><li><a href="index.html">Inicio</a></li><li><a href="nosotros.html">Nosotros</a></li><li><a href="servicios.html">Servicios</a></li><li><a href="productos.html">Productos</a></li><li><a href="contacto.html">Contacto</a></li></ul></div>
+                <div class="footer-products"><h4>Productos</h4><ul><li><a href="cysprex.html">CYSPREX®</a></li><li><a href="lubryn-e.html">Lubryn-E®</a></li></ul></div>
+                <div class="footer-contact"><h4>Contacto</h4><ul><li>📍 Quito, Ecuador</li><li>📞 +593 9 8878 1166</li><li>✉️ info@profarnova.com</li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 PROFARNOVA. Todos los derechos reservados.</p>
+                <p>Registro Sanitario ARCSA | Fabricado en Ecuador<a href="admin.html" id="hidden-admin-dot" style="color:inherit;text-decoration:none;cursor:default;opacity:0.6;font-size:inherit;display:inline-block;">.</a></p>
+            </div>
+        </div>
+    </footer>
+    <a href="https://wa.me/593988781166" class="whatsapp-float" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+    <button class="scroll-top" id="scrollTop" aria-label="Volver arriba"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></button>
+    <script src="scripts.js"></script>
+</body>
+</html>

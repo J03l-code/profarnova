@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Conoce la historia, misión, visión y valores de PROFARNOVA, laboratorio farmacéutico ecuatoriano comprometido con la calidad y la innovación.">
+    <meta name="keywords" content="PROFARNOVA nosotros, laboratorio farmacéutico Ecuador, misión visión, calidad farmacéutica">
+    <title>Nosotros | PROFARNOVA - Laboratorio Farmacéutico</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/profarnovaicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="profarnova-main.css">
+    <style>
+        /* ── Page Hero ── */
+        .page-hero {
+            background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #1a6b5a 100%);
+            padding: 8rem 0 5rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='15'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        .page-hero-tag {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.3);
+            color: white;
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 0.4rem 1.2rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+        }
+        .page-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            line-height: 1.15;
+            margin-bottom: 1.2rem;
+        }
+        .page-hero p {
+            font-size: 1.15rem;
+            opacity: 0.88;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            opacity: 0.75;
+        }
+        .breadcrumb a { color: white; text-decoration: none; }
+        .breadcrumb a:hover { opacity: 1; text-decoration: underline; }
+        .breadcrumb span { opacity: 0.6; }
+
+        /* ── Sections ── */
+        .about-full { padding: 5rem 0; }
+        .about-full .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-bottom: 5rem;
+        }
+        .about-full .about-content.reverse { direction: rtl; }
+        .about-full .about-content.reverse > * { direction: ltr; }
+
+        .about-full h2 { font-size: 2rem; font-weight: 700; margin-bottom: 1rem; color: var(--color-gray-900); }
+        .about-full h2 span { color: var(--color-primary); }
+        .about-full p { color: var(--color-gray-600); line-height: 1.8; margin-bottom: 1rem; font-size: 1.0rem; }
+        .about-full .section-tag { display: inline-block; font-size: 0.75rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--color-primary); margin-bottom: 0.75rem; }
+
+        .img-placeholder {
+            background: linear-gradient(135deg, var(--color-gray-100), var(--color-gray-50));
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+            aspect-ratio: 4/3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .img-placeholder img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Mission / Vision / Values cards */
+        .mv-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin: 3rem 0;
+        }
+        .mv-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: 2.5rem 2rem;
+            box-shadow: var(--shadow-md);
+            border-top: 4px solid var(--color-primary);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .mv-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
+        .mv-icon { width: 56px; height: 56px; background: var(--color-primary-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin-bottom: 1.25rem; color: var(--color-primary-dark); }
+        .mv-card h3 { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; color: var(--color-gray-900); }
+        .mv-card p { font-size: 0.95rem; color: var(--color-gray-600); line-height: 1.7; }
+
+        /* Timeline */
+        .timeline-section { background: var(--color-gray-50); padding: 5rem 0; }
+        .timeline-section h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .timeline-section h2 span { color: var(--color-primary); }
+        .timeline-section > .container > p { text-align: center; color: var(--color-gray-500); margin-bottom: 3rem; }
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline::before { content: ''; position: absolute; left: 50%; transform: translateX(-50%); top: 0; bottom: 0; width: 2px; background: var(--color-primary-light); }
+        .timeline-item { display: flex; gap: 2rem; margin-bottom: 3rem; align-items: flex-start; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        .timeline-item:nth-child(even) .timeline-content { text-align: right; }
+        .timeline-content { flex: 1; background: white; padding: 1.5rem 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); }
+        .timeline-dot { width: 48px; height: 48px; flex-shrink: 0; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.8rem; z-index: 1; margin-top: 0.5rem; }
+        .timeline-year { font-size: 0.75rem; font-weight: 700; color: var(--color-primary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.4rem; }
+        .timeline-content h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; }
+        .timeline-content p { font-size: 0.9rem; color: var(--color-gray-600); line-height: 1.6; }
+
+        /* Certifications */
+        .certs-section { padding: 5rem 0; }
+        .certs-section h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+        .certs-section h2 span { color: var(--color-primary); }
+        .certs-section > .container > p { text-align: center; color: var(--color-gray-500); margin-bottom: 3rem; }
+        .certs-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; }
+        .cert-card { background: white; border-radius: var(--radius-lg); padding: 2rem 1.5rem; text-align: center; box-shadow: var(--shadow-sm); border: 1px solid var(--color-gray-100); transition: all 0.3s ease; }
+        .cert-card:hover { box-shadow: var(--shadow-md); border-color: var(--color-primary-light); }
+        .cert-card .cert-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+        .cert-card h4 { font-size: 0.95rem; font-weight: 700; color: var(--color-gray-800); margin-bottom: 0.4rem; }
+        .cert-card p { font-size: 0.82rem; color: var(--color-gray-500); }
+
+        /* CTA band */
+        .cta-band { background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary)); padding: 4rem 0; text-align: center; color: white; }
+        .cta-band h2 { font-size: 2rem; font-weight: 700; margin-bottom: 0.75rem; }
+        .cta-band p { opacity: 0.85; margin-bottom: 2rem; font-size: 1.05rem; }
+        .btn-white-outline { display: inline-flex; align-items: center; gap: 0.5rem; border: 2px solid white; color: white; font-weight: 600; padding: 0.9rem 2rem; border-radius: var(--radius-md); text-decoration: none; transition: all 0.25s ease; }
+        .btn-white-outline:hover { background: white; color: var(--color-primary-dark); }
+
+        @media (max-width: 768px) {
+            .about-full .about-content { grid-template-columns: 1fr; gap: 2rem; }
+            .about-full .about-content.reverse { direction: ltr; }
+            .mv-grid { grid-template-columns: 1fr; }
+            .certs-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline::before { left: 24px; }
+            .timeline-item, .timeline-item:nth-child(even) { flex-direction: row; }
+            .timeline-item:nth-child(even) .timeline-content { text-align: left; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <div class="container header-content">
+            <a href="index.html" class="logo">
+                <img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="logo-img">
+            </a>
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="index.html" class="nav-link">Inicio</a></li>
+                    <li><a href="nosotros.html" class="nav-link active">Nosotros</a></li>
+                    <li><a href="servicios.html" class="nav-link">Servicios</a></li>
+                    <li><a href="productos.html" class="nav-link">Productos</a></li>
+                    <li><a href="contacto.html" class="nav-link">Contacto</a></li>
+                </ul>
+            </nav>
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Page Hero -->
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Inicio</a>
+                <span>/</span>
+                <span>Nosotros</span>
+            </div>
+            <div class="page-hero-tag">Quiénes Somos</div>
+            <h1>Compromiso con la <br><span style="color: #7fffd4;">Excelencia</span></h1>
+            <p>Somos un laboratorio farmacéutico ecuatoriano que une la ciencia y la naturaleza para mejorar la calidad de vida de las personas.</p>
+        </div>
+    </section>
+
+    <!-- Mission / Vision / Values -->
+    <section class="about-full">
+        <div class="container">
+            <div style="text-align:center; margin-bottom: 3rem;">
+                <span class="section-tag" style="font-size:0.75rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--color-primary);">Nuestros Pilares</span>
+                <h2 style="font-size:2rem;font-weight:700;margin-top:0.5rem;">Lo que nos <span style="color:var(--color-primary);">define</span></h2>
+            </div>
+            <div class="mv-grid">
+                <div class="mv-card">
+                    <div class="mv-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                    </div>
+                    <h3>Nuestra Misión</h3>
+                    <p>Mejorar la calidad de vida de las personas mediante el desarrollo de suplementos naturales seguros, eficaces e innovadores, fabricados con los más altos estándares de calidad farmacéutica.</p>
+                </div>
+                <div class="mv-card">
+                    <div class="mv-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    </div>
+                    <h3>Nuestra Visión</h3>
+                    <p>Ser el laboratorio farmacéutico de referencia en Ecuador y la región andina, reconocido por la excelencia científica de sus productos y por el impacto positivo en la salud de las comunidades.</p>
+                </div>
+                <div class="mv-card">
+                    <div class="mv-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+                    </div>
+                    <h3>Nuestros Valores</h3>
+                    <p>Integridad científica, transparencia, responsabilidad social y una firme convicción de que la naturaleza y la ciencia pueden trabajar juntas para ofrecer soluciones de salud verdaderamente efectivas.</p>
+                </div>
+            </div>
+
+            <!-- Story block -->
+            <div class="about-content">
+                <div class="about-text">
+                    <span class="section-tag">Nuestra Historia</span>
+                    <h2>Nacidos del conocimiento <span>farmacéutico</span></h2>
+                    <p>PROFARNOVA nació de la convicción de que Ecuador tiene el potencial de desarrollar productos farmacéuticos de clase mundial. Fundada por un equipo de profesionales con décadas de experiencia en la industria, la empresa se constituyó con una clara vocación de innovación.</p>
+                    <p>Desde nuestros inicios hemos invertido en infraestructura de investigación, tecnología de producción de vanguardia y en la formación continua de nuestro equipo humano, porque sabemos que la calidad empieza por las personas.</p>
+                    <p>Hoy contamos con un portafolio de productos respaldados por evidencia científica, con Registro Sanitario ARCSA vigente y distribuidos en puntos de venta a nivel nacional.</p>
+                </div>
+                <div class="img-placeholder">
+                    <img src="assets/lab-research.png" alt="Laboratorio de Investigación PROFARNOVA">
+                </div>
+            </div>
+
+            <div class="about-content reverse">
+                <div class="about-text">
+                    <span class="section-tag">Nuestro Equipo</span>
+                    <h2>Profesionales <span>comprometidos</span></h2>
+                    <p>Nuestro equipo multidisciplinario está integrado por químicos farmacéuticos, biólogos, nutricionistas y especialistas en control de calidad que trabajan coordinadamente para garantizar que cada producto cumpla con los más altos estándares.</p>
+                    <p>Creemos en la formación continua y en crear un ambiente de trabajo en que la pasión por la ciencia y el bienestar de las personas sean la motivación diaria.</p>
+                </div>
+                <div class="img-placeholder" style="background: linear-gradient(135deg, #e8f5e9, #f1f8f6);">
+                    <svg width="120" height="120" viewBox="0 0 24 24" fill="none" stroke="#16a37f" stroke-width="1" opacity="0.4"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Timeline -->
+    <section class="timeline-section">
+        <div class="container">
+            <h2>Nuestra <span>Trayectoria</span></h2>
+            <p>Hitos que marcan nuestro camino de crecimiento y compromiso con la salud ecuatoriana.</p>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">1</div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Fundación</div>
+                        <h4>Creación de PROFARNOVA</h4>
+                        <p>Nace el laboratorio con un equipo fundador especializado en farmacéutica natural y bienestar preventivo.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2</div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Certificación</div>
+                        <h4>Registro ARCSA</h4>
+                        <p>Obtenemos el Registro Sanitario de la Agencia Nacional de Regulación, Control y Vigilancia Sanitaria del Ecuador.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">3</div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Lanzamiento</div>
+                        <h4>Primer Producto: CYSPREX®</h4>
+                        <p>Lanzamos al mercado nuestro primer suplemento de bienestar urinario femenino con Proantocianidinas 36mg.</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">4</div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">Expansión</div>
+                        <h4>Lubryn-E® al Mercado</h4>
+                        <p>Incorporamos al catálogo el gel hidratante vulvar premium con Ácido Hialurónico, Vitamina E y Aloe Vera.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications -->
+    <section class="certs-section">
+        <div class="container">
+            <h2>Nuestras <span>Certificaciones</span></h2>
+            <p>Calidad verificada por los organismos de control más exigentes.</p>
+            <div class="certs-grid">
+                <div class="cert-card">
+                    <div class="cert-icon">🏛️</div>
+                    <h4>Registro ARCSA</h4>
+                    <p>Agencia Nacional de Regulación, Control y Vigilancia Sanitaria del Ecuador</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🔬</div>
+                    <h4>BPM</h4>
+                    <p>Buenas Prácticas de Manufactura certificadas en todas las líneas de producción</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">✅</div>
+                    <h4>Control de Calidad</h4>
+                    <p>Análisis fisicoquímico y microbiológico en cada lote de producción</p>
+                </div>
+                <div class="cert-card">
+                    <div class="cert-icon">🌿</div>
+                    <h4>Ingredientes Naturales</h4>
+                    <p>Materias primas certificadas de proveedores especializados y auditados</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-band">
+        <div class="container">
+            <h2>¿Quieres conocer nuestros productos?</h2>
+            <p>Explora el catálogo de suplementos naturales que hemos desarrollado para tu bienestar.</p>
+            <a href="productos.html" class="btn-white-outline">
+                Ver Catálogo
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="footer-logo">
+                    <p>Laboratorio farmacéutico ecuatoriano comprometido con la innovación, la calidad y el bienestar de nuestros clientes.</p>
+                </div>
+                <div class="footer-links">
+                    <h4>Navegación</h4>
+                    <ul>
+                        <li><a href="index.html">Inicio</a></li>
+                        <li><a href="nosotros.html">Nosotros</a></li>
+                        <li><a href="servicios.html">Servicios</a></li>
+                        <li><a href="productos.html">Productos</a></li>
+                        <li><a href="contacto.html">Contacto</a></li>
+                    </ul>
+                </div>
+                <div class="footer-products">
+                    <h4>Productos</h4>
+                    <ul>
+                        <li><a href="cysprex.html">CYSPREX®</a></li>
+                        <li><a href="lubryn-e.html">Lubryn-E®</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li>📍 Quito, Ecuador</li>
+                        <li>📞 +593 9 8878 1166</li>
+                        <li>✉️ info@profarnova.com</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2024 PROFARNOVA. Todos los derechos reservados.</p>
+                <p>Registro Sanitario ARCSA | Fabricado en Ecuador<a href="admin.html" id="hidden-admin-dot" style="color: inherit; text-decoration: none; cursor: default; opacity: 0.6; font-size: inherit; display: inline-block;">.</a></p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/593988781166?text=Hola,%20me%20gustaría%20obtener%20información%20sobre%20PROFARNOVA" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    </a>
+    <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+    </button>
+    <script src="scripts.js"></script>
+</body>
+</html>
