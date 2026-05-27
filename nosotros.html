@@ -163,14 +163,16 @@
         .timeline-section h2 { text-align: center; font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
         .timeline-section h2 span { color: var(--color-primary); }
         .timeline-section > .container > p { text-align: center; color: var(--color-gray-500); margin-bottom: 3rem; }
-        .timeline { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; max-width: 1200px; margin: 0 auto; }
-        .timeline-item { background: white; padding: 2rem 1.5rem; border-radius: var(--radius-xl); box-shadow: var(--shadow-md); border-top: 4px solid var(--color-primary); transition: all 0.3s ease; display: flex; flex-direction: column; gap: 1rem; align-items: flex-start; }
-        .timeline-item:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); }
-        .timeline-dot { width: 36px; height: 36px; background: var(--color-primary-light); color: var(--color-primary-dark); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; }
-        .timeline-content { display: flex; flex-direction: column; gap: 0.4rem; }
-        .timeline-year { font-size: 0.72rem; font-weight: 700; color: var(--color-primary); letter-spacing: 1.5px; text-transform: uppercase; }
-        .timeline-content h4 { font-size: 1.05rem; font-weight: 700; color: var(--color-gray-900); }
-        .timeline-content p { font-size: 0.88rem; color: var(--color-gray-600); line-height: 1.6; }
+        .timeline { position: relative; max-width: 800px; margin: 0 auto; }
+        .timeline-item { display: flex; gap: 2rem; margin-bottom: 3rem; align-items: flex-start; }
+        .timeline-item:nth-child(even) { flex-direction: row-reverse; }
+        .timeline-item:nth-child(even) .timeline-content { text-align: right; }
+        .timeline-content { flex: 1; background: white; padding: 1.5rem 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-md); transition: all 0.3s ease; }
+        .timeline-content:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+        .timeline-dot { width: 48px; height: 48px; flex-shrink: 0; background: var(--color-primary); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 0.85rem; z-index: 1; margin-top: 0.5rem; }
+        .timeline-year { font-size: 0.75rem; font-weight: 700; color: var(--color-primary); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 0.4rem; }
+        .timeline-content h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.4rem; color: var(--color-gray-900); }
+        .timeline-content p { font-size: 0.9rem; color: var(--color-gray-600); line-height: 1.6; }
 
         /* Certifications */
         .certs-section { padding: 5rem 0; }
@@ -191,17 +193,15 @@
         .btn-white-outline { display: inline-flex; align-items: center; gap: 0.5rem; border: 2px solid white; color: white; font-weight: 600; padding: 0.9rem 2rem; border-radius: var(--radius-md); text-decoration: none; transition: all 0.25s ease; }
         .btn-white-outline:hover { background: white; color: var(--color-primary-dark); }
 
-        @media (max-width: 992px) {
-            .timeline { grid-template-columns: repeat(2, 1fr); }
-        }
         @media (max-width: 768px) {
             .about-full .about-content { grid-template-columns: 1fr; gap: 2rem; }
             .about-full .about-content.reverse { direction: ltr; }
             .mv-grid { grid-template-columns: 1fr; }
             .certs-grid { grid-template-columns: repeat(2, 1fr); }
+            .timeline-item, .timeline-item:nth-child(even) { flex-direction: row; }
+            .timeline-item:nth-child(even) .timeline-content { text-align: left; }
         }
         @media (max-width: 576px) {
-            .timeline { grid-template-columns: 1fr; }
             .certs-grid { grid-template-columns: 1fr; }
         }
     </style>
