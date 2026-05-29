@@ -56,3 +56,57 @@
         grid-template-columns: 1fr;
     }
 }
+
+/* Premium Social Media Icons Styling */
+.social-links {
+    display: flex;
+    gap: 1.5rem !important;
+    margin-top: 1.5rem !important;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+}
+
+.social-icon svg {
+    width: 22px !important;
+    height: 22px !important;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    background: var(--color-primary-dark) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(142, 92, 91, 0.45);
+    color: #fff !important;
+}
+
+.social-icon:hover svg {
+    transform: scale(1.15);
+}
+
+/* Designer Link Styling */
+.designer-link {
+    color: var(--color-primary-light) !important;
+    font-weight: 700 !important;
+    text-decoration: none !important;
+    transition: all 0.3s ease !important;
+    border-bottom: 1px dashed var(--color-primary-light);
+    padding-bottom: 2px;
+}
+
+.designer-link:hover {
+    color: #fff !important;
+    border-bottom-color: #fff !important;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+}
