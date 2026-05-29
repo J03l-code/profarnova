@@ -335,12 +335,25 @@ function initProfileModal() {
             // Open modal
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            
+            // Prevent page zoom
+            const viewportMeta = document.querySelector('meta[name="viewport"]');
+            if (viewportMeta) {
+                viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no');
+            }
         });
     });
 
     const closeModal = () => {
         modal.classList.remove('active');
         document.body.style.overflow = '';
+        
+        // Restore page zoom
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        if (viewportMeta) {
+            viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+        }
+        
         // Clear iframe to stop loading and prevent background memory use
         iframe.src = '';
     };
