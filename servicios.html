@@ -11,13 +11,88 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="profarnova-main.css">
     <style>
-        .page-hero { background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 60%, #1a6b5a 100%); padding: 8rem 0 5rem; text-align: center; color: white; position: relative; overflow: hidden; }
-        .page-hero::before { content:''; position:absolute; inset:0; background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Ccircle cx='30' cy='30' r='15'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E"); }
-        .page-hero-tag { display:inline-block; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.3); color:white; font-size:0.8rem; font-weight:600; letter-spacing:2px; text-transform:uppercase; padding:0.4rem 1.2rem; border-radius:100px; margin-bottom:1.5rem; }
-        .page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.5rem); font-weight:800; margin-bottom:1.2rem; }
-        .page-hero p { font-size:1.15rem; opacity:0.88; max-width:600px; margin:0 auto; line-height:1.7; }
-        .breadcrumb { display:flex; align-items:center; justify-content:center; gap:0.5rem; margin-bottom:1.5rem; font-size:0.85rem; opacity:0.75; }
-        .breadcrumb a { color:white; text-decoration:none; } .breadcrumb span { opacity:0.6; }
+        /* ── Page Hero ── */
+        .page-hero {
+            background: linear-gradient(150deg, #ffffff 0%, #f6fce8 55%, #eef8cc 100%);
+            padding: 8.5rem 0 6rem;
+            text-align: center;
+            color: var(--color-dark);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--color-primary);
+        }
+        .page-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(ellipse at 15% 85%, rgba(154, 205, 50, 0.10) 0%, transparent 55%),
+                radial-gradient(ellipse at 85% 15%, rgba(154, 205, 50, 0.07) 0%, transparent 55%);
+            pointer-events: none;
+            z-index: 1;
+        }
+        .page-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(to right, var(--color-primary-dark), var(--color-primary), var(--color-primary-light));
+            z-index: 3;
+        }
+        .page-hero-tag {
+            display: inline-block;
+            background: rgba(154, 205, 50, 0.12);
+            border: 1.5px solid rgba(124, 181, 24, 0.4);
+            color: var(--color-primary-dark);
+            font-size: 0.78rem;
+            font-weight: 700;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            padding: 0.45rem 1.5rem;
+            border-radius: 100px;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+        .page-hero h1 {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--color-dark);
+            margin-bottom: 1.2rem;
+            line-height: 1.15;
+            position: relative;
+            z-index: 2;
+        }
+        /* Logo split: PROFAR negro, NOVA verde */
+        .page-hero h1 .profar { color: var(--color-dark); }
+        .page-hero h1 .nova  { color: var(--color-primary); }
+        /* Highlighted word (non-PROFARNOVA pages) */
+        .page-hero h1 .highlight { color: var(--color-primary-dark); }
+        .page-hero p {
+            font-size: 1.1rem;
+            color: var(--color-gray-600);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.75;
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.85rem;
+            color: var(--color-gray-500);
+            position: relative;
+            z-index: 2;
+        }
+        .breadcrumb a { color: var(--color-primary-dark); text-decoration: none; font-weight: 600; }
+        .breadcrumb a:hover { text-decoration: underline; }
+        .breadcrumb span { opacity: 0.6; }
 
         /* Services grid */
         .services-page { padding: 5rem 0; }
@@ -79,7 +154,7 @@
         <div class="container">
             <div class="breadcrumb"><a href="index.html">Inicio</a><span>/</span><span>Servicios</span></div>
             <div class="page-hero-tag">Lo que ofrecemos</div>
-            <h1>¿Por qué elegir <span style="color:#7fffd4;">PROFARNOVA</span>?</h1>
+            <h1>¿Por qué elegir <span class="profar">PROFAR</span><span class="nova">NOVA</span>?</h1>
             <p>Nos distinguimos por unir la rigurosidad científica con el poder de los ingredientes naturales para ofrecerte soluciones de salud confiables.</p>
         </div>
     </section>
