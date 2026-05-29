@@ -373,12 +373,15 @@
                                 <span class="spec">36mg PACS</span>
                                 <span class="spec">Natural</span>
                             </div>
-                            <div class="product-cta">
-                                <span>Ver detalles</span>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
+                            <div class="product-cta" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem !important;">
+                                <span class="btn-profile-trigger" data-pdf="assets/Perfil del Producto CYSPREX.pdf" data-title="Perfil de Producto - CYSPREX®" style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary-light); border: 2px solid var(--color-primary-light); padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.25rem; background: transparent; transition: all 0.3s ease;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                    Perfil
+                                </span>
+                                <span style="font-size: 0.85rem; font-weight: 700; background: var(--color-primary-dark); color: #fff; padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.25rem;">
+                                    Ver detalles
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7" /></svg>
+                                </span>
                             </div>
                         </div>
                     </article>
@@ -405,12 +408,18 @@
                                 <span class="spec">Gel Tópico</span>
                                 <span class="spec">pH Fisiológico</span>
                             </div>
-                            <div class="product-cta">
-                                <span>Ver detalles</span>
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                    stroke-width="2">
-                                    <path d="M5 12h14M12 5l7 7-7 7" />
-                                </svg>
+                            <div class="product-cta" style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem !important;">
+                                <span class="btn-profile-trigger" data-pdf="assets/Perfil del Producto LUBRYN-E.pdf" data-title="Perfil de Producto - Lubryn-E®" style="font-size: 0.85rem; font-weight: 700; color: var(--color-primary-light); border: 2px solid var(--color-primary-light); padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.25rem; background: transparent; transition: all 0.3s ease;">
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                    Perfil
+                                </span>
+                                <span style="font-size: 0.85rem; font-weight: 700; background: var(--color-primary-dark); color: #fff; padding: 0.4rem 0.8rem; border-radius: 6px; display: inline-flex; align-items: center; gap: 0.25rem;">
+                                    Ver detalles
+                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                        stroke-width="2">
+                                        <path d="M5 12h14M12 5l7 7-7 7" />
+                                    </svg>
+                                </span>
                             </div>
                         </div>
                     </article>
@@ -652,6 +661,25 @@
             <path d="M18 15l-6-6-6 6" />
         </svg>
     </button>
+
+    <!-- Secure Product Profile Viewer Modal -->
+    <div id="profileModal" class="profile-modal">
+        <div class="profile-modal-overlay"></div>
+        <div class="profile-modal-container">
+            <div class="profile-modal-header">
+                <h3 id="profileModalTitle">Perfil de Producto</h3>
+                <button class="profile-modal-close" id="closeProfileModal" aria-label="Cerrar">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div class="profile-modal-body">
+                <div class="pdf-secure-wrapper">
+                    <iframe id="profileIframe" src="" style="width:100%; height:100%; border:none;"></iframe>
+                    <div class="pdf-secure-overlay"></div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="scripts.js"></script>
 </body>

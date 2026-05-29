@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollAnimations();
     initScrollToTop();
     initSmoothScroll();
+    initProfileModal();
 });
 
 /* ============================================
@@ -301,3 +302,74 @@ function initAccessibility() {
 
 // Initialize accessibility features
 initAccessibility();
+
+/* ============================================
+   Secure Product Profile Modal
+   ============================================ */
+function initProfileModal() {
+    const modal = document.getElementById('profileModal');
+    const closeBtn = document.getElementById('closeProfileModal');
+    const overlay = document.querySelector('.profile-modal-overlay');
+    const iframe = document.getElementById('profileIframe');
+    const titleEl = document.getElementById('profileModalTitle');
+
+    if (!modal || !closeBtn || !iframe) return;
+
+    // Trigger buttons
+    const triggers = document.querySelectorAll('.btn-profile-trigger');
+
+    triggers.forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+
+            const pdfPath = trigger.getAttribute('data-pdf');
+            const pdfTitle = trigger.getAttribute('data-title') || 'Perfil de Producto';
+
+            if (!pdfPath) return;
+
+            // Load secure PDF
+            titleEl.textContent = pdfTitle;
+            iframe.src = `${pdfPath}#toolbar=0&navpanes=0&scrollbar=1`;
+
+            // Open modal
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    const closeModal = () => {
+        modal.classList.remove('active');
+        document.body.style.overflow = '';
+        // Clear iframe to stop loading and prevent background memory use
+        iframe.src = '';
+    };
+
+    closeBtn.addEventListener('click', closeModal);
+    if (overlay) overlay.addEventListener('click', closeModal);
+
+    // Close on Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && modal.classList.contains('active')) {
+            closeModal();
+        }
+    });
+
+    // Prevent Print and Save hotkeys
+    document.addEventListener('keydown', (e) => {
+        if (modal.classList.contains('active')) {
+            // Block Ctrl+P / Cmd+P (Print) and Ctrl+S / Cmd+S (Save)
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'p' || e.key === 'P' || e.key === 's' || e.key === 'S' || e.key === 'u' || e.key === 'U')) {
+                e.preventDefault();
+                return false;
+            }
+        }
+    });
+
+    // Disable right click on modal
+    modal.addEventListener('contextmenu', (e) => {
+        e.preventDefault();
+        return false;
+    });
+}
+
