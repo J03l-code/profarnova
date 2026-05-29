@@ -72,6 +72,8 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
@@ -81,6 +83,7 @@ body {
     color: var(--color-gray-700);
     background-color: var(--color-white);
     overflow-x: hidden;
+    width: 100%;
     -webkit-font-smoothing: antialiased;
 }
 
@@ -1506,7 +1509,7 @@ h6 {
     position: fixed !important;
     top: 0 !important;
     left: 0 !important;
-    width: 100vw !important;
+    width: 100% !important;
     height: 100vh !important;
     z-index: 100000 !important;
     display: flex !important;
