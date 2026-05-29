@@ -1017,7 +1017,7 @@ function getDummyProducts() {
       id: 'prod-2',
       name: 'Lubryn-E® Gel Confort Íntimo',
       category: 'Salud Femenina',
-      description: 'Gel hidratante vulvar con Ácido Hialurónico y Vitamina E. 60g.',
+      description: 'Gel hidratante íntimo con Ácido Hialurónico y Vitamina E. 60g.',
       price: 22.90,
       stock: 3, // Critical Stock < 5
       sku: 'PRF-LUB-60',
