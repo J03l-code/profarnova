@@ -97,16 +97,19 @@
 
 /* Designer Link Styling */
 .designer-link {
-    color: var(--color-primary-light) !important;
-    font-weight: 700 !important;
+    color: #c9f2d5 !important;
+    font-weight: 800 !important;
     text-decoration: none !important;
-    transition: all 0.3s ease !important;
-    border-bottom: 1px dashed var(--color-primary-light);
-    padding-bottom: 2px;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    border-bottom: 2px solid rgba(201, 242, 213, 0.5);
+    padding-bottom: 1px;
+    letter-spacing: 0.5px;
+    display: inline-block;
 }
 
 .designer-link:hover {
-    color: #fff !important;
-    border-bottom-color: #fff !important;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4);
+    color: #ffffff !important;
+    border-bottom-color: #ffffff !important;
+    text-shadow: 0 0 15px rgba(201, 242, 213, 0.9);
+    transform: translateY(-2px);
 }
