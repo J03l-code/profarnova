@@ -1207,7 +1207,10 @@ h6 {
     }
 
     .about-features {
-        align-items: center;
+        align-items: flex-start;
+        width: fit-content;
+        margin: 0 auto;
+        text-align: left;
     }
 
     .services-grid {
@@ -1226,6 +1229,19 @@ h6 {
 
     .contact-grid {
         grid-template-columns: 1fr;
+    }
+
+    .cta-card {
+        padding: var(--space-xl) var(--space-md);
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+
+    .btn-whatsapp {
+        padding: var(--space-md) var(--space-lg);
+        width: 100%;
+        box-sizing: border-box;
+        justify-content: center;
     }
 
     .footer-grid {
