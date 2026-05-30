@@ -310,16 +310,21 @@ function initProfileModal() {
     const modal = document.getElementById('profileModal');
     const closeBtn = document.getElementById('closeProfileModal');
     const overlay = document.querySelector('.profile-modal-overlay');
-    const iframe = document.getElementById('profileIframe');
+    const pdfContainer = document.getElementById('pdf-render-container');
     const titleEl = document.getElementById('profileModalTitle');
 
-    if (!modal || !closeBtn || !iframe) return;
+    if (!modal || !closeBtn || !pdfContainer) return;
+
+    // Optional: Setup PDF.js worker if available
+    if (window.pdfjsLib) {
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.worker.min.js';
+    }
 
     // Trigger buttons
     const triggers = document.querySelectorAll('.btn-profile-trigger');
 
     triggers.forEach(trigger => {
-        trigger.addEventListener('click', (e) => {
+        trigger.addEventListener('click', async (e) => {
             e.preventDefault();
             e.stopPropagation();
 
@@ -328,13 +333,48 @@ function initProfileModal() {
 
             if (!pdfPath) return;
 
-            // Load secure PDF
-            titleEl.textContent = pdfTitle;
-            iframe.src = `${pdfPath}#toolbar=0&navpanes=0&scrollbar=1`;
-
             // Open modal
+            titleEl.textContent = pdfTitle;
             modal.classList.add('active');
             document.body.style.overflow = 'hidden';
+            pdfContainer.innerHTML = '<div style="color:white; padding:20px; text-align:center;">Cargando documento...</div>';
+
+            try {
+                if (!window.pdfjsLib) throw new Error("PDF.js no cargado");
+                
+                const loadingTask = pdfjsLib.getDocument(pdfPath);
+                const pdf = await loadingTask.promise;
+                
+                pdfContainer.innerHTML = ''; // clear loading
+
+                for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+                    const page = await pdf.getPage(pageNum);
+                    
+                    const canvas = document.createElement('canvas');
+                    canvas.style.display = 'block';
+                    canvas.style.margin = '0 auto 10px auto';
+                    canvas.style.maxWidth = '100%';
+                    canvas.style.height = 'auto'; // ensure responsiveness
+                    canvas.style.boxShadow = '0 2px 10px rgba(0,0,0,0.2)';
+                    
+                    pdfContainer.appendChild(canvas);
+                    
+                    // Render page
+                    const viewport = page.getViewport({ scale: 1.5 }); // Good scale for mobile/desktop
+                    const context = canvas.getContext('2d');
+                    canvas.height = viewport.height;
+                    canvas.width = viewport.width;
+                    
+                    const renderContext = {
+                        canvasContext: context,
+                        viewport: viewport
+                    };
+                    await page.render(renderContext).promise;
+                }
+            } catch (error) {
+                console.error('Error loading PDF:', error);
+                pdfContainer.innerHTML = '<div style="color:white; padding:20px; text-align:center;">Error al cargar el documento.</div>';
+            }
         });
     });
 
@@ -342,8 +382,8 @@ function initProfileModal() {
         modal.classList.remove('active');
         document.body.style.overflow = '';
         
-        // Clear iframe to stop loading and prevent background memory use
-        iframe.src = '';
+        // Clear container to save memory
+        pdfContainer.innerHTML = '';
     };
 
     closeBtn.addEventListener('click', closeModal);
