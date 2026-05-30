@@ -1309,6 +1309,27 @@ h6 {
 
     .services-grid {
         grid-template-columns: 1fr;
+        gap: var(--space-md);
+    }
+
+    .service-card {
+        padding: var(--space-xl) var(--space-lg);
+    }
+
+    .service-icon {
+        width: 55px;
+        height: 55px;
+        margin-bottom: var(--space-md);
+    }
+
+    .service-icon svg {
+        width: 28px;
+        height: 28px;
+    }
+
+    .service-card h3 {
+        font-size: 1.05rem;
+        margin-bottom: var(--space-xs);
     }
 
     .footer-grid {
