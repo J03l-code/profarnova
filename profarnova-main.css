@@ -1289,13 +1289,22 @@ h6 {
         display: flex;
     }
 
+    .hero-stats {
+        padding: var(--space-lg) 0;
+    }
+
     .stats-grid {
         grid-template-columns: 1fr;
-        gap: var(--space-lg);
+        gap: var(--space-md);
     }
 
     .stat-number {
-        font-size: 2rem;
+        font-size: 1.6rem;
+        margin-bottom: var(--space-xs);
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
     }
 
     .services-grid {
