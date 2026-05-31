@@ -478,17 +478,6 @@ function updateProductPriceOnDOM(nameKey, rawPrice) {
             link.setAttribute('href', href);
         }
     });
-
-    // 3. Update any explicit button/label text like "Comprar ($20.99)"
-    const buttons = document.querySelectorAll('a, button');
-    buttons.forEach(btn => {
-        const text = btn.textContent;
-        if (nameKey === 'CYSPREX' && text.includes('28.80')) {
-            btn.textContent = text.replace(/28\.80/g, formattedPrice);
-        } else if (nameKey === 'Lubryn-E' && text.includes('20.99')) {
-            btn.textContent = text.replace(/20\.99/g, formattedPrice);
-        }
-    });
 }
 
 
