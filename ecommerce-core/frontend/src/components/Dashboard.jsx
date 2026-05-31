@@ -11,6 +11,7 @@ export default function Dashboard() {
   const [products, setProducts] = useState([]);
   const [orders, setOrders] = useState([]);
   const [clients, setClients] = useState([]);
+  const [messages, setMessages] = useState([]);
   const [webConfig, setWebConfig] = useState({
     banners: { main_banner: '/assets/hero-bg.jpg', promo_banner: '' },
     contact: { phone: '+593 9 8878 1166', email: 'info@profarnova.com', address: 'Quito, Ecuador' },
@@ -65,6 +66,15 @@ export default function Dashboard() {
       const configData = await configRes.json();
       if (configData && !configData.error) {
         setWebConfig(configData);
+      }
+
+      // Fetch Contact Messages
+      try {
+        const msgRes = await fetch(`${API_URL}/messages`, { headers });
+        const msgData = await msgRes.json();
+        setMessages(Array.isArray(msgData) ? msgData : []);
+      } catch (e) {
+        setMessages([]);
       }
     } catch (err) {
       console.error('Error fetching dashboard data, falling back to mock data:', err);
@@ -243,9 +253,38 @@ export default function Dashboard() {
     }
   };
 
+  // 5. MESSAGE HANDLERS
+  const handleToggleMessageStatus = async (id, newStatus) => {
+    try {
+      await fetch(`${API_URL}/messages/${id}/status`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json', 'Authorization': `Bearer ${token}` },
+        body: JSON.stringify({ status: newStatus })
+      });
+      fetchDashboardData();
+    } catch (err) {
+      console.error('Error updating message status:', err);
+    }
+  };
+
+  const handleDeleteMessage = async (id) => {
+    if (!confirm('¿Eliminar este mensaje permanentemente?')) return;
+    try {
+      await fetch(`${API_URL}/messages/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+      });
+      fetchDashboardData();
+    } catch (err) {
+      console.error('Error deleting message:', err);
+      setMessages(messages.filter(m => m.id !== id));
+    }
+  };
+
   // CRITICAL STOCK CALCULATION
   const criticalStockProducts = products.filter(p => p.stock < 5);
   const criticalStockCount = criticalStockProducts.length;
+  const unreadMessagesCount = messages.filter(m => m.status === 'unread').length;
 
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans text-slate-800">
@@ -366,6 +405,27 @@ export default function Dashboard() {
                 <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
               Configuración Web
+            </button>
+
+            <button
+              onClick={() => setActiveTab('mensajes')}
+              className={`flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-semibold transition-all ${
+                activeTab === 'mensajes'
+                  ? 'bg-emerald-50 text-emerald-700 border-l-4 border-emerald-500'
+                  : 'text-slate-600 hover:bg-slate-50'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                </svg>
+                Mensajes
+              </div>
+              {unreadMessagesCount > 0 && (
+                <span className="bg-emerald-500 text-white font-extrabold px-2 py-0.5 text-xs rounded-full">
+                  {unreadMessagesCount}
+                </span>
+              )}
             </button>
           </div>
 
@@ -858,6 +918,101 @@ export default function Dashboard() {
                       >
                         Guardar Políticas de Envío
                       </button>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {/* TAB: MENSAJES */}
+              {activeTab === 'mensajes' && (
+                <div className="space-y-6 animate-fadeIn">
+                  <div>
+                    <h2 className="text-xl font-extrabold text-slate-900">Mensajes de Contacto</h2>
+                    <p className="text-sm text-slate-500">Consultas y solicitudes enviadas desde el formulario de contacto del sitio web.</p>
+                  </div>
+
+                  <div className="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+                    <div className="overflow-x-auto">
+                      <table className="w-full text-left border-collapse">
+                        <thead>
+                          <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-400">
+                            <th className="px-6 py-4">Cliente</th>
+                            <th className="px-6 py-4">Asunto / Mensaje</th>
+                            <th className="px-6 py-4">Fecha</th>
+                            <th className="px-6 py-4">Estado</th>
+                            <th className="px-6 py-4 text-center">Acciones</th>
+                          </tr>
+                        </thead>
+                        <tbody className="divide-y divide-slate-100 text-sm">
+                          {messages.length === 0 ? (
+                            <tr>
+                              <td colSpan="5" className="px-6 py-10 text-center text-slate-400 text-sm">
+                                No hay mensajes de contacto recibidos aún.
+                              </td>
+                            </tr>
+                          ) : messages.map(m => {
+                            const isUnread = m.status === 'unread';
+                            const date = new Date(m.created_at).toLocaleDateString('es-EC', { day: 'numeric', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+                            return (
+                              <tr key={m.id} className={`hover:bg-slate-50/50 transition-colors ${isUnread ? 'bg-emerald-50/30' : ''}`}>
+                                <td className="px-6 py-4">
+                                  <div className="font-bold text-slate-800">{m.name}</div>
+                                  <div className="text-xs text-slate-500">{m.email}</div>
+                                  {m.phone && (
+                                    <a
+                                      href={`https://wa.me/${m.phone.replace(/[^\d]/g, '')}`}
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                      className="text-xs text-emerald-600 font-bold hover:underline flex items-center gap-1 mt-0.5"
+                                    >
+                                      {m.phone}
+                                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 24 24">
+                                        <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.47L0 24zm6.59-4.846c1.666.988 3.396 1.502 5.342 1.503 5.428 0 9.845-4.414 9.848-9.84.002-2.63-1.02-5.101-2.877-6.958C17.062 2.002 14.59 1 11.96 1 6.535 1 2.116 5.416 2.113 10.843c-.001 1.883.49 3.73 1.42 5.382L2.53 21.46l5.244-1.376z"/>
+                                      </svg>
+                                    </a>
+                                  )}
+                                </td>
+                                <td className="px-6 py-4">
+                                  <div className="font-bold text-slate-700 text-[10px] uppercase tracking-wide mb-1">{m.subject}</div>
+                                  <div className="text-slate-600 text-sm whitespace-pre-wrap max-w-sm">{m.message}</div>
+                                </td>
+                                <td className="px-6 py-4 text-slate-500 text-xs whitespace-nowrap">{date}</td>
+                                <td className="px-6 py-4 whitespace-nowrap">
+                                  <span className={`px-2.5 py-1 rounded-full text-xs font-extrabold ${
+                                    isUnread
+                                      ? 'bg-emerald-100 text-emerald-800 border border-emerald-200 animate-pulse'
+                                      : 'bg-slate-100 text-slate-600 border border-slate-200'
+                                  }`}>
+                                    {isUnread ? 'Nuevo' : 'Leído'}
+                                  </span>
+                                </td>
+                                <td className="px-6 py-4 text-center whitespace-nowrap">
+                                  <div className="flex justify-center gap-3">
+                                    <button
+                                      onClick={() => handleToggleMessageStatus(m.id, isUnread ? 'read' : 'unread')}
+                                      className="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all"
+                                      title={isUnread ? 'Marcar como leído' : 'Marcar como no leído'}
+                                    >
+                                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                                      </svg>
+                                    </button>
+                                    <button
+                                      onClick={() => handleDeleteMessage(m.id)}
+                                      className="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-all"
+                                      title="Eliminar"
+                                    >
+                                      <svg className="w-5 h-5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                                      </svg>
+                                    </button>
+                                  </div>
+                                </td>
+                              </tr>
+                            );
+                          })}
+                        </tbody>
+                      </table>
                     </div>
                   </div>
                 </div>
