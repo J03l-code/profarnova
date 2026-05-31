@@ -35,16 +35,18 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/config', configRoutes);
 
-// Root endpoint to satisfy cPanel/Passenger availability checks
-app.get('/', (req, res) => {
+// Root endpoints to satisfy cPanel/Passenger availability checks
+const welcomeHandler = (req, res) => {
   res.setHeader('Content-Type', 'text/html; charset=utf-8');
   res.send('<h1>PROFARNOVA API</h1><p>El servidor está funcionando correctamente.</p>');
-});
+};
+app.get('/', welcomeHandler);
+app.get('/api', welcomeHandler);
 
 const db = require('./config/db');
 
-// Health check endpoint
-app.get('/health', async (req, res) => {
+// Health check endpoints
+const healthHandler = async (req, res) => {
   try {
     // Perform a simple query to verify database connectivity
     await db.query('SELECT 1');
@@ -61,7 +63,9 @@ app.get('/health', async (req, res) => {
       timestamp: new Date() 
     });
   }
-});
+};
+app.get('/health', healthHandler);
+app.get('/api/health', healthHandler);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
