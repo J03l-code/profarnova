@@ -19,7 +19,8 @@ pool.getConnection()
   .then(async (conn) => {
     console.log('Successfully connected to the MySQL/MariaDB database.');
     
-      // Automatically initialize tables if not exist (e.g. blogs and messages tables)
+    // Automatically initialize tables if not exist (e.g. blogs and messages tables)
+    try {
       await conn.query(`
         CREATE TABLE IF NOT EXISTS blogs (
           id VARCHAR(36) PRIMARY KEY,
