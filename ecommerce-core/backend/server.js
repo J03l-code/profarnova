@@ -47,19 +47,12 @@ const db = require('./config/db');
 
 // Health check endpoints
 const healthHandler = async (req, res) => {
-  const debugInfo = {
-    dbUser: process.env.DB_USER || 'NOT_FOUND',
-    dbHost: process.env.DB_HOST || 'NOT_FOUND',
-    envPath: path.join(__dirname, '.env'),
-    cwd: process.cwd()
-  };
   try {
     // Perform a simple query to verify database connectivity
     await db.query('SELECT 1');
     res.json({ 
       status: 'healthy', 
       database: 'connected', 
-      debug: debugInfo,
       timestamp: new Date() 
     });
   } catch (error) {
@@ -67,7 +60,6 @@ const healthHandler = async (req, res) => {
       status: 'unhealthy', 
       database: 'disconnected', 
       error: error.message,
-      debug: debugInfo,
       timestamp: new Date() 
     });
   }
