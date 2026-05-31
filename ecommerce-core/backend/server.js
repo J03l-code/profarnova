@@ -35,9 +35,26 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/config', configRoutes);
 
+const db = require('./config/db');
+
 // Health check endpoint
-app.get('/health', (req, res) => {
-  res.json({ status: 'healthy', timestamp: new Date() });
+app.get('/health', async (req, res) => {
+  try {
+    // Perform a simple query to verify database connectivity
+    await db.query('SELECT 1');
+    res.json({ 
+      status: 'healthy', 
+      database: 'connected', 
+      timestamp: new Date() 
+    });
+  } catch (error) {
+    res.status(500).json({ 
+      status: 'unhealthy', 
+      database: 'disconnected', 
+      error: error.message,
+      timestamp: new Date() 
+    });
+  }
 });
 
 // Error handling middleware
