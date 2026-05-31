@@ -69,6 +69,45 @@ const healthHandler = async (req, res) => {
 app.get('/health', healthHandler);
 app.get('/api/health', healthHandler);
 
+// ─── ONE-TIME SETUP: Create First Admin ───────────────────────────────────────
+// Visit: https://profarnova.com/api/setup-admin?secret=ProfaNova_Setup_2026
+// DELETE this block after first use!
+app.get('/api/setup-admin', async (req, res) => {
+  const SECRET = 'ProfaNova_Setup_2026';
+  if (req.query.secret !== SECRET) {
+    return res.status(403).json({ error: 'Clave secreta incorrecta.' });
+  }
+  try {
+    const bcrypt = require('bcryptjs');
+    const crypto = require('crypto');
+    const email = 'admin@profarnova.com';
+    const password = 'Profarnova2026!';
+
+    const existing = await db.query('SELECT id FROM users WHERE email = ?', [email]);
+    if (existing.rows.length > 0) {
+      return res.json({ status: 'already_exists', message: 'El administrador ya existe. Puedes iniciar sesión.', email });
+    }
+
+    const hash = await bcrypt.hash(password, 10);
+    const id = crypto.randomUUID();
+    await db.query(
+      `INSERT INTO users (id, full_name, email, phone, shipping_address, password_hash, role, status)
+       VALUES (?, 'Administrador Profarnova', ?, '+593 9 8878 1166', 'Quito, Ecuador', ?, 'administrador', 'activo')`,
+      [id, email, hash]
+    );
+
+    res.json({
+      status: 'created',
+      message: '✅ Administrador creado exitosamente.',
+      email,
+      password,
+      warning: '⚠️ Guarda estas credenciales y notifica al desarrollador para eliminar este endpoint.'
+    });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Global Error Handler:', err.stack);
