@@ -11,6 +11,7 @@ const orderRoutes = require('./routes/orders');
 const userRoutes = require('./routes/users');
 const configRoutes = require('./routes/config');
 const blogRoutes = require('./routes/blogs');
+const messageRoutes = require('./routes/messages');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -36,6 +37,7 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/config', configRoutes);
 app.use('/api/blogs', blogRoutes);
+app.use('/api/messages', messageRoutes);
 
 // Root endpoints to satisfy cPanel/Passenger availability checks
 const welcomeHandler = (req, res) => {

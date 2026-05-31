@@ -19,8 +19,7 @@ pool.getConnection()
   .then(async (conn) => {
     console.log('Successfully connected to the MySQL/MariaDB database.');
     
-    // Automatically initialize tables if not exist (e.g. blogs table)
-    try {
+      // Automatically initialize tables if not exist (e.g. blogs and messages tables)
       await conn.query(`
         CREATE TABLE IF NOT EXISTS blogs (
           id VARCHAR(36) PRIMARY KEY,
@@ -35,8 +34,22 @@ pool.getConnection()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
       `);
       console.log('Blogs table verified/created successfully.');
+
+      await conn.query(`
+        CREATE TABLE IF NOT EXISTS messages (
+          id VARCHAR(36) PRIMARY KEY,
+          name VARCHAR(150) NOT NULL,
+          email VARCHAR(100) NOT NULL,
+          phone VARCHAR(20) NULL,
+          subject VARCHAR(150) NOT NULL,
+          message TEXT NOT NULL,
+          status ENUM('unread', 'read') DEFAULT 'unread',
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+      `);
+      console.log('Messages table verified/created successfully.');
     } catch (tableErr) {
-      console.error('Error verifying/creating blogs table:', tableErr.message);
+      console.error('Error verifying/creating tables:', tableErr.message);
     }
 
     // Safely add advanced columns to products table if they don't exist

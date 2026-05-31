@@ -168,6 +168,16 @@
             </svg>
             Artículos / Blog
           </button>
+
+          <button onclick="switchTab('mensajes')" id="tab-btn-mensajes" class="tab-btn flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:bg-slate-50">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+              </svg>
+              Mensajes
+            </div>
+            <span id="unread-messages-badge" class="hidden bg-emerald-500 text-white font-extrabold px-2 py-0.5 text-xs rounded-full">0</span>
+          </button>
         </div>
 
         <!-- Sticky Stock Warning Box -->
@@ -441,6 +451,32 @@
           </div>
         </div>
 
+        <!-- MODULE: MENSAJES -->
+        <div id="panel-mensajes" class="panel hidden space-y-6">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900">Mensajes de Contacto</h2>
+            <p class="text-sm text-slate-500">Revisa las consultas y solicitudes enviadas desde el formulario de contacto.</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-400">
+                    <th class="px-6 py-4">Cliente</th>
+                    <th class="px-6 py-4">Asunto / Mensaje</th>
+                    <th class="px-6 py-4">Fecha</th>
+                    <th class="px-6 py-4">Estado</th>
+                    <th class="px-6 py-4 text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm" id="messages-table-body">
+                  <!-- Dynamically Rendered -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
   </div>
@@ -675,17 +711,19 @@
     // ─── LOAD ALL DATA ────────────────────────────────────────────
     async function loadAllData() {
       try {
-        const [products, orders, clients, blogs] = await Promise.all([
+        const [products, orders, clients, blogs, messages] = await Promise.all([
           fetch(`${API_URL}/products`).then(r => r.json()).catch(() => []),
           apiRequest('GET', '/orders').catch(() => []),
           apiRequest('GET', '/users').catch(() => []),
-          fetch(`${API_URL}/blogs`).then(r => r.json()).catch(() => [])
+          fetch(`${API_URL}/blogs`).then(r => r.json()).catch(() => []),
+          apiRequest('GET', '/messages').catch(() => [])
         ]);
         renderAll(
           Array.isArray(products) ? products : [],
           Array.isArray(orders) ? orders : [],
           Array.isArray(clients) ? clients : [],
-          Array.isArray(blogs) ? blogs : []
+          Array.isArray(blogs) ? blogs : [],
+          Array.isArray(messages) ? messages : []
         );
       } catch (err) {
         showToast('Error al cargar datos del servidor.', 'error');
@@ -693,12 +731,13 @@
     }
 
     // ─── RENDER ALL ───────────────────────────────────────────────
-    function renderAll(products, orders, clients, blogs) {
+    function renderAll(products, orders, clients, blogs, messages) {
       renderStats(products, orders, clients);
       renderInventory(products);
       renderOrders(orders);
       renderClients(clients);
       renderBlogs(blogs);
+      renderMessages(messages);
     }
 
     function renderStats(products, orders, clients) {
@@ -962,6 +1001,96 @@
         showToast('Artículo eliminado.');
         loadAllData();
       } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    // ─── MESSAGE HANDLERS ──────────────────────────────────────────
+    function renderMessages(messages) {
+      // 1. Update the unread messages badge in the sidebar
+      const unreadCount = messages.filter(m => m.status === 'unread').length;
+      const badge = document.getElementById('unread-messages-badge');
+      if (unreadCount > 0) {
+        badge.textContent = unreadCount;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+
+      // 2. Render table rows
+      const body = document.getElementById('messages-table-body');
+      body.innerHTML = messages.length === 0
+        ? `<tr><td colspan="5" class="px-6 py-10 text-center text-slate-400 text-sm">No hay mensajes de contacto recibidos.</td></tr>`
+        : messages.map(m => {
+            const date = new Date(m.created_at).toLocaleDateString('es-EC', {day:'numeric', month:'short', hour:'2-digit', minute:'2-digit'});
+            
+            // Format phone direct WhatsApp link if exists
+            let phoneHtml = m.phone || '<span class="text-slate-300">No provisto</span>';
+            if (m.phone) {
+              const cleanPhone = m.phone.replace(/[^\d+]/g, '');
+              phoneHtml = `<a href="https://wa.me/${cleanPhone.startsWith('+') ? cleanPhone.slice(1) : cleanPhone}" target="_blank" class="text-emerald-600 font-bold hover:underline inline-flex items-center gap-1">
+                ${m.phone}
+                <svg class="w-3 h-3 text-emerald-500 inline" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.513 2.262 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.47L0 24zm6.59-4.846c1.666.988 3.396 1.502 5.342 1.503 5.428 0 9.845-4.414 9.848-9.84.002-2.63-1.02-5.101-2.877-6.958C17.062 2.002 14.59 1 11.96 1 6.535 1 2.116 5.416 2.113 10.843c-.001 1.883.49 3.73 1.42 5.382L2.53 21.46l5.244-1.376z"/></svg>
+              </a>`;
+            }
+
+            const isUnread = m.status === 'unread';
+
+            return `<tr class="hover:bg-slate-50/50 transition-colors ${isUnread ? 'bg-emerald-50/10 font-medium' : ''}">
+              <td class="px-6 py-4">
+                <div class="font-bold text-slate-800">${m.name}</div>
+                <div class="text-xs text-slate-500">${m.email}</div>
+                <div class="text-xs mt-0.5">${phoneHtml}</div>
+              </td>
+              <td class="px-6 py-4">
+                <div class="font-bold text-slate-700 text-[10px] uppercase tracking-wide mb-1">${m.subject}</div>
+                <div class="text-slate-600 text-sm whitespace-pre-wrap max-w-lg">${m.message}</div>
+              </td>
+              <td class="px-6 py-4 text-slate-500 text-xs whitespace-nowrap">${date}</td>
+              <td class="px-6 py-4 whitespace-nowrap">
+                <span class="px-2.5 py-1 rounded-full text-xs font-extrabold ${
+                  isUnread
+                    ? 'bg-emerald-100 text-emerald-800 border border-emerald-200 animate-pulse'
+                    : 'bg-slate-100 text-slate-600 border border-slate-200'
+                }">
+                  ${isUnread ? 'Nuevo' : 'Leído'}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-center whitespace-nowrap">
+                <div class="flex justify-center gap-3">
+                  <button onclick="toggleMessageStatus('${m.id}', '${isUnread ? 'read' : 'unread'}')" class="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all" title="${isUnread ? 'Marcar como leído' : 'Marcar como no leído'}">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                      ${isUnread 
+                        ? '<path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />' 
+                        : '<path stroke-linecap="round" stroke-linejoin="round" d="M3 19V5a2 2 0 012-2h14a2 2 0 012 2v14a2 2 0 01-2 2H5a2 2 0 01-2-2zm0 0h18" />'}
+                    </svg>
+                  </button>
+                  <button onclick="deleteMessage('${m.id}')" class="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-all" title="Eliminar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>`;
+          }).join('');
+    }
+
+    async function toggleMessageStatus(id, newStatus) {
+      try {
+        await apiRequest('PUT', `/messages/${id}/status`, { status: newStatus });
+        showToast(newStatus === 'read' ? 'Mensaje marcado como leído.' : 'Mensaje marcado como pendiente.');
+        loadAllData();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    async function deleteMessage(id) {
+      if (!confirm('¿Eliminar este mensaje permanentemente?')) return;
+      try {
+        await apiRequest('DELETE', `/messages/${id}`);
+        showToast('Mensaje eliminado.');
+        loadAllData();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
     }
 
     // ─── CONFIG HANDLERS ──────────────────────────────────────────

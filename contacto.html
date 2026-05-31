@@ -304,13 +304,41 @@
     <button class="scroll-top" id="scrollTop" aria-label="Volver arriba"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg></button>
     <script src="scripts.js"></script>
     <script>
-        function handleFormSubmit(e) {
+        async function handleFormSubmit(e) {
             e.preventDefault();
-            const nombre = document.getElementById('nombre').value;
-            const asunto = document.getElementById('asunto').value;
-            const mensaje = document.getElementById('mensaje').value;
-            const waText = encodeURIComponent(`Hola PROFARNOVA, soy ${nombre}.\n\nAsunto: ${asunto}\n\n${mensaje}`);
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnHtml = submitBtn.innerHTML;
+
+            const name = document.getElementById('nombre').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('telefono').value;
+            const subject = document.getElementById('asunto').value;
+            const message = document.getElementById('mensaje').value;
+
+            // Disable button & show sending status
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = 'Enviando...';
+
+            try {
+                // Send to DB first
+                const apiUrl = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+                    ? 'https://profarnova.com/api/messages'
+                    : '/api/messages';
+
+                await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ name, email, phone, subject, message })
+                });
+            } catch (err) {
+                console.warn('API message logging failed, bypassing to WhatsApp directly.', err);
+            }
+
+            // Open WhatsApp as requested
+            const waText = encodeURIComponent(`Hola PROFARNOVA, soy ${name}.\n\nAsunto: ${subject}\n\n${message}`);
             window.open(`https://wa.me/593987646968?text=${waText}`, '_blank');
+
+            // Show success message and hide form
             document.getElementById('contactForm').style.display = 'none';
             document.getElementById('formSuccess').style.display = 'block';
         }
