@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     initScrollToTop();
     initSmoothScroll();
     initProfileModal();
+    initProductPriceSync();
 });
 
 /* ============================================
@@ -413,4 +414,81 @@ function initProfileModal() {
         return false;
     });
 }
+
+/* ============================================
+   Dynamic Product Price Synchronization
+   ============================================ */
+async function initProductPriceSync() {
+    try {
+        const apiUrl = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+            ? 'https://profarnova.com/api/products'
+            : '/api/products';
+
+        const response = await fetch(apiUrl);
+        if (!response.ok) return;
+        const products = await response.json();
+        
+        // Find Cysprex and Lubryn-E from the database
+        const cysprex = products.find(p => p.sku === 'PRF-CYS-36');
+        const lubryne = products.find(p => p.sku === 'PRF-LUB-60');
+        
+        if (cysprex) {
+            updateProductPriceOnDOM('CYSPREX', cysprex.price);
+        }
+        if (lubryne) {
+            updateProductPriceOnDOM('Lubryn-E', lubryne.price);
+        }
+    } catch (e) {
+        console.warn('API connection failed, using offline fallback prices:', e);
+    }
+}
+
+function updateProductPriceOnDOM(nameKey, rawPrice) {
+    const formattedPrice = parseFloat(rawPrice).toFixed(2);
+    
+    // 1. Update text content of elements containing the old price or containing specific tags
+    const walker = document.createTreeWalker(
+        document.body,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+    );
+    
+    let node;
+    while (node = walker.nextNode()) {
+        const text = node.nodeValue;
+        if (nameKey === 'CYSPREX' && text.includes('28.80')) {
+            node.nodeValue = text.replace(/28\.80/g, formattedPrice);
+        } else if (nameKey === 'Lubryn-E' && text.includes('20.99')) {
+            node.nodeValue = text.replace(/20\.99/g, formattedPrice);
+        }
+    }
+
+    // 2. Update WhatsApp links in the href attribute of anchors
+    const links = document.querySelectorAll('a[href*="wa.me"]');
+    links.forEach(link => {
+        let href = link.getAttribute('href');
+        if (!href) return;
+        
+        if (nameKey === 'CYSPREX' && href.includes('28.80')) {
+            href = href.replace(/28\.80/g, formattedPrice);
+            link.setAttribute('href', href);
+        } else if (nameKey === 'Lubryn-E' && href.includes('20.99')) {
+            href = href.replace(/20\.99/g, formattedPrice);
+            link.setAttribute('href', href);
+        }
+    });
+
+    // 3. Update any explicit button/label text like "Comprar ($20.99)"
+    const buttons = document.querySelectorAll('a, button');
+    buttons.forEach(btn => {
+        const text = btn.textContent;
+        if (nameKey === 'CYSPREX' && text.includes('28.80')) {
+            btn.textContent = text.replace(/28\.80/g, formattedPrice);
+        } else if (nameKey === 'Lubryn-E' && text.includes('20.99')) {
+            btn.textContent = text.replace(/20\.99/g, formattedPrice);
+        }
+    });
+}
+
 
