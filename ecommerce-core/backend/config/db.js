@@ -16,8 +16,35 @@ const pool = mysql.createPool({
 
 // Emulate PostgreSQL pool connection logs
 pool.getConnection()
-  .then((conn) => {
+  .then(async (conn) => {
     console.log('Successfully connected to the MySQL/MariaDB database.');
+    
+    // Automatically initialize tables if not exist (e.g. blogs table)
+    try {
+      await conn.query(`
+        CREATE TABLE IF NOT EXISTS blogs (
+          id VARCHAR(36) PRIMARY KEY,
+          title VARCHAR(200) NOT NULL,
+          slug VARCHAR(200) UNIQUE NOT NULL,
+          excerpt TEXT NULL,
+          content TEXT NOT NULL,
+          category VARCHAR(100) NULL,
+          image_url TEXT NULL,
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+          updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+      `);
+      console.log('Blogs table verified/created successfully.');
+    } catch (tableErr) {
+      console.error('Error verifying/creating blogs table:', tableErr.message);
+    }
+
+    // Safely add advanced columns to products table if they don't exist
+    try { await conn.query('ALTER TABLE products ADD COLUMN composition TEXT NULL'); } catch (e) {}
+    try { await conn.query('ALTER TABLE products ADD COLUMN indications TEXT NULL'); } catch (e) {}
+    try { await conn.query('ALTER TABLE products ADD COLUMN mechanism_of_action TEXT NULL'); } catch (e) {}
+    try { await conn.query('ALTER TABLE products ADD COLUMN benefits TEXT NULL'); } catch (e) {}
+    
     conn.release();
   })
   .catch((err) => {

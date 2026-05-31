@@ -27,6 +27,10 @@ CREATE TABLE IF NOT EXISTS products (
     stock INT NOT NULL DEFAULT 0,
     sku VARCHAR(50) UNIQUE NOT NULL,
     image_url TEXT NULL,
+    composition TEXT NULL,
+    indications TEXT NULL,
+    mechanism_of_action TEXT NULL,
+    benefits TEXT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
     INDEX idx_products_category (category),
@@ -64,4 +68,19 @@ CREATE TABLE IF NOT EXISTS web_config (
     id VARCHAR(50) PRIMARY KEY,
     config_value JSON NOT NULL,
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 6. BLOGS / ARTICLES TABLE
+CREATE TABLE IF NOT EXISTS blogs (
+    id VARCHAR(36) PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    slug VARCHAR(200) UNIQUE NOT NULL,
+    excerpt TEXT NULL,
+    content TEXT NOT NULL,
+    category VARCHAR(100) NULL,
+    image_url TEXT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_blogs_slug (slug),
+    INDEX idx_blogs_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

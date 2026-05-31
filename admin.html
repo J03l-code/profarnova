@@ -161,6 +161,13 @@
             </svg>
             Configuración Web
           </button>
+
+          <button onclick="switchTab('blogs')" id="tab-btn-blogs" class="tab-btn flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:bg-slate-50">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z" />
+            </svg>
+            Artículos / Blog
+          </button>
         </div>
 
         <!-- Sticky Stock Warning Box -->
@@ -402,31 +409,60 @@
           </div>
         </div>
 
+        <!-- MODULE: BLOGS -->
+        <div id="panel-blogs" class="panel hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-900">Gestión de Artículos</h2>
+              <p class="text-sm text-slate-500">Crea, edita y elimina artículos del blog y noticias.</p>
+            </div>
+            <button onclick="openBlogModal()" class="px-4 py-2 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-md flex items-center gap-1.5 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4" /></svg>
+              Nuevo Artículo
+            </button>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-400">
+                    <th class="px-6 py-4">Título</th>
+                    <th class="px-6 py-4">Categoría</th>
+                    <th class="px-6 py-4">Slug</th>
+                    <th class="px-6 py-4">Fecha</th>
+                    <th class="px-6 py-4 text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm" id="blogs-table-body">
+                  <!-- Dynamically Rendered -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
   </div>
 
   <!-- ==================== PRODUCT CRUD MODAL ==================== -->
   <div id="product-modal" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-    <div class="bg-white rounded-2xl w-full max-w-lg shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]">
-      
+    <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]">
       <div class="p-6 border-b border-slate-100 flex items-center justify-between">
         <h3 class="font-extrabold text-slate-900 text-lg" id="modal-title">Añadir Producto</h3>
         <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-            <path d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" /></svg>
         </button>
       </div>
-
       <form id="product-form-elem" class="flex-1 overflow-y-auto p-6 space-y-4">
         <input type="hidden" id="form-product-id">
+        <!-- Basic fields -->
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Información Básica</p>
         <div class="grid grid-cols-2 gap-4">
           <div class="col-span-2">
-            <label class="block text-xs font-bold text-slate-500 mb-1">Nombre del Medicamento / Producto *</label>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Nombre del Producto *</label>
             <input type="text" id="form-product-name" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-slate-500 mb-1">Categoría *</label>
             <select id="form-product-category" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
@@ -437,33 +473,47 @@
               <option value="Bienestar Urinario">Bienestar Urinario</option>
             </select>
           </div>
-
           <div>
-            <label class="block text-xs font-bold text-slate-500 mb-1">Código SKU / Barra *</label>
+            <label class="block text-xs font-bold text-slate-500 mb-1">SKU *</label>
             <input type="text" id="form-product-sku" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
           </div>
-
           <div>
             <label class="block text-xs font-bold text-slate-500 mb-1">Precio ($) *</label>
             <input type="number" id="form-product-price" step="0.01" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
           </div>
-
           <div>
-            <label class="block text-xs font-bold text-slate-500 mb-1">Stock Disponible *</label>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Stock *</label>
             <input type="number" id="form-product-stock" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
           </div>
-
           <div class="col-span-2">
             <label class="block text-xs font-bold text-slate-500 mb-1">URL de Imagen</label>
-            <input type="text" id="form-product-image" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="assets/Cysprex final.png">
+            <input type="text" id="form-product-image" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="assets/producto.png">
           </div>
-
           <div class="col-span-2">
-            <label class="block text-xs font-bold text-slate-500 mb-1">Descripción</label>
-            <textarea id="form-product-desc" rows="3" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50"></textarea>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Descripción General</label>
+            <textarea id="form-product-desc" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50"></textarea>
           </div>
         </div>
-
+        <!-- Advanced Pharma fields -->
+        <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest pt-2 border-t border-slate-100">Información Técnica / Farmacológica</p>
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Composición</label>
+            <textarea id="form-product-composition" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Ej: Proantocianidinas 36mg, Vitamina C 60mg..."></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Indicaciones</label>
+            <textarea id="form-product-indications" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Ej: Indicado para el bienestar urinario femenino..."></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Mecanismo de Acción</label>
+            <textarea id="form-product-mechanism" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Ej: Las PACs bloquean la adherencia bacteriana..."></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Beneficios Clave</label>
+            <textarea id="form-product-benefits" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Ej: Reduce recurrencias, hidratación, sin conservantes..."></textarea>
+          </div>
+        </div>
         <div class="pt-4 border-t border-slate-100 flex gap-4">
           <button type="button" onclick="closeProductModal()" class="w-1/2 py-2.5 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Cancelar</button>
           <button type="submit" class="w-1/2 py-2.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-md transition-colors">Guardar Producto</button>
@@ -472,347 +522,332 @@
     </div>
   </div>
 
+  <!-- ==================== BLOG CRUD MODAL ==================== -->
+  <div id="blog-modal" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]">
+      <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="font-extrabold text-slate-900 text-lg" id="blog-modal-title">Nuevo Artículo</h3>
+        <button onclick="closeBlogModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <form id="blog-form-elem" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <input type="hidden" id="form-blog-id">
+        <div class="space-y-3">
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Título del Artículo *</label>
+            <input type="text" id="form-blog-title" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Ej: Los beneficios del Ácido Hialurónico">
+          </div>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1">Categoría</label>
+              <select id="form-blog-category" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
+                <option value="Salud Femenina">Salud Femenina</option>
+                <option value="Urología">Urología</option>
+                <option value="Vitaminas">Vitaminas</option>
+                <option value="Empresa">Empresa</option>
+                <option value="General">General</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-xs font-bold text-slate-500 mb-1">URL de Imagen</label>
+              <input type="text" id="form-blog-image" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="assets/imagen.png">
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Resumen / Excerpt</label>
+            <textarea id="form-blog-excerpt" rows="2" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Breve descripción del artículo (aparece en tarjetas)"></textarea>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Contenido Completo *</label>
+            <textarea id="form-blog-content" rows="8" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50 font-mono" placeholder="Escribe el contenido completo del artículo aquí..."></textarea>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-slate-100 flex gap-4">
+          <button type="button" onclick="closeBlogModal()" class="w-1/2 py-2.5 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Cancelar</button>
+          <button type="submit" class="w-1/2 py-2.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-md transition-colors">Publicar Artículo</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- ==================== CORE JS LOGIC ==================== -->
   <script>
-    // 1. Initial State Data Seeding
-    const defaultProducts = [
-      { id: '1', name: 'CYSPREX® Bienestar Urinario', category: 'Bienestar Urinario', description: 'Suplemento con Proantocianidinas 36mg. 15 cápsulas.', price: 18.50, stock: 45, sku: 'PRF-CYS-36', image_url: 'assets/Cysprex final.png' },
-      { id: '2', name: 'Lubryn-E® Gel Íntimo', category: 'Salud Femenina', description: 'Gel hidratante íntimo con Ácido Hialurónico. 60g.', price: 22.90, stock: 3, sku: 'PRF-LUB-60', image_url: 'assets/lubrine.png' },
-      { id: '3', name: 'Vitamina C + Zinc Efervescente', category: 'Vitaminas', description: 'Refuerzo inmunitario. 20 tabletas.', price: 9.80, stock: 120, sku: 'PRF-VCZ-20', image_url: '' },
-      { id: '4', name: 'Paracetamol 500mg Genérico', category: 'Analgésicos', description: 'Alivio de dolores leves y estados febriles. 30 tabletas.', price: 3.20, stock: 2, sku: 'PRF-PAR-50', image_url: '' }
-    ];
+    // ─── CONFIGURATION ───────────────────────────────────────────
+    const API_URL = 'https://profarnova.com/api'; // Production API
+    let authToken = localStorage.getItem('admin_token') || null;
 
-    const defaultOrders = [
-      { id: 'ord-1001', client_name: 'María Alejandra Falconí', client_email: 'maria.falconi@hotmail.com', total_amount: 41.40, status: 'pendiente', created_at: '2026-05-26T14:32:00Z' },
-      { id: 'ord-1002', client_name: 'Juan Carlos Mendoza', client_email: 'jcmendoza@outlook.com', total_amount: 18.50, status: 'empaquetado', created_at: '2026-05-25T11:15:00Z' },
-      { id: 'ord-1003', client_name: 'Gabriela Estefanía Ortiz', client_email: 'gaby.ortiz@gmail.com', total_amount: 63.80, status: 'enviado', created_at: '2026-05-24T09:40:00Z' }
-    ];
+    // ─── HELPERS ─────────────────────────────────────────────────
+    const apiHeaders = () => ({
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${authToken}`
+    });
 
-    const defaultClients = [
-      { id: 'cli-1', full_name: 'María Alejandra Falconí', email: 'maria.falconi@hotmail.com', phone: '+593 9 9123 4567', rfc: '1723456789001', total_orders: 1, total_spent: 41.40, status: 'activo', created_at: '2026-05-15' },
-      { id: 'cli-2', full_name: 'Juan Carlos Mendoza', email: 'jcmendoza@outlook.com', phone: '+593 9 8234 5678', rfc: '', total_orders: 4, total_spent: 98.20, status: 'activo', created_at: '2026-05-10' },
-      { id: 'cli-3', full_name: 'Roberto Villacís', email: 'rvillacis88@gmail.com', phone: '+593 9 5221 4433', rfc: '1711223344001', total_orders: 0, total_spent: 0.00, status: 'suspendido', created_at: '2026-05-08' }
-    ];
-
-    // Read or init localstorage db
-    function getData(key, fallback) {
-      const data = localStorage.getItem(key);
-      if (!data) {
-        localStorage.setItem(key, JSON.stringify(fallback));
-        return fallback;
-      }
-      return JSON.parse(data);
+    async function apiRequest(method, path, body) {
+      const opts = { method, headers: apiHeaders() };
+      if (body) opts.body = JSON.stringify(body);
+      const res = await fetch(`${API_URL}${path}`, opts);
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || `Error ${res.status}`);
+      return data;
     }
 
-    function saveData(key, val) {
-      localStorage.setItem(key, JSON.stringify(val));
+    function showToast(msg, type = 'success') {
+      const t = document.createElement('div');
+      t.className = `fixed bottom-5 right-5 z-[999] px-5 py-3 rounded-xl shadow-xl text-sm font-bold text-white transition-all ${type === 'error' ? 'bg-red-600' : 'bg-emerald-600'}`;
+      t.textContent = msg;
+      document.body.appendChild(t);
+      setTimeout(() => t.remove(), 3500);
     }
 
-    // 2. Auth checks on load
-    document.addEventListener("DOMContentLoaded", () => {
-      const isLogged = localStorage.getItem('admin_logged') === 'true';
-      if (isLogged) {
+    // ─── AUTH ─────────────────────────────────────────────────────
+    document.addEventListener('DOMContentLoaded', () => {
+      if (authToken) {
         showDashboard();
       } else {
-        showLogin();
+        document.getElementById('login-container').classList.remove('hidden');
+        document.getElementById('dashboard-container').classList.add('hidden');
       }
     });
 
-    // 3. Login Validation
-    const loginForm = document.getElementById('login-form');
-    loginForm.addEventListener('submit', (e) => {
+    document.getElementById('login-form').addEventListener('submit', async (e) => {
       e.preventDefault();
-      
-      const emailInput = document.getElementById('email');
-      const passwordInput = document.getElementById('password');
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const rememberMe = document.getElementById('remember-me').checked;
       const errorAlert = document.getElementById('login-error-alert');
       const errorText = document.getElementById('login-error-text');
-
-      // Clear errors
-      document.getElementById('email-validation-error').classList.add('hidden');
-      document.getElementById('password-validation-error').classList.add('hidden');
       errorAlert.classList.add('hidden');
 
-      let isValid = true;
-      
-      // Email check
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailInput.value) {
-        document.getElementById('email-validation-error').textContent = 'El correo electrónico es requerido.';
-        document.getElementById('email-validation-error').classList.remove('hidden');
-        isValid = false;
-      } else if (!emailRegex.test(emailInput.value)) {
-        document.getElementById('email-validation-error').textContent = 'Ingrese un formato de correo válido.';
-        document.getElementById('email-validation-error').classList.remove('hidden');
-        isValid = false;
-      }
+      const btn = e.submitter;
+      btn.textContent = 'Verificando...';
+      btn.disabled = true;
 
-      // Password check
-      if (!passwordInput.value) {
-        document.getElementById('password-validation-error').textContent = 'La contraseña es requerida.';
-        document.getElementById('password-validation-error').classList.remove('hidden');
-        isValid = false;
-      } else if (passwordInput.value.length < 8) {
-        document.getElementById('password-validation-error').textContent = 'La contraseña debe tener al menos 8 caracteres.';
-        document.getElementById('password-validation-error').classList.remove('hidden');
-        isValid = false;
-      }
+      try {
+        const data = await fetch(`${API_URL}/auth/login`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email, password, rememberMe })
+        }).then(r => r.json());
 
-      if (!isValid) return;
+        if (!data.token) throw new Error(data.error || 'Credenciales incorrectas.');
+        if (data.user?.role !== 'administrador') throw new Error('Acceso denegado. Solo para administradores.');
 
-      // Mock Credentials Check
-      if (emailInput.value === 'admin@profarnova.com' && passwordInput.value === 'admin1234') {
-        localStorage.setItem('admin_logged', 'true');
+        authToken = data.token;
+        localStorage.setItem('admin_token', authToken);
+        document.getElementById('user-display-name').textContent = data.user.full_name;
         showDashboard();
-      } else {
-        errorText.textContent = 'Credenciales incorrectas. Pruebe con: admin@profarnova.com / admin1234';
+      } catch (err) {
+        errorText.textContent = err.message;
         errorAlert.classList.remove('hidden');
+      } finally {
+        btn.textContent = 'Ingresar al Panel';
+        btn.disabled = false;
       }
     });
 
-    // Logout
     document.getElementById('logout-btn').addEventListener('click', () => {
-      localStorage.removeItem('admin_logged');
-      showLogin();
-    });
-
-    function showLogin() {
+      authToken = null;
+      localStorage.removeItem('admin_token');
       document.getElementById('login-container').classList.remove('hidden');
       document.getElementById('dashboard-container').classList.add('hidden');
-    }
+    });
 
     function showDashboard() {
       document.getElementById('login-container').classList.add('hidden');
       document.getElementById('dashboard-container').classList.remove('hidden');
-      renderAll();
+      loadAllData();
     }
 
-    // 4. Tab Navigation
+    // ─── TAB NAVIGATION ──────────────────────────────────────────
     function switchTab(tabId) {
-      document.querySelectorAll('.panel').forEach(panel => panel.classList.add('hidden'));
-      document.getElementById(`panel-${tabId}`).classList.remove('hidden');
-      
+      document.querySelectorAll('.panel').forEach(p => p.classList.add('hidden'));
+      document.getElementById(`panel-${tabId}`)?.classList.remove('hidden');
       document.querySelectorAll('.tab-btn').forEach(btn => {
-        btn.className = "tab-btn flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:bg-slate-50";
+        btn.className = 'tab-btn flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:bg-slate-50';
       });
-      
       const activeBtn = document.getElementById(`tab-btn-${tabId}`);
       if (activeBtn) {
-        if (tabId === 'inventario' && parseInt(document.getElementById('critical-badge').textContent) > 0) {
-          activeBtn.className = "tab-btn flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-semibold transition-all bg-emerald-50 text-emerald-700 border-l-4 border-emerald-500";
-        } else {
-          activeBtn.className = "tab-btn flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all bg-emerald-50 text-emerald-700 border-l-4 border-emerald-500";
-        }
+        activeBtn.className = `tab-btn flex items-center ${tabId === 'inventario' ? 'justify-between' : 'gap-3'} px-3 py-2.5 rounded-lg text-sm font-semibold transition-all bg-emerald-50 text-emerald-700 border-l-4 border-emerald-500`;
       }
     }
 
-    // 5. RENDERING CORE MODULES
-    function renderAll() {
-      const products = getData('products_db', defaultProducts);
-      const orders = getData('orders_db', defaultOrders);
-      const clients = getData('clients_db', defaultClients);
-
-      // STOCK ALERTS
-      const criticalProducts = products.filter(p => parseInt(p.stock) < 5);
-      const criticalCount = criticalProducts.length;
-      
-      const criticalBadge = document.getElementById('critical-badge');
-      const stickyAlert = document.getElementById('sticky-stock-alert');
-      const stickyCount = document.getElementById('sticky-stock-count');
-
-      if (criticalCount > 0) {
-        criticalBadge.textContent = criticalCount;
-        criticalBadge.classList.remove('hidden');
-        stickyAlert.classList.remove('hidden');
-        stickyCount.textContent = criticalCount;
-      } else {
-        criticalBadge.classList.add('hidden');
-        stickyAlert.classList.add('hidden');
+    // ─── LOAD ALL DATA ────────────────────────────────────────────
+    async function loadAllData() {
+      try {
+        const [products, orders, clients, blogs] = await Promise.all([
+          fetch(`${API_URL}/products`).then(r => r.json()).catch(() => []),
+          apiRequest('GET', '/orders').catch(() => []),
+          apiRequest('GET', '/users').catch(() => []),
+          fetch(`${API_URL}/blogs`).then(r => r.json()).catch(() => [])
+        ]);
+        renderAll(
+          Array.isArray(products) ? products : [],
+          Array.isArray(orders) ? orders : [],
+          Array.isArray(clients) ? clients : [],
+          Array.isArray(blogs) ? blogs : []
+        );
+      } catch (err) {
+        showToast('Error al cargar datos del servidor.', 'error');
       }
+    }
 
-      // RESUMEN PANEL STATS
-      const totalSales = orders.reduce((sum, o) => sum + parseFloat(o.total_amount), 0);
+    // ─── RENDER ALL ───────────────────────────────────────────────
+    function renderAll(products, orders, clients, blogs) {
+      renderStats(products, orders, clients);
+      renderInventory(products);
+      renderOrders(orders);
+      renderClients(clients);
+      renderBlogs(blogs);
+    }
+
+    function renderStats(products, orders, clients) {
+      const totalSales = orders.reduce((s, o) => s + parseFloat(o.total_amount || 0), 0);
       document.getElementById('stat-sales').textContent = `$${totalSales.toFixed(2)}`;
       document.getElementById('stat-products-count').textContent = products.length;
       document.getElementById('stat-clients-count').textContent = clients.filter(c => c.status === 'activo').length;
 
-      // Top products rendering
+      const criticalProducts = products.filter(p => parseInt(p.stock) < 5);
+      const badge = document.getElementById('critical-badge');
+      const alert = document.getElementById('sticky-stock-alert');
+      if (criticalProducts.length > 0) {
+        badge.textContent = criticalProducts.length;
+        badge.classList.remove('hidden');
+        alert.classList.remove('hidden');
+        document.getElementById('sticky-stock-count').textContent = criticalProducts.length;
+      } else {
+        badge.classList.add('hidden');
+        alert.classList.add('hidden');
+      }
+
       const topList = document.getElementById('top-products-list');
       topList.innerHTML = '';
-      products.slice(0, 3).forEach((p, idx) => {
-        const div = document.createElement('div');
-        div.className = "flex items-center justify-between py-3.5";
-        div.innerHTML = `
+      products.slice(0, 3).forEach((p, i) => {
+        topList.innerHTML += `<div class="flex items-center justify-between py-3.5">
           <div class="flex items-center gap-3">
-            <span class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-sm">#${idx+1}</span>
-            <div>
-              <p class="font-bold text-slate-800 text-sm">${p.name}</p>
-              <p class="text-xs text-slate-400">${p.category}</p>
-            </div>
+            <span class="w-8 h-8 rounded-full bg-emerald-50 text-emerald-700 flex items-center justify-center font-bold text-sm">#${i+1}</span>
+            <div><p class="font-bold text-slate-800 text-sm">${p.name}</p><p class="text-xs text-slate-400">${p.category}</p></div>
           </div>
-          <div class="text-right">
-            <p class="font-bold text-slate-950 text-sm">${140 - idx * 35} uds</p>
-            <p class="text-xs text-emerald-600 font-semibold">+$${((140 - idx * 35) * p.price).toFixed(2)}</p>
-          </div>
-        `;
-        topList.appendChild(div);
-      });
-
-      // INVENTARIO TAB TABLE
-      const invBody = document.getElementById('inventory-table-body');
-      invBody.innerHTML = '';
-      products.forEach(p => {
-        const isCritical = parseInt(p.stock) < 5;
-        const tr = document.createElement('tr');
-        tr.className = "hover:bg-slate-50/50 transition-colors";
-        tr.innerHTML = `
-          <td class="px-6 py-4 font-mono font-semibold text-slate-500">${p.sku}</td>
-          <td class="px-6 py-4 font-bold text-slate-800">${p.name}</td>
-          <td class="px-6 py-4 text-slate-500">${p.category}</td>
-          <td class="px-6 py-4 font-semibold text-slate-900">$${parseFloat(p.price).toFixed(2)}</td>
-          <td class="px-6 py-4">
-            <div class="flex items-center gap-2">
-              <span class="font-bold ${isCritical ? 'text-red-600' : 'text-slate-700'}">${p.stock}</span>
-              ${isCritical ? `<span class="bg-red-50 text-red-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-red-100 uppercase tracking-wide">Crítico</span>` : ''}
-            </div>
-          </td>
-          <td class="px-6 py-4 text-center">
-            <div class="flex items-center justify-center gap-3">
-              <button onclick="editProduct('${p.id}')" class="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-              </button>
-              <button onclick="deleteProduct('${p.id}')" class="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-all">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </button>
-            </div>
-          </td>
-        `;
-        invBody.appendChild(tr);
-      });
-
-      // PEDIDOS TAB TABLE
-      const orderBody = document.getElementById('orders-table-body');
-      orderBody.innerHTML = '';
-      orders.forEach(o => {
-        const tr = document.createElement('tr');
-        tr.className = "hover:bg-slate-50/50 transition-colors";
-        
-        let badgeColor = 'bg-amber-50 text-amber-700 border-amber-100';
-        if (o.status === 'empaquetado') badgeColor = 'bg-sky-50 text-sky-700 border-sky-100';
-        if (o.status === 'enviado') badgeColor = 'bg-blue-50 text-blue-700 border-blue-100';
-        if (o.status === 'entregado') badgeColor = 'bg-emerald-50 text-emerald-700 border-emerald-100';
-
-        tr.innerHTML = `
-          <td class="px-6 py-4 font-mono text-slate-500 text-xs">${o.id}</td>
-          <td class="px-6 py-4">
-            <div class="font-bold text-slate-800">${o.client_name}</div>
-            <div class="text-xs text-slate-400">${o.client_email}</div>
-          </td>
-          <td class="px-6 py-4 text-slate-500">${new Date(o.created_at).toLocaleDateString('es-EC', {day:'numeric', month:'short', year:'numeric'})}</td>
-          <td class="px-6 py-4 font-bold text-slate-900">$${o.total_amount.toFixed(2)}</td>
-          <td class="px-6 py-4">
-            <span class="px-2.5 py-1 rounded-full text-xs font-bold uppercase ${badgeColor}">${o.status}</span>
-          </td>
-          <td class="px-6 py-4">
-            <select onchange="updateOrderStatus('${o.id}', this.value)" class="px-2 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-4 focus:ring-emerald-100 bg-white">
-              <option value="pendiente" ${o.status==='pendiente'?'selected':''}>Pendiente</option>
-              <option value="empaquetado" ${o.status==='empaquetado'?'selected':''}>Empaquetado</option>
-              <option value="enviado" ${o.status==='enviado'?'selected':''}>Enviado</option>
-              <option value="entregado" ${o.status==='entregado'?'selected':''}>Entregado</option>
-            </select>
-          </td>
-        `;
-        orderBody.appendChild(tr);
-      });
-
-      // CLIENTES TAB TABLE
-      const clientsBody = document.getElementById('clients-table-body');
-      clientsBody.innerHTML = '';
-      clients.forEach(c => {
-        const tr = document.createElement('tr');
-        tr.className = "hover:bg-slate-50/50 transition-colors";
-        const isActive = c.status === 'activo';
-        
-        tr.innerHTML = `
-          <td class="px-6 py-4">
-            <div class="font-bold text-slate-800">${c.full_name}</div>
-            <div class="text-xs text-slate-400">${c.email}</div>
-          </td>
-          <td class="px-6 py-4 text-slate-700">
-            <div>${c.phone}</div>
-            <div class="text-xs text-slate-400 font-mono">RFC: ${c.rfc || 'No registrado'}</div>
-          </td>
-          <td class="px-6 py-4 font-semibold text-slate-700">${c.total_orders}</td>
-          <td class="px-6 py-4 font-bold text-slate-900">$${c.total_spent.toFixed(2)}</td>
-          <td class="px-6 py-4">
-            <span class="px-2 py-0.5 rounded-full text-xs font-bold uppercase ${isActive ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-red-50 text-red-700 border-red-100'}">${c.status}</span>
-          </td>
-          <td class="px-6 py-4 text-center">
-            <button onclick="toggleClientStatus('${c.id}')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${isActive ? 'text-red-600 bg-red-50 hover:bg-red-100' : 'text-emerald-600 bg-emerald-50 hover:bg-emerald-100'}">
-              ${isActive ? 'Suspender' : 'Activar'}
-            </button>
-          </td>
-        `;
-        clientsBody.appendChild(tr);
+          <div class="text-right"><p class="font-bold text-slate-950 text-sm">${p.stock} en stock</p><p class="text-xs text-emerald-600 font-semibold">$${parseFloat(p.price).toFixed(2)}</p></div>
+        </div>`;
       });
     }
 
-    // 6. ACTION HANDLERS
-    // Product Add/Edit Modal
+    function renderInventory(products) {
+      const body = document.getElementById('inventory-table-body');
+      body.innerHTML = products.length === 0
+        ? `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-sm">No hay productos registrados.</td></tr>`
+        : products.map(p => {
+            const crit = parseInt(p.stock) < 5;
+            return `<tr class="hover:bg-slate-50/50 transition-colors">
+              <td class="px-6 py-4 font-mono text-xs text-slate-500">${p.sku}</td>
+              <td class="px-6 py-4 font-bold text-slate-800">${p.name}</td>
+              <td class="px-6 py-4 text-slate-500 text-sm">${p.category}</td>
+              <td class="px-6 py-4 font-semibold text-slate-900">$${parseFloat(p.price).toFixed(2)}</td>
+              <td class="px-6 py-4">
+                <div class="flex items-center gap-2">
+                  <span class="font-bold ${crit ? 'text-red-600' : 'text-slate-700'}">${p.stock}</span>
+                  ${crit ? '<span class="bg-red-50 text-red-700 text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-red-100 uppercase">Crítico</span>' : ''}
+                </div>
+              </td>
+              <td class="px-6 py-4 text-center">
+                <div class="flex justify-center gap-3">
+                  <button onclick='editProduct(${JSON.stringify(p)})' class="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all" title="Editar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="deleteProduct('${p.id}')" class="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-all" title="Eliminar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>`;
+          }).join('');
+    }
+
+    function renderOrders(orders) {
+      const body = document.getElementById('orders-table-body');
+      body.innerHTML = orders.length === 0
+        ? `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-sm">No hay pedidos registrados.</td></tr>`
+        : orders.map(o => {
+            const bc = o.status === 'empaquetado' ? 'bg-sky-50 text-sky-700 border-sky-100'
+              : o.status === 'enviado' ? 'bg-blue-50 text-blue-700 border-blue-100'
+              : o.status === 'entregado' ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
+              : 'bg-amber-50 text-amber-700 border-amber-100';
+            const date = new Date(o.created_at).toLocaleDateString('es-EC', {day:'numeric', month:'short', year:'numeric'});
+            return `<tr class="hover:bg-slate-50/50 transition-colors">
+              <td class="px-6 py-4 font-mono text-slate-500 text-xs">${String(o.id).slice(0,8)}...</td>
+              <td class="px-6 py-4"><div class="font-bold text-slate-800">${o.client_name || 'Consumidor final'}</div><div class="text-xs text-slate-400">${o.client_email || ''}</div></td>
+              <td class="px-6 py-4 text-slate-500 text-sm">${date}</td>
+              <td class="px-6 py-4 font-bold text-slate-900">$${parseFloat(o.total_amount).toFixed(2)}</td>
+              <td class="px-6 py-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold uppercase border ${bc}">${o.status}</span></td>
+              <td class="px-6 py-4">
+                <select onchange="updateOrderStatus('${o.id}', this.value)" class="px-2 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-4 focus:ring-emerald-100 bg-white">
+                  <option value="pendiente" ${o.status==='pendiente'?'selected':''}>Pendiente</option>
+                  <option value="empaquetado" ${o.status==='empaquetado'?'selected':''}>Empaquetado</option>
+                  <option value="enviado" ${o.status==='enviado'?'selected':''}>Enviado</option>
+                  <option value="entregado" ${o.status==='entregado'?'selected':''}>Entregado</option>
+                </select>
+              </td>
+            </tr>`;
+          }).join('');
+    }
+
+    function renderClients(clients) {
+      const body = document.getElementById('clients-table-body');
+      body.innerHTML = clients.length === 0
+        ? `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-sm">No hay clientes registrados.</td></tr>`
+        : clients.map(c => {
+            const active = c.status === 'activo';
+            return `<tr class="hover:bg-slate-50/50 transition-colors">
+              <td class="px-6 py-4"><div class="font-bold text-slate-800">${c.full_name}</div><div class="text-xs text-slate-400">${c.email}</div></td>
+              <td class="px-6 py-4"><div class="text-slate-700 text-sm">${c.phone}</div><div class="text-xs text-slate-400 font-mono">RFC: ${c.rfc || 'N/A'}</div></td>
+              <td class="px-6 py-4 font-semibold text-slate-700">${c.total_orders || 0}</td>
+              <td class="px-6 py-4 font-bold text-slate-900">$${parseFloat(c.total_spent || 0).toFixed(2)}</td>
+              <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full text-xs font-bold uppercase border ${active ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-red-50 text-red-700 border-red-100'}">${c.status}</span></td>
+              <td class="px-6 py-4 text-center">
+                <button onclick="toggleClientStatus('${c.id}', '${c.status}')" class="px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${active ? 'text-red-600 bg-red-50 hover:bg-red-100' : 'text-emerald-600 bg-emerald-50 hover:bg-emerald-100'}">
+                  ${active ? 'Suspender' : 'Activar'}
+                </button>
+              </td>
+            </tr>`;
+          }).join('');
+    }
+
+    function renderBlogs(blogs) {
+      const body = document.getElementById('blogs-table-body');
+      body.innerHTML = blogs.length === 0
+        ? `<tr><td colspan="5" class="px-6 py-10 text-center text-slate-400 text-sm">No hay artículos publicados.</td></tr>`
+        : blogs.map(b => {
+            const date = new Date(b.created_at).toLocaleDateString('es-EC', {day:'numeric', month:'short', year:'numeric'});
+            return `<tr class="hover:bg-slate-50/50 transition-colors">
+              <td class="px-6 py-4"><div class="font-bold text-slate-800">${b.title}</div><div class="text-xs text-slate-400 line-clamp-1">${b.excerpt || ''}</div></td>
+              <td class="px-6 py-4"><span class="px-2 py-0.5 rounded-full text-xs font-bold bg-emerald-50 text-emerald-700 border border-emerald-100">${b.category || 'General'}</span></td>
+              <td class="px-6 py-4 font-mono text-xs text-slate-400">${b.slug}</td>
+              <td class="px-6 py-4 text-slate-500 text-sm">${date}</td>
+              <td class="px-6 py-4 text-center">
+                <div class="flex justify-center gap-3">
+                  <button onclick='editBlog(${JSON.stringify(b)})' class="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all" title="Editar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="deleteBlog('${b.id}')" class="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-all" title="Eliminar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>`;
+          }).join('');
+    }
+
+    // ─── PRODUCT HANDLERS ─────────────────────────────────────────
     function openProductModal() {
       document.getElementById('modal-title').textContent = 'Añadir Producto';
       document.getElementById('form-product-id').value = '';
       document.getElementById('product-form-elem').reset();
       document.getElementById('product-modal').classList.remove('hidden');
     }
+    function closeProductModal() { document.getElementById('product-modal').classList.add('hidden'); }
 
-    function closeProductModal() {
-      document.getElementById('product-modal').classList.add('hidden');
-    }
-
-    document.getElementById('product-form-elem').addEventListener('submit', (e) => {
-      e.preventDefault();
-      
-      const prodId = document.getElementById('form-product-id').value;
-      const name = document.getElementById('form-product-name').value;
-      const category = document.getElementById('form-product-category').value;
-      const sku = document.getElementById('form-product-sku').value;
-      const price = parseFloat(document.getElementById('form-product-price').value);
-      const stock = parseInt(document.getElementById('form-product-stock').value);
-      const image = document.getElementById('form-product-image').value;
-      const desc = document.getElementById('form-product-desc').value;
-
-      const products = getData('products_db', defaultProducts);
-
-      if (prodId) {
-        // Edit mode
-        const index = products.findIndex(p => p.id === prodId);
-        if (index !== -1) {
-          products[index] = { id: prodId, name, category, sku, price, stock, image_url: image, description: desc };
-        }
-      } else {
-        // Create mode
-        const newProduct = {
-          id: Date.now().toString(),
-          name, category, sku, price, stock, image_url: image, description: desc
-        };
-        products.push(newProduct);
-      }
-
-      saveData('products_db', products);
-      closeProductModal();
-      renderAll();
-    });
-
-    function editProduct(productId) {
-      const products = getData('products_db', defaultProducts);
-      const p = products.find(prod => prod.id === productId);
-      if (!p) return;
-
+    function editProduct(p) {
       document.getElementById('modal-title').textContent = 'Editar Producto';
       document.getElementById('form-product-id').value = p.id;
       document.getElementById('form-product-name').value = p.name;
@@ -822,62 +857,128 @@
       document.getElementById('form-product-stock').value = p.stock;
       document.getElementById('form-product-image').value = p.image_url || '';
       document.getElementById('form-product-desc').value = p.description || '';
-
+      document.getElementById('form-product-composition').value = p.composition || '';
+      document.getElementById('form-product-indications').value = p.indications || '';
+      document.getElementById('form-product-mechanism').value = p.mechanism_of_action || '';
+      document.getElementById('form-product-benefits').value = p.benefits || '';
       document.getElementById('product-modal').classList.remove('hidden');
     }
 
-    function deleteProduct(productId) {
-      if (!confirm('¿Está seguro de que desea eliminar este producto?')) return;
-      const products = getData('products_db', defaultProducts);
-      const filtered = products.filter(p => p.id !== productId);
-      saveData('products_db', filtered);
-      renderAll();
+    document.getElementById('product-form-elem').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('form-product-id').value;
+      const body = {
+        name: document.getElementById('form-product-name').value,
+        category: document.getElementById('form-product-category').value,
+        sku: document.getElementById('form-product-sku').value,
+        price: parseFloat(document.getElementById('form-product-price').value),
+        stock: parseInt(document.getElementById('form-product-stock').value),
+        image_url: document.getElementById('form-product-image').value,
+        description: document.getElementById('form-product-desc').value,
+        composition: document.getElementById('form-product-composition').value,
+        indications: document.getElementById('form-product-indications').value,
+        mechanism_of_action: document.getElementById('form-product-mechanism').value,
+        benefits: document.getElementById('form-product-benefits').value
+      };
+      try {
+        await apiRequest(id ? 'PUT' : 'POST', id ? `/products/${id}` : '/products', body);
+        showToast(id ? 'Producto actualizado.' : 'Producto creado.');
+        closeProductModal();
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
+    });
+
+    async function deleteProduct(id) {
+      if (!confirm('¿Eliminar este producto?')) return;
+      try {
+        await apiRequest('DELETE', `/products/${id}`);
+        showToast('Producto eliminado.');
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
     }
 
-    // Order status trigger
-    function updateOrderStatus(orderId, newStatus) {
-      const orders = getData('orders_db', defaultOrders);
-      const idx = orders.findIndex(o => o.id === orderId);
-      if (idx !== -1) {
-        orders[idx].status = newStatus;
-        saveData('orders_db', orders);
-        renderAll();
-      }
+    // ─── ORDER HANDLERS ───────────────────────────────────────────
+    async function updateOrderStatus(id, status) {
+      try {
+        await apiRequest('PUT', `/orders/${id}/status`, { status });
+        showToast('Estado del pedido actualizado.');
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
     }
 
-    // Client toggle status
-    function toggleClientStatus(clientId) {
-      const clients = getData('clients_db', defaultClients);
-      const idx = clients.findIndex(c => c.id === clientId);
-      if (idx !== -1) {
-        const nextStatus = clients[idx].status === 'activo' ? 'suspendido' : 'activo';
-        if (confirm(`¿Desea cambiar el estado del cliente a ${nextStatus}?`)) {
-          clients[idx].status = nextStatus;
-          saveData('clients_db', clients);
-          renderAll();
-        }
-      }
+    // ─── CLIENT HANDLERS ──────────────────────────────────────────
+    async function toggleClientStatus(id, current) {
+      const next = current === 'activo' ? 'suspendido' : 'activo';
+      if (!confirm(`¿${next === 'activo' ? 'Activar' : 'Suspender'} esta cuenta?`)) return;
+      try {
+        await apiRequest('PUT', `/users/${id}/status`, { status: next });
+        showToast(`Cliente ${next}.`);
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
     }
 
-    // Config saves
-    function saveBanners() {
-      const main = document.getElementById('config-banner-main').value;
-      const promo = document.getElementById('config-banner-promo').value;
-      alert(`Banners guardados:\nPrincipal: ${main}\nPromocional: ${promo}`);
+    // ─── BLOG HANDLERS ────────────────────────────────────────────
+    function openBlogModal() {
+      document.getElementById('blog-modal-title').textContent = 'Nuevo Artículo';
+      document.getElementById('form-blog-id').value = '';
+      document.getElementById('blog-form-elem').reset();
+      document.getElementById('blog-modal').classList.remove('hidden');
+    }
+    function closeBlogModal() { document.getElementById('blog-modal').classList.add('hidden'); }
+
+    function editBlog(b) {
+      document.getElementById('blog-modal-title').textContent = 'Editar Artículo';
+      document.getElementById('form-blog-id').value = b.id;
+      document.getElementById('form-blog-title').value = b.title;
+      document.getElementById('form-blog-category').value = b.category || 'General';
+      document.getElementById('form-blog-image').value = b.image_url || '';
+      document.getElementById('form-blog-excerpt').value = b.excerpt || '';
+      document.getElementById('form-blog-content').value = b.content;
+      document.getElementById('blog-modal').classList.remove('hidden');
     }
 
-    function saveContact() {
-      const phone = document.getElementById('config-contact-phone').value;
-      const email = document.getElementById('config-contact-email').value;
-      const addr = document.getElementById('config-contact-address').value;
-      alert(`Contacto guardado:\nTel: ${phone}\nEmail: ${email}\nDir: ${addr}`);
+    document.getElementById('blog-form-elem').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('form-blog-id').value;
+      const body = {
+        title: document.getElementById('form-blog-title').value,
+        category: document.getElementById('form-blog-category').value,
+        image_url: document.getElementById('form-blog-image').value,
+        excerpt: document.getElementById('form-blog-excerpt').value,
+        content: document.getElementById('form-blog-content').value
+      };
+      try {
+        await apiRequest(id ? 'PUT' : 'POST', id ? `/blogs/${id}` : '/blogs', body);
+        showToast(id ? 'Artículo actualizado.' : 'Artículo publicado.');
+        closeBlogModal();
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
+    });
+
+    async function deleteBlog(id) {
+      if (!confirm('¿Eliminar este artículo permanentemente?')) return;
+      try {
+        await apiRequest('DELETE', `/blogs/${id}`);
+        showToast('Artículo eliminado.');
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
     }
 
-    function saveShipping() {
-      const fee = document.getElementById('config-shipping-fee').value;
-      const free = document.getElementById('config-shipping-free').value;
-      const policy = document.getElementById('config-shipping-policy').value;
-      alert(`Políticas de envío guardadas:\nCosto: $${fee}\nUmbral gratis: $${free}\nPolítica: ${policy}`);
+    // ─── CONFIG HANDLERS ──────────────────────────────────────────
+    async function saveBanners() {
+      const value = { main_banner: document.getElementById('config-banner-main').value, promo_banner: document.getElementById('config-banner-promo').value };
+      try { await apiRequest('PUT', '/config', { key: 'banners', value }); showToast('Banners guardados.'); }
+      catch (err) { showToast(err.message, 'error'); }
+    }
+    async function saveContact() {
+      const value = { phone: document.getElementById('config-contact-phone').value, email: document.getElementById('config-contact-email').value, address: document.getElementById('config-contact-address').value };
+      try { await apiRequest('PUT', '/config', { key: 'contact', value }); showToast('Contacto guardado.'); }
+      catch (err) { showToast(err.message, 'error'); }
+    }
+    async function saveShipping() {
+      const value = { base_fee: parseFloat(document.getElementById('config-shipping-fee').value), free_shipping_threshold: parseFloat(document.getElementById('config-shipping-free').value), policy: document.getElementById('config-shipping-policy').value };
+      try { await apiRequest('PUT', '/config', { key: 'shipping', value }); showToast('Políticas de envío guardadas.'); }
+      catch (err) { showToast(err.message, 'error'); }
     }
   </script>
 </body>

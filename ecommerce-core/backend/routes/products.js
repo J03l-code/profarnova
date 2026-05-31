@@ -72,7 +72,7 @@ router.get('/:id', async (req, res) => {
 
 // CREATE PRODUCT (Admin Only)
 router.post('/', verifyToken, isAdmin, upload.single('image'), async (req, res) => {
-  const { name, category, description, price, stock, sku } = req.body;
+  const { name, category, description, price, stock, sku, composition, indications, mechanism_of_action, benefits } = req.body;
   const image_url = req.file ? `/uploads/${req.file.filename}` : req.body.image_url || null;
 
   // Validation
@@ -91,9 +91,9 @@ router.post('/', verifyToken, isAdmin, upload.single('image'), async (req, res) 
     const productId = crypto.randomUUID();
 
     await db.query(
-      `INSERT INTO products (id, name, category, description, price, stock, sku, image_url)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
-      [productId, name, category, description || '', price, stock, sku, image_url]
+      `INSERT INTO products (id, name, category, description, price, stock, sku, image_url, composition, indications, mechanism_of_action, benefits)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`,
+      [productId, name, category, description || '', price, stock, sku, image_url, composition || null, indications || null, mechanism_of_action || null, benefits || null]
     );
 
     const result = await db.query('SELECT * FROM products WHERE id = ?', [productId]);
@@ -115,7 +115,7 @@ router.post('/', verifyToken, isAdmin, upload.single('image'), async (req, res) 
 // UPDATE PRODUCT (Admin Only)
 router.put('/:id', verifyToken, isAdmin, upload.single('image'), async (req, res) => {
   const { id } = req.params;
-  const { name, category, description, price, stock, sku } = req.body;
+  const { name, category, description, price, stock, sku, composition, indications, mechanism_of_action, benefits } = req.body;
   
   try {
     // Get existing product
@@ -140,12 +140,18 @@ router.put('/:id', verifyToken, isAdmin, upload.single('image'), async (req, res
     const updatedStock = stock !== undefined ? stock : currentProduct.stock;
     const updatedSku = sku || currentProduct.sku;
     const updatedImageUrl = req.file ? `/uploads/${req.file.filename}` : req.body.image_url || currentProduct.image_url;
+    const updatedComposition = composition !== undefined ? composition : currentProduct.composition;
+    const updatedIndications = indications !== undefined ? indications : currentProduct.indications;
+    const updatedMechanism = mechanism_of_action !== undefined ? mechanism_of_action : currentProduct.mechanism_of_action;
+    const updatedBenefits = benefits !== undefined ? benefits : currentProduct.benefits;
 
     await db.query(
       `UPDATE products 
-       SET name = ?, category = ?, description = ?, price = ?, stock = ?, sku = ?, image_url = ?
+       SET name = ?, category = ?, description = ?, price = ?, stock = ?, sku = ?, image_url = ?,
+           composition = ?, indications = ?, mechanism_of_action = ?, benefits = ?
        WHERE id = ?`,
-      [updatedName, updatedCategory, updatedDescription, updatedPrice, updatedStock, updatedSku, updatedImageUrl, id]
+      [updatedName, updatedCategory, updatedDescription, updatedPrice, updatedStock, updatedSku, updatedImageUrl,
+       updatedComposition, updatedIndications, updatedMechanism, updatedBenefits, id]
     );
 
     const result = await db.query('SELECT * FROM products WHERE id = ?', [id]);
