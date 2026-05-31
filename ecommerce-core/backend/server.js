@@ -35,6 +35,12 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/config', configRoutes);
 
+// Root endpoint to satisfy cPanel/Passenger availability checks
+app.get('/', (req, res) => {
+  res.setHeader('Content-Type', 'text/html; charset=utf-8');
+  res.send('<h1>PROFARNOVA API</h1><p>El servidor está funcionando correctamente.</p>');
+});
+
 const db = require('./config/db');
 
 // Health check endpoint
