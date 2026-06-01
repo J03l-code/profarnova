@@ -480,4 +480,295 @@ function updateProductPriceOnDOM(nameKey, rawPrice) {
     });
 }
 
+/* ============================================
+   CART & ORDER MODAL SYSTEM
+   ============================================ */
 
+// Cart state stored in localStorage
+let cart = JSON.parse(localStorage.getItem('pf_cart') || '[]');
+
+function saveCart() {
+    localStorage.setItem('pf_cart', JSON.stringify(cart));
+    updateCartBadge();
+}
+
+function updateCartBadge() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    document.querySelectorAll('.cart-badge').forEach(el => {
+        el.textContent = total;
+        el.style.display = total > 0 ? 'flex' : 'none';
+    });
+}
+
+// Called by "Comprar" buttons — data-product, data-price, data-img
+function addToCart(name, price, img) {
+    const existing = cart.find(i => i.name === name);
+    if (existing) {
+        existing.qty++;
+    } else {
+        cart.push({ name, price: parseFloat(price), img: img || '', qty: 1 });
+    }
+    saveCart();
+    showCartToast(name);
+    openCartDrawer();
+}
+
+function showCartToast(name) {
+    let t = document.getElementById('pf-toast');
+    if (!t) {
+        t = document.createElement('div');
+        t.id = 'pf-toast';
+        t.style.cssText = 'position:fixed;bottom:90px;left:50%;transform:translateX(-50%);background:#16a34a;color:#fff;padding:10px 22px;border-radius:30px;font-weight:700;font-size:0.9rem;z-index:9999;box-shadow:0 4px 20px rgba(0,0,0,0.2);transition:opacity .3s';
+        document.body.appendChild(t);
+    }
+    t.textContent = `✓ ${name} añadido al carrito`;
+    t.style.opacity = '1';
+    clearTimeout(t._timer);
+    t._timer = setTimeout(() => t.style.opacity = '0', 2500);
+}
+
+function openCartDrawer() {
+    ensureCartUI();
+    document.getElementById('pf-cart-drawer').classList.add('open');
+    renderCartDrawer();
+}
+
+function closeCartDrawer() {
+    const d = document.getElementById('pf-cart-drawer');
+    if (d) d.classList.remove('open');
+}
+
+function renderCartDrawer() {
+    const list = document.getElementById('pf-cart-list');
+    const footer = document.getElementById('pf-cart-footer');
+    if (!list) return;
+
+    if (cart.length === 0) {
+        list.innerHTML = '<p style="text-align:center;color:#94a3b8;padding:2rem 0;">Tu carrito está vacío</p>';
+        footer.innerHTML = '';
+        return;
+    }
+
+    list.innerHTML = cart.map((item, idx) => `
+        <div style="display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:1px solid #f1f5f9">
+            <img src="${item.img}" alt="${item.name}" style="width:56px;height:56px;object-fit:contain;border-radius:8px;background:#f8fafc;border:1px solid #e2e8f0">
+            <div style="flex:1">
+                <div style="font-weight:700;font-size:0.9rem;color:#1e293b">${item.name}</div>
+                <div style="color:#16a34a;font-weight:700">$${item.price.toFixed(2)} c/u</div>
+                <div style="display:flex;align-items:center;gap:8px;margin-top:6px">
+                    <button onclick="changeQty(${idx},-1)" style="width:28px;height:28px;border-radius:50%;border:2px solid #e2e8f0;background:#fff;cursor:pointer;font-size:1rem;font-weight:700;display:flex;align-items:center;justify-content:center">−</button>
+                    <span style="font-weight:700;min-width:20px;text-align:center">${item.qty}</span>
+                    <button onclick="changeQty(${idx},1)" style="width:28px;height:28px;border-radius:50%;border:2px solid #e2e8f0;background:#fff;cursor:pointer;font-size:1rem;font-weight:700;display:flex;align-items:center;justify-content:center">+</button>
+                    <button onclick="removeCartItem(${idx})" style="margin-left:auto;color:#ef4444;background:none;border:none;cursor:pointer;font-size:0.8rem;font-weight:700">Eliminar</button>
+                </div>
+            </div>
+            <div style="font-weight:800;color:#1e293b;white-space:nowrap">$${(item.price*item.qty).toFixed(2)}</div>
+        </div>`).join('');
+
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    footer.innerHTML = `
+        <div style="display:flex;justify-content:space-between;font-weight:800;font-size:1.1rem;margin-bottom:14px;color:#1e293b">
+            <span>Total:</span><span style="color:#16a34a">$${total.toFixed(2)}</span>
+        </div>
+        <button onclick="openOrderModal()" style="width:100%;padding:14px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border:none;border-radius:12px;font-weight:800;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Proceder al pedido por WhatsApp
+        </button>`;
+}
+
+function changeQty(idx, delta) {
+    cart[idx].qty = Math.max(1, cart[idx].qty + delta);
+    saveCart();
+    renderCartDrawer();
+}
+
+function removeCartItem(idx) {
+    cart.splice(idx, 1);
+    saveCart();
+    renderCartDrawer();
+}
+
+function openOrderModal() {
+    closeCartDrawer();
+    ensureOrderModal();
+    document.getElementById('pf-order-modal').style.display = 'flex';
+}
+
+function closeOrderModal() {
+    const m = document.getElementById('pf-order-modal');
+    if (m) m.style.display = 'none';
+}
+
+function submitOrder() {
+    const get = id => document.getElementById(id)?.value.trim() || '';
+    const nombre = get('ord-nombre');
+    const telefono = get('ord-telefono');
+    const email = get('ord-email');
+    const ciudad = get('ord-ciudad');
+    const direccion = get('ord-direccion');
+    const referencia = get('ord-referencia');
+    const notas = get('ord-notas');
+
+    if (!nombre || !telefono || !ciudad || !direccion) {
+        alert('Por favor completa los campos obligatorios: nombre, teléfono, ciudad y dirección.');
+        return;
+    }
+
+    const itemLines = cart.map(i => `  • ${i.name} x${i.qty} = $${(i.price * i.qty).toFixed(2)}`).join('\n');
+    const total = cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
+
+    const msg = `🛍️ *NUEVO PEDIDO - PROFARNOVA*
+
+👤 *Datos del Cliente:*
+• Nombre: ${nombre}
+• Teléfono: ${telefono}
+• Email: ${email || 'No indicado'}
+
+📦 *Productos:*
+${itemLines}
+
+💰 *Total: $${total}*
+
+🚚 *Datos de Envío:*
+• Ciudad: ${ciudad}
+• Dirección: ${direccion}
+• Referencia: ${referencia || 'No indicada'}
+
+📝 *Notas:* ${notas || 'Ninguna'}
+
+_Pedido realizado desde profarnova.com_`;
+
+    // Save to DB
+    fetch('/api/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            name: nombre,
+            email: email || 'no-email@pedido.com',
+            phone: telefono,
+            subject: `Pedido: ${cart.map(i => i.name).join(', ')}`,
+            message: `PEDIDO\n\n${itemLines}\n\nTotal: $${total}\n\nEnvío:\nCiudad: ${ciudad}\nDirección: ${direccion}\nReferencia: ${referencia}\nNotas: ${notas}`
+        })
+    }).catch(() => {});
+
+    // Open WhatsApp
+    window.open(`https://wa.me/593987646968?text=${encodeURIComponent(msg)}`, '_blank');
+
+    // Clear cart
+    cart = [];
+    saveCart();
+    closeOrderModal();
+    document.getElementById('pf-order-success').style.display = 'flex';
+}
+
+function ensureCartUI() {
+    if (document.getElementById('pf-cart-drawer')) return;
+
+    // Cart button (floating)
+    const btn = document.createElement('button');
+    btn.id = 'pf-cart-btn';
+    btn.setAttribute('aria-label', 'Ver carrito');
+    btn.onclick = openCartDrawer;
+    btn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-badge" style="display:none;position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;font-size:0.7rem;font-weight:800;align-items:center;justify-content:center">0</span>`;
+    btn.style.cssText = 'position:fixed;bottom:140px;right:22px;z-index:900;width:54px;height:54px;border-radius:50%;background:#1e293b;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.25);transition:transform .2s';
+    btn.onmouseenter = () => btn.style.transform = 'scale(1.1)';
+    btn.onmouseleave = () => btn.style.transform = 'scale(1)';
+    document.body.appendChild(btn);
+
+    // Drawer
+    const drawer = document.createElement('div');
+    drawer.id = 'pf-cart-drawer';
+    drawer.style.cssText = 'position:fixed;top:0;right:0;width:min(420px,100vw);height:100vh;background:#fff;z-index:1000;box-shadow:-8px 0 40px rgba(0,0,0,0.15);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)';
+    drawer.innerHTML = `
+        <style>#pf-cart-drawer.open{transform:translateX(0)!important}</style>
+        <div style="padding:20px 24px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between">
+            <h3 style="margin:0;font-size:1.2rem;font-weight:800;color:#1e293b;display:flex;align-items:center;gap:8px">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                Mi Carrito
+            </h3>
+            <button onclick="closeCartDrawer()" style="background:none;border:none;cursor:pointer;color:#64748b;padding:4px">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+            </button>
+        </div>
+        <div id="pf-cart-list" style="flex:1;overflow-y:auto;padding:16px 24px"></div>
+        <div id="pf-cart-footer" style="padding:20px 24px;border-top:1px solid #f1f5f9"></div>`;
+    document.body.appendChild(drawer);
+
+    // Overlay
+    const ov = document.createElement('div');
+    ov.id = 'pf-cart-overlay';
+    ov.onclick = closeCartDrawer;
+    ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,0.4);z-index:999;display:none';
+    document.body.appendChild(ov);
+
+    drawer.addEventListener('transitionend', () => {
+        ov.style.display = drawer.classList.contains('open') ? 'block' : 'none';
+    });
+
+    updateCartBadge();
+}
+
+function ensureOrderModal() {
+    if (document.getElementById('pf-order-modal')) return;
+
+    const m = document.createElement('div');
+    m.id = 'pf-order-modal';
+    m.style.cssText = 'position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,0.6);display:none;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(4px)';
+    m.innerHTML = `
+        <div style="background:#fff;border-radius:20px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 25px 60px rgba(0,0,0,0.3)">
+            <div style="padding:24px 28px;border-bottom:1px solid #f1f5f9;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;border-radius:20px 20px 0 0;z-index:1">
+                <h3 style="margin:0;font-size:1.2rem;font-weight:800;color:#1e293b">📋 Datos del Pedido</h3>
+                <button onclick="closeOrderModal()" style="background:none;border:none;cursor:pointer;color:#64748b">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                </button>
+            </div>
+            <div style="padding:24px 28px;display:flex;flex-direction:column;gap:14px">
+                <p style="margin:0;font-size:0.85rem;color:#64748b;background:#f8fafc;padding:10px 14px;border-radius:10px">
+                    Completa tus datos y se abrirá WhatsApp con tu pedido listo para enviar.
+                </p>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+                    ${field('ord-nombre','Nombre completo *','Tu nombre','text')}
+                    ${field('ord-telefono','Teléfono / WhatsApp *','+593 9 0000 0000','tel')}
+                    ${field('ord-email','Correo electrónico','tu@correo.com','email')}
+                    ${field('ord-ciudad','Ciudad *','Quito, Guayaquil...','text')}
+                </div>
+                ${field('ord-direccion','Dirección de entrega *','Calle, número, sector...','text',true)}
+                ${field('ord-referencia','Referencia (opcional)','Ej: Casa azul, junto al parque...','text',true)}
+                ${field('ord-notas','Notas adicionales (opcional)','Instrucciones especiales...','text',true,true)}
+                <button onclick="submitOrder()" style="width:100%;padding:16px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border:none;border-radius:12px;font-weight:800;font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;margin-top:4px;box-shadow:0 4px 16px rgba(22,163,74,0.4)">
+                    <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Confirmar y enviar por WhatsApp
+                </button>
+            </div>
+        </div>`;
+    document.body.appendChild(m);
+    m.addEventListener('click', e => { if (e.target === m) closeOrderModal(); });
+
+    // Success screen
+    const s = document.createElement('div');
+    s.id = 'pf-order-success';
+    s.style.cssText = 'position:fixed;inset:0;z-index:2100;background:rgba(0,0,0,0.7);display:none;align-items:center;justify-content:center;padding:16px';
+    s.innerHTML = `
+        <div style="background:#fff;border-radius:20px;padding:40px 32px;text-align:center;max-width:380px;width:100%">
+            <div style="font-size:4rem;margin-bottom:16px">🎉</div>
+            <h3 style="margin:0 0 8px;color:#16a34a;font-size:1.4rem">¡Pedido enviado!</h3>
+            <p style="color:#64748b;margin:0 0 24px">Tu pedido fue enviado a nuestro equipo por WhatsApp. Te contactaremos en breve para confirmar.</p>
+            <button onclick="document.getElementById('pf-order-success').style.display='none'" style="padding:12px 32px;background:#16a34a;color:#fff;border:none;border-radius:10px;font-weight:700;cursor:pointer">Aceptar</button>
+        </div>`;
+    document.body.appendChild(s);
+}
+
+function field(id, label, placeholder, type='text', fullWidth=false, isTextarea=false) {
+    const col = fullWidth ? 'grid-column:1/-1' : '';
+    const input = isTextarea
+        ? `<textarea id="${id}" placeholder="${placeholder}" rows="2" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:0.9rem;font-family:inherit;resize:vertical;box-sizing:border-box;transition:border-color .2s" onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e2e8f0'"></textarea>`
+        : `<input id="${id}" type="${type}" placeholder="${placeholder}" style="width:100%;padding:10px 14px;border:2px solid #e2e8f0;border-radius:10px;font-size:0.9rem;font-family:inherit;box-sizing:border-box;transition:border-color .2s" onfocus="this.style.borderColor='#16a34a'" onblur="this.style.borderColor='#e2e8f0'">`;
+    return `<div style="${col}"><label style="display:block;font-size:0.8rem;font-weight:700;color:#475569;margin-bottom:5px">${label}</label>${input}</div>`;
+}
+
+// Auto-init cart UI on page load
+document.addEventListener('DOMContentLoaded', () => {
+    ensureCartUI();
+    cart = JSON.parse(localStorage.getItem('pf_cart') || '[]');
+    updateCartBadge();
+});
