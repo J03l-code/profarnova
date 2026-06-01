@@ -1,0 +1,99 @@
+/* ============================================
+   CYSPREX® Premium Landing Page
+   Color Tokens Override & Extensions
+   ============================================ */
+
+@import url("styles.css");
+
+:root {
+    /* Colors derived from Cysprex branding — Cranberry / Forest Green palette */
+    --color-primary: #7CB69D;            /* Sage Green */
+    --color-primary-dark: #4A7C59;       /* Forest Green */
+    --color-primary-light: #A8D5BA;      /* Light Mint */
+    --color-secondary: #E8F5E9;          /* Very light green tint */
+    --color-accent-pink: #FDE8E8;        /* Cranberry light tint */
+    --color-accent-peach: #FFF5F0;       /* Warm peach tint */
+
+    --color-cream: #F7F9F7;              /* Cool cream background */
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, #7CB69D 0%, #4A7C59 100%);
+    --gradient-soft: linear-gradient(135deg, #E8F5E9 0%, #FDE8E8 100%);
+    --gradient-hero: linear-gradient(180deg, #F7F9F7 0%, #FFFFFF 50%, #E8F5E9 100%);
+    --gradient-glow: radial-gradient(circle, rgba(124, 182, 157, 0.3) 0%, transparent 70%);
+
+    /* Shadows */
+    --shadow-glow: 0 0 40px rgba(124, 182, 157, 0.3);
+}
+
+/* Logo color */
+.logo-text {
+    color: var(--color-primary-dark);
+}
+
+/* Highlight box */
+.highlight-box {
+    background: var(--gradient-primary);
+}
+
+/* Icon backgrounds */
+.icon-bg {
+    background: var(--gradient-soft);
+}
+
+/* Premium Social Media Icons Styling */
+.social-links {
+    display: flex;
+    gap: 1.5rem !important;
+    margin-top: 1.5rem !important;
+    flex-wrap: wrap;
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px !important;
+    height: 48px !important;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-decoration: none;
+}
+
+.social-icon svg {
+    width: 22px !important;
+    height: 22px !important;
+    transition: transform 0.3s ease;
+}
+
+.social-icon:hover {
+    background: var(--color-primary-dark) !important;
+    transform: translateY(-4px);
+    box-shadow: 0 6px 15px rgba(74, 124, 89, 0.45);
+    color: #fff !important;
+}
+
+.social-icon:hover svg {
+    transform: scale(1.15);
+}
+
+/* Designer Link Styling */
+.designer-link {
+    color: #c9f2d5 !important;
+    font-weight: 800 !important;
+    text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+    border-bottom: 2px solid rgba(201, 242, 213, 0.5);
+    padding-bottom: 1px;
+    letter-spacing: 0.5px;
+    display: inline-block;
+}
+
+.designer-link:hover {
+    color: #ffffff !important;
+    border-bottom-color: #ffffff !important;
+    text-shadow: 0 0 15px rgba(201, 242, 213, 0.9);
+    transform: translateY(-2px);
+}
