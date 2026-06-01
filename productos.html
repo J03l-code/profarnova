@@ -166,9 +166,16 @@
                     <li><a href="contacto.html" class="nav-link">Contacto</a></li>
                 </ul>
             </nav>
+            <!-- Cart button -->
+            <button onclick="openCartDrawer()" id="nav-cart-btn" aria-label="Ver carrito" style="position:relative;background:none;border:2px solid currentColor;border-radius:10px;padding:7px 14px;cursor:pointer;display:flex;align-items:center;gap:6px;font-weight:700;font-size:0.85rem;transition:all .2s;color:inherit;margin-right:8px">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                <span>Carrito</span>
+                <span class="cart-badge" style="display:none;position:absolute;top:-8px;right:-8px;background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;font-size:0.7rem;font-weight:800;align-items:center;justify-content:center">0</span>
+            </button>
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú"><span></span><span></span><span></span></button>
         </div>
     </header>
+
 
     <section class="page-hero">
         <div class="container">
@@ -217,7 +224,10 @@
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                                 Perfil
                             </button>
-                            <a href="https://wa.me/593987646968?text=Hola,%20me%20interesa%20comprar%20CYSPREX%20por%20$28.80" class="btn-outline-sm" target="_blank" rel="noopener">Comprar ($28.80)</a>
+                            <button onclick="addToCart('CYSPREX®', 28.80, 'assets/Cysprex final.png')" class="btn-outline-sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                                Añadir al carrito
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -257,7 +267,10 @@
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
                                 Perfil
                             </button>
-                            <a href="https://wa.me/593987646968?text=Hola,%20me%20interesa%20comprar%20Lubryn-E%20por%20$20.99" class="btn-outline-sm" target="_blank" rel="noopener">Comprar ($20.99)</a>
+                            <button onclick="addToCart('Lubryn-E®', 20.99, 'assets/lubrine.png')" class="btn-outline-sm" style="cursor:pointer;display:inline-flex;align-items:center;gap:0.4rem">
+                                <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+                                Añadir al carrito
+                            </button>
                         </div>
                     </div>
                 </div>
