@@ -49,6 +49,20 @@ pool.getConnection()
         ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
       `);
       console.log('Messages table verified/created successfully.');
+
+      await conn.query(`
+        CREATE TABLE IF NOT EXISTS reviews (
+          id VARCHAR(36) PRIMARY KEY,
+          product_sku VARCHAR(50) NOT NULL,
+          client_name VARCHAR(150) NOT NULL,
+          client_email VARCHAR(100) NULL,
+          rating INT NOT NULL,
+          comment TEXT NOT NULL,
+          status ENUM('pending', 'approved', 'rejected') DEFAULT 'pending',
+          created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
+      `);
+      console.log('Reviews table verified/created successfully.');
     } catch (tableErr) {
       console.error('Error verifying/creating tables:', tableErr.message);
     }
@@ -58,6 +72,7 @@ pool.getConnection()
     try { await conn.query('ALTER TABLE products ADD COLUMN indications TEXT NULL'); } catch (e) {}
     try { await conn.query('ALTER TABLE products ADD COLUMN mechanism_of_action TEXT NULL'); } catch (e) {}
     try { await conn.query('ALTER TABLE products ADD COLUMN benefits TEXT NULL'); } catch (e) {}
+    try { await conn.query('ALTER TABLE products ADD COLUMN discount_price DECIMAL(10,2) NULL'); } catch (e) {}
     
     // Safely add guest order columns to orders table if they don't exist
     try { await conn.query('ALTER TABLE orders ADD COLUMN client_name VARCHAR(150) NULL'); } catch (e) {}

@@ -176,6 +176,16 @@
             </div>
             <span id="unread-messages-badge" class="hidden bg-emerald-500 text-white font-extrabold px-2 py-0.5 text-xs rounded-full">0</span>
           </button>
+
+          <button onclick="switchTab('reseñas')" id="tab-btn-reseñas" class="tab-btn flex items-center justify-between px-3 py-2.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:bg-slate-50">
+            <div class="flex items-center gap-3">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.907c.961 0 1.36 1.242.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.772-.568-.372-1.81.588-1.81h4.907a1 1 0 00.95-.69l1.519-4.674z" />
+              </svg>
+              Reseñas
+            </div>
+            <span id="pending-reviews-badge" class="hidden bg-rose-500 text-white font-extrabold px-2 py-0.5 text-xs rounded-full">0</span>
+          </button>
         </div>
 
         <!-- Sticky Stock Warning Box -->
@@ -300,9 +310,15 @@
 
         <!-- MODULE: PEDIDOS -->
         <div id="panel-pedidos" class="panel hidden space-y-6">
-          <div>
-            <h2 class="text-xl font-extrabold text-slate-900">Ventas y Pedidos</h2>
-            <p class="text-sm text-slate-500">Historial de compras y actualización de estados.</p>
+          <div class="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-900">Ventas y Pedidos</h2>
+              <p class="text-sm text-slate-500">Historial de compras y actualización de estados.</p>
+            </div>
+            <button onclick="exportOrdersToCSV()" class="px-4 py-2 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg flex items-center gap-1.5 transition-colors shadow-sm">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/></svg>
+              Exportar a Excel / CSV
+            </button>
           </div>
 
           <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
@@ -475,6 +491,34 @@
           </div>
         </div>
 
+        <!-- MODULE: RESEÑAS -->
+        <div id="panel-reseñas" class="panel hidden space-y-6">
+          <div>
+            <h2 class="text-xl font-extrabold text-slate-900">Moderación de Reseñas</h2>
+            <p class="text-sm text-slate-500">Administra, aprueba o descarta las valoraciones de tus clientes antes de que se muestren en la tienda.</p>
+          </div>
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-400">
+                    <th class="px-6 py-4">Producto (SKU)</th>
+                    <th class="px-6 py-4">Cliente</th>
+                    <th class="px-6 py-4">Calificación</th>
+                    <th class="px-6 py-4">Comentario</th>
+                    <th class="px-6 py-4">Fecha</th>
+                    <th class="px-6 py-4">Estado</th>
+                    <th class="px-6 py-4 text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm" id="reviews-table-body">
+                  <!-- Dynamically Rendered -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
   </div>
@@ -512,12 +556,16 @@
             <input type="text" id="form-product-sku" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
           </div>
           <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Stock *</label>
+            <input type="number" id="form-product-stock" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
+          </div>
+          <div>
             <label class="block text-xs font-bold text-slate-500 mb-1">Precio ($) *</label>
             <input type="number" id="form-product-price" step="0.01" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
           </div>
           <div>
-            <label class="block text-xs font-bold text-slate-500 mb-1">Stock *</label>
-            <input type="number" id="form-product-stock" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
+            <label class="block text-xs font-bold text-slate-500 mb-1">Precio Oferta ($)</label>
+            <input type="number" id="form-product-discount" step="0.01" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Opcional">
           </div>
           <div class="col-span-2">
             <label class="block text-xs font-bold text-slate-500 mb-1">URL de Imagen</label>
@@ -610,6 +658,7 @@
     // ─── CONFIGURATION ───────────────────────────────────────────
     const API_URL = 'https://profarnova.com/api'; // Production API
     let authToken = localStorage.getItem('admin_token') || null;
+    let loadedOrders = [];
 
     // ─── HELPERS ─────────────────────────────────────────────────
     const apiHeaders = () => ({
@@ -709,19 +758,21 @@
     // ─── LOAD ALL DATA ────────────────────────────────────────────
     async function loadAllData() {
       try {
-        const [products, orders, clients, blogs, messages] = await Promise.all([
+        const [products, orders, clients, blogs, messages, reviews] = await Promise.all([
           fetch(`${API_URL}/products`).then(r => r.json()).catch(() => []),
           apiRequest('GET', '/orders').catch(() => []),
           apiRequest('GET', '/users').catch(() => []),
           fetch(`${API_URL}/blogs`).then(r => r.json()).catch(() => []),
-          apiRequest('GET', '/messages').catch(() => [])
+          apiRequest('GET', '/messages').catch(() => []),
+          apiRequest('GET', '/reviews').catch(() => [])
         ]);
         renderAll(
           Array.isArray(products) ? products : [],
           Array.isArray(orders) ? orders : [],
           Array.isArray(clients) ? clients : [],
           Array.isArray(blogs) ? blogs : [],
-          Array.isArray(messages) ? messages : []
+          Array.isArray(messages) ? messages : [],
+          Array.isArray(reviews) ? reviews : []
         );
       } catch (err) {
         showToast('Error al cargar datos del servidor.', 'error');
@@ -729,13 +780,14 @@
     }
 
     // ─── RENDER ALL ───────────────────────────────────────────────
-    function renderAll(products, orders, clients, blogs, messages) {
+    function renderAll(products, orders, clients, blogs, messages, reviews) {
       renderStats(products, orders, clients);
       renderInventory(products);
       renderOrders(orders);
       renderClients(clients);
       renderBlogs(blogs);
       renderMessages(messages);
+      renderReviews(reviews);
     }
 
     function renderStats(products, orders, clients) {
@@ -780,7 +832,12 @@
               <td class="px-6 py-4 font-mono text-xs text-slate-500">${p.sku}</td>
               <td class="px-6 py-4 font-bold text-slate-800">${p.name}</td>
               <td class="px-6 py-4 text-slate-500 text-sm">${p.category}</td>
-              <td class="px-6 py-4 font-semibold text-slate-900">$${parseFloat(p.price).toFixed(2)}</td>
+              <td class="px-6 py-4 font-semibold text-slate-900">
+                ${p.discount_price ? `
+                  <span class="text-slate-400 line-through text-xs">$${parseFloat(p.price).toFixed(2)}</span>
+                  <span class="text-rose-600 block font-bold text-sm">$${parseFloat(p.discount_price).toFixed(2)}</span>
+                ` : `<span class="text-slate-900">$${parseFloat(p.price).toFixed(2)}</span>`}
+              </td>
               <td class="px-6 py-4">
                 <div class="flex items-center gap-2">
                   <span class="font-bold ${crit ? 'text-red-600' : 'text-slate-700'}">${p.stock}</span>
@@ -802,6 +859,7 @@
     }
 
     function renderOrders(orders) {
+      loadedOrders = orders;
       const body = document.getElementById('orders-table-body');
       body.innerHTML = orders.length === 0
         ? `<tr><td colspan="6" class="px-6 py-10 text-center text-slate-400 text-sm">No hay pedidos registrados.</td></tr>`
@@ -896,6 +954,7 @@
       document.getElementById('form-product-category').value = p.category;
       document.getElementById('form-product-sku').value = p.sku;
       document.getElementById('form-product-price').value = p.price;
+      document.getElementById('form-product-discount').value = p.discount_price || '';
       document.getElementById('form-product-stock').value = p.stock;
       document.getElementById('form-product-image').value = p.image_url || '';
       document.getElementById('form-product-desc').value = p.description || '';
@@ -909,11 +968,13 @@
     document.getElementById('product-form-elem').addEventListener('submit', async (e) => {
       e.preventDefault();
       const id = document.getElementById('form-product-id').value;
+      const discountVal = document.getElementById('form-product-discount').value.trim();
       const body = {
         name: document.getElementById('form-product-name').value,
         category: document.getElementById('form-product-category').value,
         sku: document.getElementById('form-product-sku').value,
         price: parseFloat(document.getElementById('form-product-price').value),
+        discount_price: discountVal ? parseFloat(discountVal) : null,
         stock: parseInt(document.getElementById('form-product-stock').value),
         image_url: document.getElementById('form-product-image').value,
         description: document.getElementById('form-product-desc').value,
@@ -955,6 +1016,40 @@
         showToast('Pedido eliminado exitosamente.');
         loadAllData();
       } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    function exportOrdersToCSV() {
+      if (!loadedOrders || loadedOrders.length === 0) {
+        showToast('No hay pedidos para exportar.', 'error');
+        return;
+      }
+      
+      const headers = ['ID Pedido', 'Cliente', 'Email', 'Telefono', 'Fecha', 'Total', 'Estado', 'Direccion', 'Notas'];
+      const rows = loadedOrders.map(o => [
+        o.id,
+        o.client_name || 'Consumidor final',
+        o.client_email || '',
+        o.client_phone || '',
+        new Date(o.created_at).toLocaleDateString('es-EC'),
+        o.total_amount,
+        o.status,
+        o.shipping_address || '',
+        o.notes || ''
+      ]);
+
+      const csvContent = "\uFEFF" + [
+        headers.map(h => `"${h.replace(/"/g, '""')}"`).join(','),
+        ...rows.map(r => r.map(val => `"${String(val).replace(/"/g, '""')}"`).join(','))
+      ].join('\n');
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.setAttribute("href", url);
+      link.setAttribute("download", `pedidos_profarnova_${new Date().toISOString().slice(0,10)}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
     }
 
     // ─── CLIENT HANDLERS ──────────────────────────────────────────
@@ -1120,6 +1215,78 @@
       const value = { base_fee: parseFloat(document.getElementById('config-shipping-fee').value), free_shipping_threshold: parseFloat(document.getElementById('config-shipping-free').value), policy: document.getElementById('config-shipping-policy').value };
       try { await apiRequest('PUT', '/config', { key: 'shipping', value }); showToast('Políticas de envío guardadas.'); }
       catch (err) { showToast(err.message, 'error'); }
+    }
+
+    function renderReviews(reviews) {
+      const pendingReviews = reviews.filter(r => r.status === 'pending');
+      const badge = document.getElementById('pending-reviews-badge');
+      if (pendingReviews.length > 0) {
+        badge.textContent = pendingReviews.length;
+        badge.classList.remove('hidden');
+      } else {
+        badge.classList.add('hidden');
+      }
+
+      const body = document.getElementById('reviews-table-body');
+      body.innerHTML = reviews.length === 0
+        ? `<tr><td colspan="7" class="px-6 py-10 text-center text-slate-400 text-sm">No hay reseñas registradas.</td></tr>`
+        : reviews.map(r => {
+            const sc = r.status === 'approved' ? 'bg-emerald-50 text-emerald-700 border-emerald-100'
+                     : r.status === 'rejected' ? 'bg-red-50 text-red-700 border-red-100'
+                     : 'bg-amber-50 text-amber-700 border-amber-100';
+            
+            const stars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+
+            return `<tr class="hover:bg-slate-50/50 transition-colors">
+              <td class="px-6 py-4 font-semibold text-slate-800">${r.product_sku}</td>
+              <td class="px-6 py-4">
+                <div class="font-bold text-slate-900">${r.client_name}</div>
+                <div class="text-xs text-slate-500">${r.client_email || ''}</div>
+              </td>
+              <td class="px-6 py-4 text-amber-500 font-bold text-base select-none">${stars}</td>
+              <td class="px-6 py-4 text-slate-600 max-w-xs break-words">${r.comment}</td>
+              <td class="px-6 py-4 text-slate-400 text-xs">${new Date(r.created_at).toLocaleDateString('es-EC')}</td>
+              <td class="px-6 py-4">
+                <span class="inline-flex items-center px-2.5 py-1 text-xs font-bold rounded-full border ${sc} uppercase">
+                  ${r.status === 'approved' ? 'Aprobada' : (r.status === 'rejected' ? 'Rechazada' : 'Pendiente')}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-center">
+                <div class="flex justify-center gap-2">
+                  ${r.status !== 'approved' ? `
+                    <button onclick="updateReviewStatus('${r.id}', 'approved')" class="p-1 px-2.5 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-md font-bold text-xs transition-all" title="Aprobar">
+                      Aprobar
+                    </button>
+                  ` : ''}
+                  ${r.status !== 'rejected' ? `
+                    <button onclick="updateReviewStatus('${r.id}', 'rejected')" class="p-1 px-2.5 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-md font-bold text-xs transition-all" title="Rechazar">
+                      Rechazar
+                    </button>
+                  ` : ''}
+                  <button onclick="deleteReview('${r.id}')" class="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-md transition-all" title="Eliminar">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>`;
+          }).join('');
+    }
+
+    async function updateReviewStatus(id, status) {
+      try {
+        await apiRequest('PUT', `/reviews/${id}/status`, { status });
+        showToast('Reseña actualizada con éxito.');
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    async function deleteReview(id) {
+      if (!confirm('¿Seguro que deseas eliminar esta reseña de forma permanente?')) return;
+      try {
+        await apiRequest('DELETE', `/reviews/${id}`);
+        showToast('Reseña eliminada.');
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
     }
   </script>
 </body>

@@ -428,23 +428,28 @@ async function initProductPriceSync() {
         if (!response.ok) return;
         const products = await response.json();
         
+        // Save products globally
+        window.pfProducts = products;
+        
         // Find Cysprex and Lubryn-E from the database
         const cysprex = products.find(p => p.sku === 'PRF-CYS-36');
         const lubryne = products.find(p => p.sku === 'PRF-LUB-60');
         
         if (cysprex) {
-            updateProductPriceOnDOM('CYSPREX', cysprex.price);
+            updateProductPriceOnDOM('CYSPREX', cysprex.price, cysprex.discount_price);
         }
         if (lubryne) {
-            updateProductPriceOnDOM('Lubryn-E', lubryne.price);
+            updateProductPriceOnDOM('Lubryn-E', lubryne.price, lubryne.discount_price);
         }
     } catch (e) {
         console.warn('API connection failed, using offline fallback prices:', e);
     }
 }
 
-function updateProductPriceOnDOM(nameKey, rawPrice) {
+function updateProductPriceOnDOM(nameKey, rawPrice, discountPrice) {
     const formattedPrice = parseFloat(rawPrice).toFixed(2);
+    const formattedDiscount = discountPrice ? parseFloat(discountPrice).toFixed(2) : null;
+    const searchVal = nameKey === 'CYSPREX' ? '28.80' : '20.99';
     
     // 1. Update text content of elements containing the old price or containing specific tags
     const walker = document.createTreeWalker(
@@ -457,10 +462,27 @@ function updateProductPriceOnDOM(nameKey, rawPrice) {
     let node;
     while (node = walker.nextNode()) {
         const text = node.nodeValue;
-        if (nameKey === 'CYSPREX' && text.includes('28.80')) {
-            node.nodeValue = text.replace(/28\.80/g, formattedPrice);
-        } else if (nameKey === 'Lubryn-E' && text.includes('20.99')) {
-            node.nodeValue = text.replace(/20\.99/g, formattedPrice);
+        if (text.includes(searchVal)) {
+            if (discountPrice) {
+                node.nodeValue = text.replace(new RegExp(searchVal, 'g'), formattedDiscount);
+                
+                const parent = node.parentElement;
+                if (parent && !parent.querySelector('.original-price-strike')) {
+                    parent.style.position = 'relative';
+                    const strike = document.createElement('span');
+                    strike.className = 'original-price-strike';
+                    strike.style.cssText = 'text-decoration: line-through; color: #94a3b8; font-size: 0.85em; margin-right: 8px; font-weight: 500;';
+                    strike.textContent = `$${formattedPrice}`;
+                    parent.insertBefore(strike, parent.firstChild);
+                    
+                    const badge = document.createElement('span');
+                    badge.style.cssText = 'background: #f43f5e; color: #fff; font-size: 0.6em; padding: 2px 6px; border-radius: 4px; margin-left: 8px; font-weight: 800; vertical-align: middle; display: inline-block;';
+                    badge.textContent = 'OFERTA';
+                    parent.appendChild(badge);
+                }
+            } else {
+                node.nodeValue = text.replace(new RegExp(searchVal, 'g'), formattedPrice);
+            }
         }
     }
 
@@ -470,11 +492,9 @@ function updateProductPriceOnDOM(nameKey, rawPrice) {
         let href = link.getAttribute('href');
         if (!href) return;
         
-        if (nameKey === 'CYSPREX' && href.includes('28.80')) {
-            href = href.replace(/28\.80/g, formattedPrice);
-            link.setAttribute('href', href);
-        } else if (nameKey === 'Lubryn-E' && href.includes('20.99')) {
-            href = href.replace(/20\.99/g, formattedPrice);
+        const finalPriceStr = discountPrice ? formattedDiscount : formattedPrice;
+        if (href.includes(searchVal)) {
+            href = href.replace(new RegExp(searchVal, 'g'), finalPriceStr);
             link.setAttribute('href', href);
         }
     });
@@ -502,11 +522,22 @@ function updateCartBadge() {
 
 // Called by "Comprar" buttons — data-product, data-price, data-img
 function addToCart(name, price, img) {
+    let finalPrice = parseFloat(price);
+    
+    // Check if we have dynamic/promo pricing loaded from database
+    const sku = name.includes('CYSPREX') ? 'PRF-CYS-36' : (name.includes('Lubryn') ? 'PRF-LUB-60' : null);
+    if (sku && window.pfProducts && window.pfProducts.length > 0) {
+        const found = window.pfProducts.find(p => p.sku === sku);
+        if (found) {
+            finalPrice = found.discount_price ? parseFloat(found.discount_price) : parseFloat(found.price);
+        }
+    }
+
     const existing = cart.find(i => i.name === name);
     if (existing) {
         existing.qty++;
     } else {
-        cart.push({ name, price: parseFloat(price), img: img || '', qty: 1 });
+        cart.push({ name, price: finalPrice, img: img || '', qty: 1 });
     }
     saveCart();
     showCartToast(name);

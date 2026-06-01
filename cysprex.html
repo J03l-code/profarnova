@@ -504,6 +504,230 @@
         </div>
     </section>
 
+    <!-- ==================== SECCIÓN DE RESEÑAS Y TESTIMONIOS ==================== -->
+    <section class="section reviews-section" id="testimonios" style="background: #ffffff; padding: 6rem 0; border-top: 1px solid #f1f5f9;">
+        <div class="container" style="max-width: 1000px; margin: 0 auto; padding: 0 1.5rem;">
+            <div style="text-align: center; margin-bottom: 4rem;">
+                <span class="section-badge" style="background: #f0fdf4; color: #16a34a; padding: 6px 16px; border-radius: 9999px; font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 1rem;">Experiencias Reales</span>
+                <h2 style="font-size: 2.5rem; font-weight: 800; color: #0f172a; margin-bottom: 1rem;">Opiniones de Clientes</h2>
+                <p style="color: #64748b; max-width: 600px; margin: 0 auto; font-size: 1.1rem; line-height: 1.6;">
+                    Descubre lo que dicen las personas que ya han integrado CYSPREX® en su rutina diaria de bienestar.
+                </p>
+                <div style="display: flex; align-items: center; justify-content: center; gap: 0.5rem; margin-top: 1.5rem;">
+                    <div style="font-size: 2rem; font-weight: 800; color: #0f172a;">4.9</div>
+                    <div style="color: #fbbf24; font-size: 1.5rem; letter-spacing: -2px;">★★★★★</div>
+                    <div style="color: #64748b; font-size: 0.9rem; margin-left: 0.5rem;">(Opiniones verificadas)</div>
+                </div>
+            </div>
+
+            <!-- Grid Layout: Reviews List & Write Review Form -->
+            <div style="display: grid; grid-template-columns: 1fr; gap: 3rem; align-items: start;" class="reviews-grid-layout">
+                
+                <!-- Left: Reviews Container -->
+                <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+                    <h3 style="font-size: 1.3rem; font-weight: 700; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 0.75rem;">Reseñas Destacadas</h3>
+                    
+                    <div id="dynamic-reviews-container" style="display: flex; flex-direction: column; gap: 1.5rem;">
+                        <!-- Dynamically loaded reviews will appear here -->
+                    </div>
+                </div>
+
+                <!-- Right: Form to write review -->
+                <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 20px; padding: 2.5rem; box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.05);">
+                    <h3 style="font-size: 1.3rem; font-weight: 700; color: #1e293b; margin-bottom: 0.5rem;">Escribe una reseña</h3>
+                    <p style="color: #64748b; font-size: 0.9rem; margin-bottom: 1.5rem;">Tu correo electrónico no será publicado. Los campos obligatorios están marcados con *</p>
+                    
+                    <form id="product-review-form" style="display: flex; flex-direction: column; gap: 1.25rem;">
+                        <!-- Interactive Star Rating -->
+                        <div>
+                            <label style="display: block; font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 0.5rem;">Tu calificación *</label>
+                            <div style="display: flex; gap: 0.4rem;" id="form-star-rating">
+                                <span data-value="1" class="review-star-btn" style="font-size: 1.8rem; color: #cbd5e1; cursor: pointer; transition: color 0.2s;">★</span>
+                                <span data-value="2" class="review-star-btn" style="font-size: 1.8rem; color: #cbd5e1; cursor: pointer; transition: color 0.2s;">★</span>
+                                <span data-value="3" class="review-star-btn" style="font-size: 1.8rem; color: #cbd5e1; cursor: pointer; transition: color 0.2s;">★</span>
+                                <span data-value="4" class="review-star-btn" style="font-size: 1.8rem; color: #cbd5e1; cursor: pointer; transition: color 0.2s;">★</span>
+                                <span data-value="5" class="review-star-btn" style="font-size: 1.8rem; color: #cbd5e1; cursor: pointer; transition: color 0.2s;">★</span>
+                            </div>
+                            <input type="hidden" id="review-rating-input" value="5">
+                        </div>
+
+                        <div>
+                            <label for="review-client-name" style="display: block; font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 0.4rem;">Nombre *</label>
+                            <input type="text" id="review-client-name" required style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; background: #ffffff;" placeholder="Ej. Ana Belén">
+                        </div>
+
+                        <div>
+                            <label for="review-client-email" style="display: block; font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 0.4rem;">Correo Electrónico (Opcional)</label>
+                            <input type="email" id="review-client-email" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; background: #ffffff;" placeholder="ana@ejemplo.com">
+                        </div>
+
+                        <div>
+                            <label for="review-client-comment" style="display: block; font-size: 0.85rem; font-weight: 700; color: #475569; margin-bottom: 0.4rem;">Tu opinión *</label>
+                            <textarea id="review-client-comment" required rows="4" style="width: 100%; padding: 0.8rem 1rem; border: 1px solid #cbd5e1; border-radius: 10px; font-size: 0.95rem; background: #ffffff; resize: none;" placeholder="Cuéntanos tu experiencia con el producto..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-glow" style="width: 100%; padding: 1rem; border-radius: 10px; font-weight: 700; cursor: pointer; border: none;">
+                            Enviar Reseña
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom CSS styles for reviews section in this page -->
+    <style>
+        @media (min-width: 768px) {
+            .reviews-grid-layout {
+                grid-template-columns: 1.2fr 0.8fr !important;
+            }
+        }
+        .review-star-btn.active {
+            color: #fbbf24 !important;
+        }
+    </style>
+
+    <!-- Script to handle dynamic reviews on this product page -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const productSku = 'PRF-CYS-36'; // SKU for CYSPREX
+            const apiUrl = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+                ? 'https://profarnova.com/api'
+                : '/api';
+
+            // Star Rating selection inside form
+            const stars = document.querySelectorAll('.review-star-btn');
+            const ratingInput = document.getElementById('review-rating-input');
+
+            // Set default: 5 stars
+            updateFormStars(5);
+
+            stars.forEach(star => {
+                star.addEventListener('click', () => {
+                    const val = parseInt(star.getAttribute('data-value'));
+                    ratingInput.value = val;
+                    updateFormStars(val);
+                });
+                star.addEventListener('mouseover', () => {
+                    const val = parseInt(star.getAttribute('data-value'));
+                    previewFormStars(val);
+                });
+                star.addEventListener('mouseout', () => {
+                    updateFormStars(parseInt(ratingInput.value));
+                });
+            });
+
+            function updateFormStars(rating) {
+                stars.forEach(s => {
+                    const val = parseInt(s.getAttribute('data-value'));
+                    if (val <= rating) {
+                        s.classList.add('active');
+                    } else {
+                        s.classList.remove('active');
+                    }
+                });
+            }
+
+            function previewFormStars(rating) {
+                stars.forEach(s => {
+                    const val = parseInt(s.getAttribute('data-value'));
+                    if (val <= rating) {
+                        s.style.color = '#fbbf24';
+                    } else {
+                        s.style.color = '#cbd5e1';
+                    }
+                });
+            }
+
+            // Load Reviews from Backend
+            async function loadProductReviews() {
+                const container = document.getElementById('dynamic-reviews-container');
+                try {
+                    const res = await fetch(`${apiUrl}/reviews/product/${productSku}`);
+                    if (!res.ok) throw new Error('Failed to load');
+                    const data = await res.json();
+
+                    if (!data || data.length === 0) {
+                        container.innerHTML = `
+                            <div style="background: #f8fafc; border-radius: 12px; padding: 2rem; text-align: center; color: #64748b; font-size: 0.95rem; border: 1px dashed #cbd5e1;">
+                                No hay opiniones aprobadas aún. ¡Sé el primero en dejar tu reseña!
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    container.innerHTML = data.map(r => {
+                        const filledStars = '★'.repeat(r.rating) + '☆'.repeat(5 - r.rating);
+                        return `
+                            <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 16px; padding: 1.5rem; box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.05);">
+                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 0.75rem;">
+                                    <div>
+                                        <h4 style="font-size: 1.05rem; font-weight: 700; color: #0f172a; margin: 0;">${r.client_name}</h4>
+                                        <div style="color: #fbbf24; font-size: 1.1rem; margin-top: 0.2rem; select-none">${filledStars}</div>
+                                    </div>
+                                    <span style="color: #94a3b8; font-size: 0.8rem;">${new Date(r.created_at).toLocaleDateString('es-EC')}</span>
+                                </div>
+                                <p style="color: #475569; font-size: 0.95rem; line-height: 1.5; margin: 0;">
+                                    "${r.comment}"
+                                </p>
+                            </div>
+                        `;
+                    }).join('');
+
+                } catch (e) {
+                    console.error(e);
+                    container.innerHTML = `
+                        <div style="background: #f8fafc; border-radius: 12px; padding: 2rem; text-align: center; color: #64748b; font-size: 0.95rem; border: 1px dashed #cbd5e1;">
+                            No se pudieron cargar las reseñas en este momento.
+                        </div>
+                    `;
+                }
+            }
+
+            loadProductReviews();
+
+            // Submit Review Form
+            const form = document.getElementById('product-review-form');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const btn = form.querySelector('button[type="submit"]');
+                btn.disabled = true;
+                btn.textContent = 'Enviando...';
+
+                const body = {
+                    product_sku: productSku,
+                    client_name: document.getElementById('review-client-name').value,
+                    client_email: document.getElementById('review-client-email').value,
+                    rating: parseInt(ratingInput.value),
+                    comment: document.getElementById('review-client-comment').value
+                };
+
+                try {
+                    const res = await fetch(`${apiUrl}/reviews`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(body)
+                    });
+                    
+                    const data = await res.json();
+                    if (!res.ok) throw new Error(data.error || 'Failed to submit review');
+
+                    alert('¡Gracias! Tu reseña ha sido enviada con éxito y se publicará tras ser aprobada por el administrador.');
+                    form.reset();
+                    updateFormStars(5);
+                    ratingInput.value = 5;
+
+                } catch (err) {
+                    alert(err.message || 'Ocurrió un error al enviar la reseña.');
+                } finally {
+                    btn.disabled = false;
+                    btn.textContent = 'Enviar Reseña';
+                }
+            });
+        });
+    </script>
+
     <!-- CTA Final Section -->
     <section class="section cta-final" id="comprar">
         <div class="container">
