@@ -4,12 +4,41 @@ const crypto = require('crypto');
 const db = require('../config/db');
 const { verifyToken, isAdmin } = require('../middleware/auth');
 
+// PUBLIC: Create order from website (no auth required)
+router.post('/website', async (req, res) => {
+  const { client_name, client_phone, client_email, items, shipping_city, shipping_address, shipping_reference, notes, total_amount } = req.body;
+
+  if (!client_name || !client_phone || !items || !shipping_address) {
+    return res.status(400).json({ error: 'Faltan campos obligatorios.' });
+  }
+
+  try {
+    const orderId = crypto.randomUUID();
+    const shippingFull = `${shipping_city} - ${shipping_address}${shipping_reference ? ' (' + shipping_reference + ')' : ''}`;
+
+    await db.query(
+      `INSERT INTO orders (id, user_id, total_amount, status, shipping_address, client_name, client_phone, client_email, items_detail, notes, created_at, updated_at)
+       VALUES (?, NULL, ?, 'pendiente', ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)`,
+      [orderId, parseFloat(total_amount) || 0, shippingFull, client_name, client_phone, client_email || '', JSON.stringify(items), notes || '']
+    );
+
+    const result = await db.query('SELECT * FROM orders WHERE id = ?', [orderId]);
+    res.status(201).json({ message: 'Pedido registrado.', order: result.rows[0] });
+  } catch (err) {
+    console.error('Error creating website order:', err.message);
+    res.status(500).json({ error: 'Error al registrar el pedido.' });
+  }
+});
+
 // GET GLOBAL ORDER HISTORY (Admin Only)
 router.get('/', verifyToken, isAdmin, async (req, res) => {
   try {
     const result = await db.query(`
       SELECT o.id, o.total_amount, o.status, o.shipping_address, o.created_at, o.updated_at,
-             u.full_name as client_name, u.email as client_email, u.phone as client_phone
+             o.client_name, o.client_phone, o.client_email, o.items_detail, o.notes,
+             COALESCE(o.client_name, u.full_name) as client_name,
+             COALESCE(o.client_email, u.email) as client_email,
+             COALESCE(o.client_phone, u.phone) as client_phone
       FROM orders o
       LEFT JOIN users u ON o.user_id = u.id
       ORDER BY o.created_at DESC

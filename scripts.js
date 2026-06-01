@@ -638,16 +638,24 @@ ${itemLines}
 
 _Pedido realizado desde profarnova.com_`;
 
-    // Save to DB
-    fetch('/api/messages', {
+    // Save to DB → Ventas y Pedidos section in Dashboard
+    const API_BASE = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+        ? 'http://localhost:3000/api'
+        : '/api';
+
+    fetch(`${API_BASE}/orders/website`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            name: nombre,
-            email: email || 'no-email@pedido.com',
-            phone: telefono,
-            subject: `Pedido: ${cart.map(i => i.name).join(', ')}`,
-            message: `PEDIDO\n\n${itemLines}\n\nTotal: $${total}\n\nEnvío:\nCiudad: ${ciudad}\nDirección: ${direccion}\nReferencia: ${referencia}\nNotas: ${notas}`
+            client_name: nombre,
+            client_phone: telefono,
+            client_email: email || '',
+            shipping_city: ciudad,
+            shipping_address: direccion,
+            shipping_reference: referencia || '',
+            notes: notas || '',
+            total_amount: total,
+            items: cart.map(i => ({ name: i.name, quantity: i.qty, price: i.price, subtotal: (i.qty * i.price).toFixed(2) }))
         })
     }).catch(() => {});
 

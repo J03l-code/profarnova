@@ -59,6 +59,13 @@ pool.getConnection()
     try { await conn.query('ALTER TABLE products ADD COLUMN mechanism_of_action TEXT NULL'); } catch (e) {}
     try { await conn.query('ALTER TABLE products ADD COLUMN benefits TEXT NULL'); } catch (e) {}
     
+    // Safely add guest order columns to orders table if they don't exist
+    try { await conn.query('ALTER TABLE orders ADD COLUMN client_name VARCHAR(150) NULL'); } catch (e) {}
+    try { await conn.query('ALTER TABLE orders ADD COLUMN client_phone VARCHAR(30) NULL'); } catch (e) {}
+    try { await conn.query('ALTER TABLE orders ADD COLUMN client_email VARCHAR(100) NULL'); } catch (e) {}
+    try { await conn.query('ALTER TABLE orders ADD COLUMN items_detail TEXT NULL'); } catch (e) {}
+    try { await conn.query('ALTER TABLE orders ADD COLUMN notes TEXT NULL'); } catch (e) {}
+    
     conn.release();
   })
   .catch((err) => {

@@ -656,19 +656,39 @@ export default function Dashboard() {
                           <tr className="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-400">
                             <th className="px-6 py-4">ID Pedido</th>
                             <th className="px-6 py-4">Cliente</th>
+                            <th className="px-6 py-4">Productos</th>
+                            <th className="px-6 py-4">Envío</th>
                             <th className="px-6 py-4">Fecha</th>
                             <th className="px-6 py-4">Total</th>
                             <th className="px-6 py-4">Estado</th>
-                            <th className="px-6 py-4">Actualizar Estado</th>
+                            <th className="px-6 py-4">Actualizar</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-slate-100 text-sm">
-                          {orders.map(order => (
+                          {orders.map(order => {
+                            let parsedItems = [];
+                            try { parsedItems = JSON.parse(order.items_detail || '[]'); } catch(e) {}
+                            return (
                             <tr key={order.id} className="hover:bg-slate-50/50 transition-colors">
                               <td className="px-6 py-4 font-mono text-slate-500 text-xs">{order.id.slice(0,8)}...</td>
                               <td className="px-6 py-4">
                                 <div className="font-bold text-slate-800">{order.client_name || 'Consumidor Final'}</div>
-                                <div className="text-xs text-slate-400">{order.client_email || 'info@client.com'}</div>
+                                <div className="text-xs text-slate-500">{order.client_phone || ''}</div>
+                                <div className="text-xs text-slate-400">{order.client_email || ''}</div>
+                              </td>
+                              <td className="px-6 py-4 text-xs text-slate-600 max-w-xs">
+                                {parsedItems.length > 0
+                                  ? parsedItems.map((it, idx) => (
+                                      <div key={idx} className="mb-0.5">
+                                        <span className="font-semibold">{it.name}</span> ×{it.quantity} — <span className="text-emerald-700 font-bold">${it.subtotal}</span>
+                                      </div>
+                                    ))
+                                  : <span className="text-slate-400 italic">Sin detalle</span>
+                                }
+                              </td>
+                              <td className="px-6 py-4 text-xs text-slate-500 max-w-[160px]">
+                                {order.shipping_address || '—'}
+                                {order.notes && <div className="text-slate-400 mt-0.5 italic">Nota: {order.notes}</div>}
                               </td>
                               <td className="px-6 py-4 text-slate-500">
                                 {new Date(order.created_at).toLocaleDateString('es-EC', { day: 'numeric', month: 'short', year: 'numeric' })}
@@ -697,7 +717,8 @@ export default function Dashboard() {
                                 </select>
                               </td>
                             </tr>
-                          ))}
+                            );
+                          })}
                         </tbody>
                       </table>
                     </div>
