@@ -818,12 +818,17 @@
               <td class="px-6 py-4 font-bold text-slate-900">$${parseFloat(o.total_amount).toFixed(2)}</td>
               <td class="px-6 py-4"><span class="px-2.5 py-1 rounded-full text-xs font-bold uppercase border ${bc}">${o.status}</span></td>
               <td class="px-6 py-4">
-                <select onchange="updateOrderStatus('${o.id}', this.value)" class="px-2 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-4 focus:ring-emerald-100 bg-white">
-                  <option value="pendiente" ${o.status==='pendiente'?'selected':''}>Pendiente</option>
-                  <option value="empaquetado" ${o.status==='empaquetado'?'selected':''}>Empaquetado</option>
-                  <option value="enviado" ${o.status==='enviado'?'selected':''}>Enviado</option>
-                  <option value="entregado" ${o.status==='entregado'?'selected':''}>Entregado</option>
-                </select>
+                <div class="flex items-center gap-2">
+                  <select onchange="updateOrderStatus('${o.id}', this.value)" class="px-2 py-1.5 rounded-lg border border-slate-200 text-xs font-semibold focus:outline-none focus:ring-4 focus:ring-emerald-100 bg-white">
+                    <option value="pendiente" ${o.status==='pendiente'?'selected':''}>Pendiente</option>
+                    <option value="empaquetado" ${o.status==='empaquetado'?'selected':''}>Empaquetado</option>
+                    <option value="enviado" ${o.status==='enviado'?'selected':''}>Enviado</option>
+                    <option value="entregado" ${o.status==='entregado'?'selected':''}>Entregado</option>
+                  </select>
+                  <button onclick="deleteOrder('${o.id}')" class="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-all" title="Eliminar pedido">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
               </td>
             </tr>`;
           }).join('');
@@ -939,6 +944,15 @@
       try {
         await apiRequest('PUT', `/orders/${id}/status`, { status });
         showToast('Estado del pedido actualizado.');
+        loadAllData();
+      } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    async function deleteOrder(id) {
+      if (!confirm('¿Seguro que deseas eliminar este pedido de forma permanente?')) return;
+      try {
+        await apiRequest('DELETE', `/orders/${id}`);
+        showToast('Pedido eliminado exitosamente.');
         loadAllData();
       } catch (err) { showToast(err.message, 'error'); }
     }

@@ -195,4 +195,24 @@ router.put('/:id/status', verifyToken, isAdmin, async (req, res) => {
   }
 });
 
+// DELETE ORDER (Admin Only)
+router.delete('/:id', verifyToken, isAdmin, async (req, res) => {
+  const { id } = req.params;
+  try {
+    const checkOrder = await db.query('SELECT id FROM orders WHERE id = ?', [id]);
+    if (checkOrder.rows.length === 0) {
+      return res.status(404).json({ error: 'Pedido no encontrado.' });
+    }
+    
+    // Also delete order_items if they exist for this order
+    await db.query('DELETE FROM order_items WHERE order_id = ?', [id]);
+    await db.query('DELETE FROM orders WHERE id = ?', [id]);
+    
+    res.json({ message: 'Pedido eliminado exitosamente.' });
+  } catch (err) {
+    console.error('Error deleting order:', err);
+    res.status(500).json({ error: 'Error interno del servidor.' });
+  }
+});
+
 module.exports = router;
