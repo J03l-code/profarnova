@@ -86,9 +86,7 @@ export default function Login({ onLoginSuccess, forceAdminLayout = false }) {
         {/* LOGO & HEADER */}
         <div className="text-center">
           <div className="flex justify-center mb-4">
-            <span className="h-12 w-12 rounded-xl bg-emerald-500 flex items-center justify-center text-white text-2xl font-bold shadow-md shadow-emerald-200">
-              P+
-            </span>
+            <img src="/profarnova-logo.png" alt="PROFARNOVA" className="h-12 w-auto" />
           </div>
           <h2 className="text-3xl font-extrabold text-slate-900 tracking-tight">
             {forceAdminLayout ? 'Acceso Administrativo' : 'Iniciar Sesión'}
