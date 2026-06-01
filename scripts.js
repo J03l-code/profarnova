@@ -616,8 +616,11 @@ function submitOrder() {
 
     const itemLines = cart.map(i => `  • ${i.name} x${i.qty} = $${(i.price * i.qty).toFixed(2)}`).join('\n');
     const total = cart.reduce((s, i) => s + i.price * i.qty, 0).toFixed(2);
+    
+    // Generate a short 6-character order ID for easy reference
+    const shortOrderId = Math.random().toString(36).substring(2, 8).toUpperCase();
 
-    const msg = `🛍️ *NUEVO PEDIDO - PROFARNOVA*
+    const msg = `🛍️ *NUEVO PEDIDO #${shortOrderId}*
 
 👤 *Datos del Cliente:*
 • Nombre: ${nombre}
@@ -653,7 +656,7 @@ _Pedido realizado desde profarnova.com_`;
             shipping_city: ciudad,
             shipping_address: direccion,
             shipping_reference: referencia || '',
-            notes: notas || '',
+            notes: `[Ref: #${shortOrderId}] ${notas || ''}`.trim(),
             total_amount: total,
             items: cart.map(i => ({ name: i.name, quantity: i.qty, price: i.price, subtotal: (i.qty * i.price).toFixed(2) }))
         })
