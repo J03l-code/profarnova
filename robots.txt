@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# Directorios a ignorar
+Disallow: /ecommerce-core/
+Disallow: /admin.html
+Disallow: /assets/PDFs/
+
+# Mapa del sitio
+Sitemap: https://profarnova.com/sitemap.xml
