@@ -1257,12 +1257,32 @@ h6 {
 
 @media (max-width: 768px) {
     .header-content {
-        height: 70px;
+        height: 64px;
+        padding: 0 var(--space-md);
+        gap: 0;
+    }
+
+    /* Smaller logo on mobile */
+    .logo-img {
+        height: 28px;
+    }
+
+    /* Hide cart button label on mobile, show icon only */
+    #nav-cart-btn {
+        padding: 6px 10px;
+        gap: 0;
+        border-radius: 8px;
+        margin-right: 6px;
+        flex-shrink: 0;
+    }
+
+    #nav-cart-btn span:not(.cart-badge) {
+        display: none;
     }
 
     .nav {
         position: fixed;
-        top: 70px;
+        top: 64px;
         left: 0;
         right: 0;
         background: var(--color-white);
