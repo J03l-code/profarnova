@@ -664,18 +664,8 @@ _Pedido realizado desde profarnova.com_`;
 function ensureCartUI() {
     if (document.getElementById('pf-cart-drawer')) return;
 
-    // Cart button (floating)
-    const btn = document.createElement('button');
-    btn.id = 'pf-cart-btn';
-    btn.setAttribute('aria-label', 'Ver carrito');
-    btn.onclick = openCartDrawer;
-    btn.innerHTML = `<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg><span class="cart-badge" style="display:none;position:absolute;top:-6px;right:-6px;background:#ef4444;color:#fff;border-radius:50%;width:20px;height:20px;font-size:0.7rem;font-weight:800;align-items:center;justify-content:center">0</span>`;
-    btn.style.cssText = 'position:fixed;bottom:140px;right:22px;z-index:900;width:54px;height:54px;border-radius:50%;background:#1e293b;color:#fff;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(0,0,0,0.25);transition:transform .2s';
-    btn.onmouseenter = () => btn.style.transform = 'scale(1.1)';
-    btn.onmouseleave = () => btn.style.transform = 'scale(1)';
-    document.body.appendChild(btn);
-
-    // Drawer
+    // Floating button is removed — cart is now in the page header.
+    // Drawer stays the same.
     const drawer = document.createElement('div');
     drawer.id = 'pf-cart-drawer';
     drawer.style.cssText = 'position:fixed;top:0;right:0;width:min(420px,100vw);height:100vh;background:#fff;z-index:1000;box-shadow:-8px 0 40px rgba(0,0,0,0.15);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.4,0,.2,1)';
