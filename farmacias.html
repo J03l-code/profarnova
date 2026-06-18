@@ -298,7 +298,32 @@
             todasFarmacias = FARMACIAS_FALLBACK;
         }
         document.getElementById('stat-farmacias').textContent = todasFarmacias.length + '+';
-        renderFarmacias(todasFarmacias);
+
+        const selectCiudad = document.getElementById('filtro-ciudad');
+        const selectProducto = document.getElementById('filtro-producto');
+        const urlParams = new URLSearchParams(window.location.search);
+        const paramCiudad = urlParams.get('ciudad');
+        const paramProducto = urlParams.get('producto');
+
+        const ciudadesUnicas = [...new Set(todasFarmacias.map(f => f.ciudad.toLowerCase().trim()))].sort();
+        
+        let htmlOpts = '<option value="todas">Todas las ciudades</option>';
+        ciudadesUnicas.forEach(c => {
+            htmlOpts += `<option value="${c}">${c.charAt(0).toUpperCase() + c.slice(1)}</option>`;
+        });
+        selectCiudad.innerHTML = htmlOpts;
+        
+        if (paramCiudad) {
+            const found = ciudadesUnicas.find(c => c === paramCiudad.toLowerCase().trim());
+            if (found) selectCiudad.value = found;
+        }
+
+        if (paramProducto) {
+            const prodVal = paramProducto.toLowerCase() === 'cysprex' ? 'cysprex' : (paramProducto.toLowerCase() === 'lubryn-e' ? 'lubryn' : 'todos');
+            selectProducto.value = prodVal;
+        }
+
+        filtrarFarmacias();
     }
 
     function renderFarmacias(lista) {
@@ -360,7 +385,7 @@
         const producto = document.getElementById('filtro-producto').value;
         const nombre = document.getElementById('filtro-nombre').value.toLowerCase().trim();
         const resultado = todasFarmacias.filter(f => {
-            const okCiudad = ciudad === 'todas' || f.ciudad === ciudad;
+            const okCiudad = ciudad === 'todas' || f.ciudad.toLowerCase().trim() === ciudad;
             const okProd = producto === 'todos' || f.productos.includes(producto);
             const okNombre = !nombre || f.nombre.toLowerCase().includes(nombre);
             return okCiudad && okProd && okNombre;

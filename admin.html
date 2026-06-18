@@ -715,11 +715,20 @@
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-500 mb-1">Ciudad *</label>
-            <select id="form-farmacia-ciudad" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
-              <option value="quito">Quito</option>
-              <option value="guayaquil">Guayaquil</option>
-              <option value="cuenca">Cuenca</option>
-            </select>
+            <input type="text" id="form-farmacia-ciudad" list="ciudades-list" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Ej: Quito, Machala...">
+            <datalist id="ciudades-list">
+              <option value="Quito">
+              <option value="Guayaquil">
+              <option value="Cuenca">
+              <option value="Machala">
+              <option value="Manta">
+              <option value="Portoviejo">
+              <option value="Santo Domingo">
+              <option value="Ambato">
+              <option value="Loja">
+              <option value="Riobamba">
+              <option value="Ibarra">
+            </datalist>
           </div>
           <div>
             <label class="block text-xs font-bold text-slate-500 mb-1">Teléfono *</label>
