@@ -84,3 +84,22 @@ CREATE TABLE IF NOT EXISTS blogs (
     INDEX idx_blogs_slug (slug),
     INDEX idx_blogs_created_at (created_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 7. FARMACIAS TABLE
+CREATE TABLE IF NOT EXISTS farmacias (
+    id VARCHAR(36) PRIMARY KEY,
+    nombre VARCHAR(150) NOT NULL,
+    ciudad VARCHAR(50) NOT NULL,
+    direccion TEXT NOT NULL,
+    telefono VARCHAR(50) NOT NULL,
+    whatsapp VARCHAR(50) NULL,
+    horario VARCHAR(150) NULL,
+    productos JSON NOT NULL, -- JSON array of product keys e.g. ["cysprex", "lubryn"]
+    maps TEXT NULL,
+    activa TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_farmacias_ciudad (ciudad),
+    INDEX idx_farmacias_activa (activa)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+

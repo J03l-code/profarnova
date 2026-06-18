@@ -186,6 +186,13 @@
             </div>
             <span id="pending-reviews-badge" class="hidden bg-rose-500 text-white font-extrabold px-2 py-0.5 text-xs rounded-full">0</span>
           </button>
+
+          <button onclick="switchTab('farmacias')" id="tab-btn-farmacias" class="tab-btn flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-semibold transition-all text-slate-600 hover:bg-slate-50">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+            Farmacias Aliadas
+          </button>
         </div>
 
         <!-- Sticky Stock Warning Box -->
@@ -519,6 +526,43 @@
           </div>
         </div>
 
+        <!-- MODULE: FARMACIAS -->
+        <div id="panel-farmacias" class="panel hidden space-y-6">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-xl font-extrabold text-slate-900">Farmacias Aliadas</h2>
+              <p class="text-sm text-slate-500">Administra las farmacias y puntos de venta donde están disponibles tus productos.</p>
+            </div>
+            <button onclick="openFarmaciaModal()" class="px-4 py-2 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-md flex items-center gap-1.5 transition-colors">
+              <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path d="M12 4v16m8-8H4" />
+              </svg>
+              Añadir Farmacia
+            </button>
+          </div>
+
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm overflow-hidden">
+            <div class="overflow-x-auto">
+              <table class="w-full text-left border-collapse">
+                <thead>
+                  <tr class="bg-slate-50 border-b border-slate-200 text-xs font-bold uppercase text-slate-400">
+                    <th class="px-6 py-4">Farmacia</th>
+                    <th class="px-6 py-4">Ciudad</th>
+                    <th class="px-6 py-4">Dirección</th>
+                    <th class="px-6 py-4">Contacto</th>
+                    <th class="px-6 py-4">Productos</th>
+                    <th class="px-6 py-4 text-center">Estado</th>
+                    <th class="px-6 py-4 text-center">Acciones</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-sm" id="farmacias-table-body">
+                  <!-- Dynamically Rendered -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
       </main>
     </div>
   </div>
@@ -653,10 +697,82 @@
     </div>
   </div>
 
+  <!-- ==================== FARMACIA CRUD MODAL ==================== -->
+  <div id="farmacia-modal" class="hidden fixed inset-0 bg-slate-900/60 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
+    <div class="bg-white rounded-2xl w-full max-w-2xl shadow-2xl border border-slate-100 flex flex-col max-h-[90vh]">
+      <div class="p-6 border-b border-slate-100 flex items-center justify-between">
+        <h3 class="font-extrabold text-slate-900 text-lg" id="farmacia-modal-title">Añadir Farmacia</h3>
+        <button onclick="closeFarmaciaModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 18L18 6M6 6l12 12" /></svg>
+        </button>
+      </div>
+      <form id="farmacia-form-elem" class="flex-1 overflow-y-auto p-6 space-y-4">
+        <input type="hidden" id="form-farmacia-id">
+        <div class="grid grid-cols-2 gap-4">
+          <div class="col-span-2">
+            <label class="block text-xs font-bold text-slate-500 mb-1">Nombre de la Farmacia *</label>
+            <input type="text" id="form-farmacia-nombre" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Ciudad *</label>
+            <select id="form-farmacia-ciudad" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
+              <option value="quito">Quito</option>
+              <option value="guayaquil">Guayaquil</option>
+              <option value="cuenca">Cuenca</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Teléfono *</label>
+            <input type="text" id="form-farmacia-telefono" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="+593...">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">WhatsApp (con código de país, sin +)</label>
+            <input type="text" id="form-farmacia-whatsapp" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="593988781166">
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Horario de Atención</label>
+            <input type="text" id="form-farmacia-horario" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Ej: Lun-Vie 8:00-20:00">
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-bold text-slate-500 mb-1">Dirección *</label>
+            <input type="text" id="form-farmacia-direccion" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-bold text-slate-500 mb-1">Enlace de Google Maps (URL)</label>
+            <input type="url" id="form-farmacia-maps" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="https://maps.google.com/?q=...">
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-bold text-slate-500 mb-2">Productos Disponibles</label>
+            <div class="flex gap-6">
+              <label class="flex items-center gap-2 text-sm text-slate-700 font-semibold cursor-pointer">
+                <input type="checkbox" id="prod-cysprex" value="cysprex" class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
+                CYSPREX®
+              </label>
+              <label class="flex items-center gap-2 text-sm text-slate-700 font-semibold cursor-pointer">
+                <input type="checkbox" id="prod-lubryn" value="lubryn" class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
+                Lubryn-E®
+              </label>
+            </div>
+          </div>
+          <div class="col-span-2 flex items-center gap-2">
+            <input type="checkbox" id="form-farmacia-activa" checked class="h-4 w-4 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500">
+            <label for="form-farmacia-activa" class="text-sm font-semibold text-slate-700 cursor-pointer">Farmacia Activa (se muestra en la web pública)</label>
+          </div>
+        </div>
+        <div class="pt-4 border-t border-slate-100 flex gap-4">
+          <button type="button" onclick="closeFarmaciaModal()" class="w-1/2 py-2.5 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors">Cancelar</button>
+          <button type="submit" class="w-1/2 py-2.5 text-sm font-bold text-white bg-emerald-600 hover:bg-emerald-700 rounded-lg shadow-md transition-colors">Guardar Farmacia</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
   <!-- ==================== CORE JS LOGIC ==================== -->
   <script>
     // ─── CONFIGURATION ───────────────────────────────────────────
-    const API_URL = 'https://profarnova.com/api'; // Production API
+    const API_URL = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+      ? 'http://localhost:5000/api'
+      : 'https://profarnova.com/api'; // Production API
     let authToken = localStorage.getItem('admin_token') || null;
     let loadedOrders = [];
 
@@ -758,13 +874,14 @@
     // ─── LOAD ALL DATA ────────────────────────────────────────────
     async function loadAllData() {
       try {
-        const [products, orders, clients, blogs, messages, reviews] = await Promise.all([
+        const [products, orders, clients, blogs, messages, reviews, farmacias] = await Promise.all([
           fetch(`${API_URL}/products`).then(r => r.json()).catch(() => []),
           apiRequest('GET', '/orders').catch(() => []),
           apiRequest('GET', '/users').catch(() => []),
           fetch(`${API_URL}/blogs`).then(r => r.json()).catch(() => []),
           apiRequest('GET', '/messages').catch(() => []),
-          apiRequest('GET', '/reviews').catch(() => [])
+          apiRequest('GET', '/reviews').catch(() => []),
+          apiRequest('GET', '/farmacias/admin').catch(() => [])
         ]);
         renderAll(
           Array.isArray(products) ? products : [],
@@ -772,7 +889,8 @@
           Array.isArray(clients) ? clients : [],
           Array.isArray(blogs) ? blogs : [],
           Array.isArray(messages) ? messages : [],
-          Array.isArray(reviews) ? reviews : []
+          Array.isArray(reviews) ? reviews : [],
+          Array.isArray(farmacias) ? farmacias : []
         );
       } catch (err) {
         showToast('Error al cargar datos del servidor.', 'error');
@@ -780,7 +898,7 @@
     }
 
     // ─── RENDER ALL ───────────────────────────────────────────────
-    function renderAll(products, orders, clients, blogs, messages, reviews) {
+    function renderAll(products, orders, clients, blogs, messages, reviews, farmacias) {
       renderStats(products, orders, clients);
       renderInventory(products);
       renderOrders(orders);
@@ -788,7 +906,9 @@
       renderBlogs(blogs);
       renderMessages(messages);
       renderReviews(reviews);
+      renderFarmaciasList(farmacias);
     }
+
 
     function renderStats(products, orders, clients) {
       const totalSales = orders.reduce((s, o) => s + parseFloat(o.total_amount || 0), 0);
@@ -1287,6 +1407,116 @@
         showToast('Reseña eliminada.');
         loadAllData();
       } catch (err) { showToast(err.message, 'error'); }
+    }
+
+    // ─── FARMACIA HANDLERS ────────────────────────────────────────
+    function openFarmaciaModal() {
+      document.getElementById('farmacia-modal-title').textContent = 'Añadir Farmacia';
+      document.getElementById('form-farmacia-id').value = '';
+      document.getElementById('farmacia-form-elem').reset();
+      document.getElementById('form-farmacia-activa').checked = true;
+      document.getElementById('farmacia-modal').classList.remove('hidden');
+    }
+
+    function closeFarmaciaModal() {
+      document.getElementById('farmacia-modal').classList.add('hidden');
+    }
+
+    function editFarmacia(f) {
+      document.getElementById('farmacia-modal-title').textContent = 'Editar Farmacia';
+      document.getElementById('form-farmacia-id').value = f.id;
+      document.getElementById('form-farmacia-nombre').value = f.nombre;
+      document.getElementById('form-farmacia-ciudad').value = f.ciudad;
+      document.getElementById('form-farmacia-direccion').value = f.direccion;
+      document.getElementById('form-farmacia-telefono').value = f.telefono;
+      document.getElementById('form-farmacia-whatsapp').value = f.whatsapp || '';
+      document.getElementById('form-farmacia-horario').value = f.horario || '';
+      document.getElementById('form-farmacia-maps').value = f.maps || '';
+      
+      const prods = f.productos || [];
+      document.getElementById('prod-cysprex').checked = prods.includes('cysprex');
+      document.getElementById('prod-lubryn').checked = prods.includes('lubryn');
+      
+      document.getElementById('form-farmacia-activa').checked = f.activa === 1;
+      document.getElementById('farmacia-modal').classList.remove('hidden');
+    }
+
+    document.getElementById('farmacia-form-elem').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const id = document.getElementById('form-farmacia-id').value;
+      const prods = [];
+      if (document.getElementById('prod-cysprex').checked) prods.push('cysprex');
+      if (document.getElementById('prod-lubryn').checked) prods.push('lubryn');
+
+      const body = {
+        nombre: document.getElementById('form-farmacia-nombre').value,
+        ciudad: document.getElementById('form-farmacia-ciudad').value,
+        direccion: document.getElementById('form-farmacia-direccion').value,
+        telefono: document.getElementById('form-farmacia-telefono').value,
+        whatsapp: document.getElementById('form-farmacia-whatsapp').value,
+        horario: document.getElementById('form-farmacia-horario').value,
+        maps: document.getElementById('form-farmacia-maps').value,
+        productos: prods,
+        activa: document.getElementById('form-farmacia-activa').checked ? 1 : 0
+      };
+
+      try {
+        await apiRequest(id ? 'PUT' : 'POST', id ? `/farmacias/${id}` : '/farmacias', body);
+        showToast(id ? 'Farmacia actualizada.' : 'Farmacia creada.');
+        closeFarmaciaModal();
+        loadAllData();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    });
+
+    async function deleteFarmacia(id) {
+      if (!confirm('¿Seguro que deseas eliminar esta farmacia permanentemente?')) return;
+      try {
+        await apiRequest('DELETE', `/farmacias/${id}`);
+        showToast('Farmacia eliminada.');
+        loadAllData();
+      } catch (err) {
+        showToast(err.message, 'error');
+      }
+    }
+
+    function renderFarmaciasList(farmacias) {
+      const body = document.getElementById('farmacias-table-body');
+      body.innerHTML = farmacias.length === 0
+        ? `<tr><td colspan="7" class="px-6 py-10 text-center text-slate-400 text-sm">No hay farmacias registradas.</td></tr>`
+        : farmacias.map(f => {
+            const active = f.activa === 1;
+            const prodsHtml = (f.productos || [])
+              .map(p => `<span class="px-2 py-0.5 rounded text-[10px] font-bold uppercase ${p === 'cysprex' ? 'bg-indigo-50 text-indigo-700 border border-indigo-100' : 'bg-pink-50 text-pink-700 border border-pink-100'}">${p === 'cysprex' ? 'CYSPREX®' : 'Lubryn-E®'}</span>`)
+              .join(' ');
+
+            return `<tr class="hover:bg-slate-50/50 transition-colors">
+              <td class="px-6 py-4 font-bold text-slate-800">${f.nombre}</td>
+              <td class="px-6 py-4 capitalize text-slate-600 text-sm">${f.ciudad}</td>
+              <td class="px-6 py-4 text-slate-500 text-xs max-w-xs truncate" title="${f.direccion}">${f.direccion}</td>
+              <td class="px-6 py-4 text-xs text-slate-600">
+                <div>Tel: ${f.telefono}</div>
+                ${f.whatsapp ? `<div class="text-emerald-600 font-semibold">WA: ${f.whatsapp}</div>` : ''}
+              </td>
+              <td class="px-6 py-4"><div class="flex gap-1 flex-wrap">${prodsHtml || '<span class="text-slate-400 text-xs">Ninguno</span>'}</div></td>
+              <td class="px-6 py-4 text-center">
+                <span class="px-2 py-0.5 rounded-full text-xs font-bold uppercase border ${active ? 'bg-emerald-50 text-emerald-700 border-emerald-100' : 'bg-red-50 text-red-700 border-red-100'}">
+                  ${active ? 'Activa' : 'Inactiva'}
+                </span>
+              </td>
+              <td class="px-6 py-4 text-center">
+                <div class="flex justify-center gap-3">
+                  <button onclick='editFarmacia(${JSON.stringify(f).replace(/'/g, "&#39;")})' class="p-1.5 text-slate-500 hover:text-emerald-600 hover:bg-emerald-50 rounded-md transition-all" title="Editar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
+                  </button>
+                  <button onclick="deleteFarmacia('${f.id}')" class="p-1.5 text-slate-500 hover:text-red-600 hover:bg-red-50 rounded-md transition-all" title="Eliminar">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/></svg>
+                  </button>
+                </div>
+              </td>
+            </tr>`;
+          }).join('');
     }
   </script>
 </body>

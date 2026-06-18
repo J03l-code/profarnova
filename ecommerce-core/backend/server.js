@@ -13,6 +13,7 @@ const configRoutes = require('./routes/config');
 const blogRoutes = require('./routes/blogs');
 const messageRoutes = require('./routes/messages');
 const reviewRoutes = require('./routes/reviews');
+const farmaciaRoutes = require('./routes/farmacias');
 
 const app = express();
 const PORT = process.env.PORT || 5000;
@@ -40,6 +41,8 @@ app.use('/api/config', configRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/messages', messageRoutes);
 app.use('/api/reviews', reviewRoutes);
+app.use('/api/farmacias', farmaciaRoutes);
+
 
 // Root endpoints to satisfy cPanel/Passenger availability checks
 const welcomeHandler = (req, res) => {
