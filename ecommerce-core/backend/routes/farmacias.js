@@ -63,8 +63,8 @@ router.post('/', verifyToken, isAdmin, upload.single('logo_file'), async (req, r
     logo = '/uploads/' + req.file.filename;
   }
 
-  if (!nombre || !ciudad || !direccion || !telefono) {
-    return res.status(400).json({ error: 'Nombre, ciudad, dirección y teléfono son requeridos.' });
+  if (!nombre || !ciudad || !direccion) {
+    return res.status(400).json({ error: 'Nombre, ciudad y dirección son requeridos.' });
   }
   try {
     const id = crypto.randomUUID();
@@ -79,7 +79,7 @@ router.post('/', verifyToken, isAdmin, upload.single('logo_file'), async (req, r
     await db.query(
       `INSERT INTO farmacias (id, nombre, ciudad, sector, direccion, telefono, whatsapp, horario, productos, maps, logo, activa)
        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 1)`,
-      [id, nombre, ciudad.toLowerCase(), sector || '', direccion, telefono, whatsapp || '', horario || '', productosJson, maps || '', logo]
+      [id, nombre, ciudad.toLowerCase(), sector || '', direccion, telefono || '', whatsapp || '', horario || '', productosJson, maps || '', logo]
     );
     res.status(201).json({ success: true, id, message: 'Farmacia creada exitosamente.' });
   } catch (err) {
@@ -109,13 +109,13 @@ router.put('/:id', verifyToken, isAdmin, upload.single('logo_file'), async (req,
        await db.query(
         `UPDATE farmacias SET nombre=?, ciudad=?, sector=?, direccion=?, telefono=?, whatsapp=?, horario=?, productos=?, maps=?, logo=?, activa=?
          WHERE id=?`,
-        [nombre, ciudad.toLowerCase(), sector || '', direccion, telefono, whatsapp || '', horario || '', productosJson, maps || '', logo, (activa === 'true' || activa === true || activa === 1 || activa === '1') ? 1 : 0, id]
+        [nombre, ciudad.toLowerCase(), sector || '', direccion, telefono || '', whatsapp || '', horario || '', productosJson, maps || '', logo, (activa === 'true' || activa === true || activa === 1 || activa === '1') ? 1 : 0, id]
       );
     } else {
        await db.query(
         `UPDATE farmacias SET nombre=?, ciudad=?, sector=?, direccion=?, telefono=?, whatsapp=?, horario=?, productos=?, maps=?, activa=?
          WHERE id=?`,
-        [nombre, ciudad.toLowerCase(), sector || '', direccion, telefono, whatsapp || '', horario || '', productosJson, maps || '', (activa === 'true' || activa === true || activa === 1 || activa === '1') ? 1 : 0, id]
+        [nombre, ciudad.toLowerCase(), sector || '', direccion, telefono || '', whatsapp || '', horario || '', productosJson, maps || '', (activa === 'true' || activa === true || activa === 1 || activa === '1') ? 1 : 0, id]
       );
     }
     res.json({ success: true, message: 'Farmacia actualizada.' });

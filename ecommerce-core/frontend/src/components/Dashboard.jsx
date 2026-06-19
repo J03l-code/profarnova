@@ -1329,8 +1329,8 @@ export default function Dashboard() {
                   <input type="text" value={farmaciaForm.sector} onChange={e=>setFarmaciaForm({...farmaciaForm, sector:e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" placeholder="Ej: La Carolina" />
                 </div>
                 <div>
-                  <label className="block text-xs font-bold text-slate-500 mb-1">Teléfono *</label>
-                  <input required type="text" value={farmaciaForm.telefono} onChange={e=>setFarmaciaForm({...farmaciaForm, telefono:e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" />
+                  <label className="block text-xs font-bold text-slate-500 mb-1">Teléfono (Opcional)</label>
+                  <input type="text" value={farmaciaForm.telefono} onChange={e=>setFarmaciaForm({...farmaciaForm, telefono:e.target.value})} className="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm" />
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-slate-500 mb-1">WhatsApp</label>
