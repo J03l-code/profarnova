@@ -345,7 +345,7 @@
 
             // La URL del logo ya viene completa desde el servidor
             const logoHtml = f.logo
-                ? `<img src="${f.logo}" alt="${f.nombre}" onerror="this.style.display='none'" style="max-width:140px;max-height:80px;width:auto;height:auto;object-fit:contain;background:#fff;border-radius:8px;padding:6px;flex-shrink:0;box-shadow:0 4px 6px -1px rgba(0,0,0,0.1);">`
+                ? `<img src="${f.logo}" alt="${f.nombre}" onerror="this.style.display='none'" style="max-width:140px;max-height:80px;width:auto;height:auto;object-fit:contain;background:#fff;border-radius:4px;flex-shrink:0;box-shadow:0 2px 4px rgba(0,0,0,0.1);">`
                 : storeIcon;
 
             const sectorHtml = f.sector ? ` <span style="color:rgba(255,255,255,0.5);font-size:.65rem;margin-left:4px;">- ${f.sector.toUpperCase()}</span>` : '';
