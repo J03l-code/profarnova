@@ -31,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 
 // Serve Static Uploads
 app.use('/uploads', express.static(uploadDir));
+app.use('/api/uploads', express.static(uploadDir));
 
 // Route bindings
 app.use('/api/auth', authRoutes);

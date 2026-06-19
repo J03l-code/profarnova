@@ -61,7 +61,7 @@ router.post('/', verifyToken, isAdmin, upload.single('logo_file'), async (req, r
   let logo = req.body.logo || '';
   if (req.file) {
     const baseUrl = process.env.APP_URL || 'https://profarnova.com';
-    logo = `${baseUrl}/uploads/${req.file.filename}`;
+    logo = `${baseUrl}/api/uploads/${req.file.filename}`;
   }
 
   if (!nombre || !ciudad || !direccion) {
@@ -95,7 +95,7 @@ router.put('/:id', verifyToken, isAdmin, upload.single('logo_file'), async (req,
   let logo = req.body.logo || '';
   if (req.file) {
     const baseUrl = process.env.APP_URL || 'https://profarnova.com';
-    logo = `${baseUrl}/uploads/${req.file.filename}`;
+    logo = `${baseUrl}/api/uploads/${req.file.filename}`;
   }
 
   try {
