@@ -60,7 +60,8 @@ router.post('/', verifyToken, isAdmin, upload.single('logo_file'), async (req, r
   const { nombre, ciudad, sector, direccion, telefono, whatsapp, horario, productos, maps } = req.body;
   let logo = req.body.logo || '';
   if (req.file) {
-    logo = '/uploads/' + req.file.filename;
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    logo = `${baseUrl}/uploads/${req.file.filename}`;
   }
 
   if (!nombre || !ciudad || !direccion) {
@@ -93,7 +94,8 @@ router.put('/:id', verifyToken, isAdmin, upload.single('logo_file'), async (req,
   const { nombre, ciudad, sector, direccion, telefono, whatsapp, horario, productos, maps, activa } = req.body;
   let logo = req.body.logo || '';
   if (req.file) {
-    logo = '/uploads/' + req.file.filename;
+    const baseUrl = `${req.protocol}://${req.get('host')}`;
+    logo = `${baseUrl}/uploads/${req.file.filename}`;
   }
 
   try {

@@ -339,22 +339,13 @@
         sinRes.style.display = 'none';
         count.textContent = `Mostrando ${lista.length} farmacia${lista.length !== 1 ? 's' : ''}`;
 
-        // Base URL del servidor para imagenes subidas localmente
-        const serverBase = (window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1'))
-            ? 'http://localhost:5000'
-            : '';
-
         grid.innerHTML = lista.map(f => {
             const tags = f.productos.map(p => `<span style="padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-weight:700;background:${p==='cysprex'?'rgba(124,181,24,.15)':'rgba(26,26,26,.08)'};color:${p==='cysprex'?'var(--color-primary-dark)':'var(--color-dark)'};">${p==='cysprex'?'CYSPREX®':'Lubryn-E®'}</span>`).join('');
             const storeIcon = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(154,205,50,.6)" stroke-width="1.5" style="flex-shrink:0"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`;
 
-            // Corrige la URL del logo: si fue subida al servidor, antepone el origen
-            let logoSrc = '';
-            if (f.logo) {
-                logoSrc = f.logo.startsWith('/uploads/') ? serverBase + f.logo : f.logo;
-            }
-            const logoHtml = logoSrc
-                ? `<img src="${logoSrc}" alt="${f.nombre}" onerror="this.style.display='none'" style="width:48px;height:48px;object-fit:contain;background:#fff;border-radius:8px;padding:4px;flex-shrink:0;">`
+            // La URL del logo ya viene completa desde el servidor
+            const logoHtml = f.logo
+                ? `<img src="${f.logo}" alt="${f.nombre}" onerror="this.style.display='none'" style="width:48px;height:48px;object-fit:contain;background:#fff;border-radius:8px;padding:4px;flex-shrink:0;">`
                 : storeIcon;
 
             const sectorHtml = f.sector ? ` <span style="color:rgba(255,255,255,0.5);font-size:.65rem;margin-left:4px;">- ${f.sector.toUpperCase()}</span>` : '';
