@@ -731,6 +731,10 @@
             </datalist>
           </div>
           <div>
+            <label class="block text-xs font-bold text-slate-500 mb-1">Sector (Opcional)</label>
+            <input type="text" id="form-farmacia-sector" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="Ej: Cotocollao, Urdesa...">
+          </div>
+          <div>
             <label class="block text-xs font-bold text-slate-500 mb-1">Teléfono *</label>
             <input type="text" id="form-farmacia-telefono" required class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="+593...">
           </div>
@@ -749,6 +753,10 @@
           <div class="col-span-2">
             <label class="block text-xs font-bold text-slate-500 mb-1">Enlace de Google Maps (URL)</label>
             <input type="url" id="form-farmacia-maps" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="https://maps.google.com/?q=...">
+          </div>
+          <div class="col-span-2">
+            <label class="block text-xs font-bold text-slate-500 mb-1">URL del Logo (Opcional)</label>
+            <input type="url" id="form-farmacia-logo" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="https://ejemplo.com/logo.png">
           </div>
           <div class="col-span-2">
             <label class="block text-xs font-bold text-slate-500 mb-2">Productos Disponibles</label>
@@ -1436,11 +1444,13 @@
       document.getElementById('form-farmacia-id').value = f.id;
       document.getElementById('form-farmacia-nombre').value = f.nombre;
       document.getElementById('form-farmacia-ciudad').value = f.ciudad;
+      document.getElementById('form-farmacia-sector').value = f.sector || '';
       document.getElementById('form-farmacia-direccion').value = f.direccion;
       document.getElementById('form-farmacia-telefono').value = f.telefono;
       document.getElementById('form-farmacia-whatsapp').value = f.whatsapp || '';
       document.getElementById('form-farmacia-horario').value = f.horario || '';
       document.getElementById('form-farmacia-maps').value = f.maps || '';
+      document.getElementById('form-farmacia-logo').value = f.logo || '';
       
       const prods = f.productos || [];
       document.getElementById('prod-cysprex').checked = prods.includes('cysprex');
@@ -1460,11 +1470,13 @@
       const body = {
         nombre: document.getElementById('form-farmacia-nombre').value,
         ciudad: document.getElementById('form-farmacia-ciudad').value,
+        sector: document.getElementById('form-farmacia-sector').value,
         direccion: document.getElementById('form-farmacia-direccion').value,
         telefono: document.getElementById('form-farmacia-telefono').value,
         whatsapp: document.getElementById('form-farmacia-whatsapp').value,
         horario: document.getElementById('form-farmacia-horario').value,
         maps: document.getElementById('form-farmacia-maps').value,
+        logo: document.getElementById('form-farmacia-logo').value,
         productos: prods,
         activa: document.getElementById('form-farmacia-activa').checked ? 1 : 0
       };
@@ -1501,8 +1513,16 @@
               .join(' ');
 
             return `<tr class="hover:bg-slate-50/50 transition-colors">
-              <td class="px-6 py-4 font-bold text-slate-800">${f.nombre}</td>
-              <td class="px-6 py-4 capitalize text-slate-600 text-sm">${f.ciudad}</td>
+              <td class="px-6 py-4 font-bold text-slate-800">
+                <div class="flex items-center gap-3">
+                  ${f.logo ? `<img src="${f.logo}" alt="Logo" class="w-8 h-8 object-contain rounded-md border border-slate-200">` : ''}
+                  <span>${f.nombre}</span>
+                </div>
+              </td>
+              <td class="px-6 py-4 capitalize text-slate-600 text-sm">
+                <div>${f.ciudad}</div>
+                ${f.sector ? `<div class="text-xs text-slate-400 mt-0.5">${f.sector}</div>` : ''}
+              </td>
               <td class="px-6 py-4 text-slate-500 text-xs max-w-xs truncate" title="${f.direccion}">${f.direccion}</td>
               <td class="px-6 py-4 text-xs text-slate-600">
                 <div>Tel: ${f.telefono}</div>

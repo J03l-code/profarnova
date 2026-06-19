@@ -274,14 +274,14 @@
     // DATOS DE FARMACIAS - Carga desde API o fallback
     // =============================================
     const FARMACIAS_FALLBACK = [
-        { id:1, nombre:"Farmacia Cruz Azul - La Mariscal", ciudad:"quito", direccion:"Av. Amazonas N24-196 y Colón, La Mariscal", telefono:"+593 2 256 1234", whatsapp:"593225561234", horario:"Lun-Vie 8:00-20:00 | Sáb 9:00-18:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Av.+Amazonas+N24-196+Quito" },
-        { id:2, nombre:"Farmacia Comunitaria - La Carolina", ciudad:"quito", direccion:"Av. Naciones Unidas E3-33 y Av. Shyris, La Carolina", telefono:"+593 2 244 5678", whatsapp:"593224445678", horario:"Lun-Dom 7:00-22:00", productos:["cysprex"], maps:"https://maps.google.com/?q=Av.+Naciones+Unidas+Quito" },
-        { id:3, nombre:"Farmacia Sana Sana - Cumbayá", ciudad:"quito", direccion:"Calle Francisco de Orellana y Diego de Vasquez, Cumbayá", telefono:"+593 2 289 3456", whatsapp:"593228893456", horario:"Lun-Sáb 8:00-21:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Cumbaya+Quito" },
-        { id:4, nombre:"Farmacia Medicity - Kennedy", ciudad:"guayaquil", direccion:"Av. Francisco de Orellana y Justino Cornejo, Kennedy Norte", telefono:"+593 4 268 7890", whatsapp:"593426687890", horario:"Lun-Dom 8:00-22:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Kennedy+Norte+Guayaquil" },
-        { id:5, nombre:"Boticas & Salud - Urdesa", ciudad:"guayaquil", direccion:"Circunvalación Sur 717 y Víctor Emilio Estrada, Urdesa", telefono:"+593 4 238 1122", whatsapp:"593423811221", horario:"Lun-Sáb 8:00-20:00", productos:["lubryn"], maps:"https://maps.google.com/?q=Urdesa+Guayaquil" },
-        { id:6, nombre:"Farmacia Pasteur - Samborondón", ciudad:"guayaquil", direccion:"Av. Jaime Roldós Aguilera, La Puntilla, Samborondón", telefono:"+593 4 371 9900", whatsapp:"593437199001", horario:"Lun-Dom 7:00-23:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Samborondon+Guayaquil" },
-        { id:7, nombre:"Farmacia Cruz Azul - El Centro", ciudad:"cuenca", direccion:"Calle Bolívar 7-79 y Luis Cordero, Centro Histórico", telefono:"+593 7 284 5566", whatsapp:"593728455661", horario:"Lun-Vie 8:00-20:00 | Sáb 9:00-17:00", productos:["cysprex"], maps:"https://maps.google.com/?q=Calle+Bolivar+Cuenca" },
-        { id:8, nombre:"Farmacia Fybeca - Mall del Río", ciudad:"cuenca", direccion:"Av. De las Américas y Tarqui, Mall del Río, Cuenca", telefono:"+593 7 408 0000", whatsapp:"593740800001", horario:"Lun-Dom 9:00-21:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Mall+del+Rio+Cuenca" }
+        { id:1, nombre:"Farmacia Cruz Azul - La Mariscal", ciudad:"quito", sector:"La Mariscal", direccion:"Av. Amazonas N24-196 y Colón, La Mariscal", telefono:"+593 2 256 1234", whatsapp:"593225561234", horario:"Lun-Vie 8:00-20:00 | Sáb 9:00-18:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Av.+Amazonas+N24-196+Quito", logo:"https://upload.wikimedia.org/wikipedia/commons/a/a2/Logotipo_Farmacias_Cruz_Azul.png" },
+        { id:2, nombre:"Farmacia Comunitaria - La Carolina", ciudad:"quito", sector:"La Carolina", direccion:"Av. Naciones Unidas E3-33 y Av. Shyris, La Carolina", telefono:"+593 2 244 5678", whatsapp:"593224445678", horario:"Lun-Dom 7:00-22:00", productos:["cysprex"], maps:"https://maps.google.com/?q=Av.+Naciones+Unidas+Quito" },
+        { id:3, nombre:"Farmacia Sana Sana - Cumbayá", ciudad:"quito", sector:"Cumbayá", direccion:"Calle Francisco de Orellana y Diego de Vasquez, Cumbayá", telefono:"+593 2 289 3456", whatsapp:"593228893456", horario:"Lun-Sáb 8:00-21:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Cumbaya+Quito" },
+        { id:4, nombre:"Farmacia Medicity - Kennedy", ciudad:"guayaquil", sector:"Kennedy Norte", direccion:"Av. Francisco de Orellana y Justino Cornejo, Kennedy Norte", telefono:"+593 4 268 7890", whatsapp:"593426687890", horario:"Lun-Dom 8:00-22:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Kennedy+Norte+Guayaquil" },
+        { id:5, nombre:"Boticas & Salud - Urdesa", ciudad:"guayaquil", sector:"Urdesa", direccion:"Circunvalación Sur 717 y Víctor Emilio Estrada, Urdesa", telefono:"+593 4 238 1122", whatsapp:"593423811221", horario:"Lun-Sáb 8:00-20:00", productos:["lubryn"], maps:"https://maps.google.com/?q=Urdesa+Guayaquil" },
+        { id:6, nombre:"Farmacia Pasteur - Samborondón", ciudad:"guayaquil", sector:"La Puntilla", direccion:"Av. Jaime Roldós Aguilera, La Puntilla, Samborondón", telefono:"+593 4 371 9900", whatsapp:"593437199001", horario:"Lun-Dom 7:00-23:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Samborondon+Guayaquil" },
+        { id:7, nombre:"Farmacia Cruz Azul - El Centro", ciudad:"cuenca", sector:"Centro Histórico", direccion:"Calle Bolívar 7-79 y Luis Cordero, Centro Histórico", telefono:"+593 7 284 5566", whatsapp:"593728455661", horario:"Lun-Vie 8:00-20:00 | Sáb 9:00-17:00", productos:["cysprex"], maps:"https://maps.google.com/?q=Calle+Bolivar+Cuenca" },
+        { id:8, nombre:"Farmacia Fybeca - Mall del Río", ciudad:"cuenca", sector:"Mall del Río", direccion:"Av. De las Américas y Tarqui, Mall del Río, Cuenca", telefono:"+593 7 408 0000", whatsapp:"593740800001", horario:"Lun-Dom 9:00-21:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Mall+del+Rio+Cuenca" }
     ];
 
     let todasFarmacias = [];
@@ -340,14 +340,17 @@
         count.textContent = `Mostrando ${lista.length} farmacia${lista.length !== 1 ? 's' : ''}`;
         grid.innerHTML = lista.map(f => {
             const tags = f.productos.map(p => `<span style="padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-weight:700;background:${p==='cysprex'?'rgba(124,181,24,.15)':'rgba(26,26,26,.08)'};color:${p==='cysprex'?'var(--color-primary-dark)':'var(--color-dark)'};">${p==='cysprex'?'CYSPREX®':'Lubryn-E®'}</span>`).join('');
+            const storeIcon = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(154,205,50,.6)" stroke-width="1.5" style="flex-shrink:0"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`;
+            const logoHtml = f.logo ? `<img src="${f.logo}" alt="${f.nombre}" style="width:36px;height:36px;object-fit:contain;background:#fff;border-radius:6px;padding:2px;flex-shrink:0;">` : storeIcon;
+            const sectorHtml = f.sector ? ` <span style="color:rgba(255,255,255,0.5);font-size:.65rem;margin-left:4px;">- ${f.sector.toUpperCase()}</span>` : '';
             return `
             <div class="farmacia-card" data-ciudad="${f.ciudad}" data-productos="${f.productos.join(',')}" data-nombre="${f.nombre.toLowerCase()}">
                 <div style="background:linear-gradient(135deg,var(--color-dark) 0%,#2a2a2a 100%);padding:1.25rem 1.5rem;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:center;">
                     <div>
-                        <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-primary);display:block;margin-bottom:.25rem;">${f.ciudad.charAt(0).toUpperCase()+f.ciudad.slice(1)}</span>
+                        <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-primary);display:flex;align-items:center;margin-bottom:.25rem;">${f.ciudad.charAt(0).toUpperCase()+f.ciudad.slice(1)}${sectorHtml}</span>
                         <h3 style="color:#fff;font-size:.95rem;font-family:var(--font-heading);margin:0;line-height:1.3;">${f.nombre}</h3>
                     </div>
-                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(154,205,50,.6)" stroke-width="1.5" style="flex-shrink:0"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+                    ${logoHtml}
                 </div>
                 <div style="padding:1.5rem;background:#fff;border-radius:0 0 12px 12px;border:1px solid var(--color-gray-200);border-top:none;">
                     <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;">${tags}</div>
