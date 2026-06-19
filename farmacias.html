@@ -4,8 +4,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Encuentra las farmacias autorizadas donde puedes adquirir los productos PROFARNOVA cerca de ti. CYSPREX® y Lubryn-E® disponibles en farmacias de Ecuador.">
-    <meta name="keywords" content="PROFARNOVA farmacias, donde comprar CYSPREX, donde comprar Lubryn-E, farmacias Ecuador, puntos de venta PROFARNOVA">
+    <meta name="description"
+        content="Encuentra las farmacias autorizadas donde puedes adquirir los productos PROFARNOVA cerca de ti. CYSPREX® y Lubryn-E® disponibles en farmacias de Ecuador.">
+    <meta name="keywords"
+        content="PROFARNOVA farmacias, donde comprar CYSPREX, donde comprar Lubryn-E, farmacias Ecuador, puntos de venta PROFARNOVA">
     <title>Dónde Comprar | Farmacias Autorizadas - PROFARNOVA</title>
     <link rel="canonical" href="https://profarnova.com/farmacias.html" />
 
@@ -13,7 +15,8 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://profarnova.com/farmacias.html">
     <meta property="og:title" content="Farmacias Autorizadas | PROFARNOVA">
-    <meta property="og:description" content="Encuentra dónde comprar CYSPREX® y Lubryn-E® en farmacias cercanas a ti en Ecuador.">
+    <meta property="og:description"
+        content="Encuentra dónde comprar CYSPREX® y Lubryn-E® en farmacias cercanas a ti en Ecuador.">
     <meta property="og:image" content="https://profarnova.com/assets/profarnova-logo.png">
 
     <!-- Favicon -->
@@ -22,7 +25,9 @@
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Open+Sans:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
 
     <link rel="stylesheet" href="profarnova-main.css?v=2.0">
 
@@ -135,16 +140,17 @@
     <!-- Page Hero -->
     <section class="page-hero">
         <div class="container page-hero-content">
-            <span class="section-tag">Puntos de Venta</span>
+            <span class="section-tag">Puntos de Venta Físicos</span>
             <h1>Farmacias <span class="text-highlight">Autorizadas</span></h1>
-            <p>Encuentra dónde adquirir nuestros productos cerca de ti. Todas nuestras farmacias aliadas están debidamente autorizadas y cuentan con stock verificado.</p>
+            <p>Encuentra dónde adquirir nuestros productos cerca de ti. Todas nuestras farmacias aliadas están
+                debidamente autorizadas y cuentan con stock verificado.</p>
             <div class="hero-stats-row">
                 <div class="hero-stat">
                     <strong id="stat-farmacias">12+</strong>
                     <span>Farmacias aliadas</span>
                 </div>
                 <div class="hero-stat">
-                    <strong>3</strong>
+                    <strong id="stat-ciudades">3</strong>
                     <span>Ciudades</span>
                 </div>
                 <div class="hero-stat">
@@ -157,53 +163,77 @@
 
     <!-- Search Section -->
     <section class="section" style="background:#f8f9fa;padding:3rem 0 2rem;">
-      <div class="container">
-        <div style="background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:2rem;margin-bottom:2.5rem;">
-          <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;">
-            <div style="flex:1;min-width:220px;">
-              <label style="font-family:var(--font-heading);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-gray-600);display:block;margin-bottom:.5rem;">Ciudad</label>
-              <select id="filtro-ciudad" onchange="filtrarFarmacias()" style="width:100%;padding:.75rem 1rem;border:2px solid var(--color-gray-200);border-radius:8px;font-family:var(--font-body);font-size:.95rem;color:var(--color-dark);background:#fff;cursor:pointer;outline:none;">
-                <option value="todas">Todas las ciudades</option>
-                <option value="quito">Quito</option>
-                <option value="guayaquil">Guayaquil</option>
-                <option value="cuenca">Cuenca</option>
-              </select>
+        <div class="container">
+            <div
+                style="background:#fff;border-radius:16px;box-shadow:0 4px 20px rgba(0,0,0,0.08);padding:2rem;margin-bottom:2.5rem;">
+                <div style="display:flex;gap:1rem;flex-wrap:wrap;align-items:flex-end;">
+                    <div style="flex:1;min-width:220px;">
+                        <label
+                            style="font-family:var(--font-heading);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-gray-600);display:block;margin-bottom:.5rem;">Ciudad</label>
+                        <select id="filtro-ciudad" onchange="filtrarFarmacias()"
+                            style="width:100%;padding:.75rem 1rem;border:2px solid var(--color-gray-200);border-radius:8px;font-family:var(--font-body);font-size:.95rem;color:var(--color-dark);background:#fff;cursor:pointer;outline:none;">
+                            <option value="todas">Todas las ciudades</option>
+                            <option value="quito">Quito</option>
+                            <option value="guayaquil">Guayaquil</option>
+                            <option value="cuenca">Cuenca</option>
+                        </select>
+                    </div>
+                    <div style="flex:1;min-width:220px;">
+                        <label
+                            style="font-family:var(--font-heading);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-gray-600);display:block;margin-bottom:.5rem;">Producto</label>
+                        <select id="filtro-producto" onchange="filtrarFarmacias()"
+                            style="width:100%;padding:.75rem 1rem;border:2px solid var(--color-gray-200);border-radius:8px;font-family:var(--font-body);font-size:.95rem;color:var(--color-dark);background:#fff;cursor:pointer;outline:none;">
+                            <option value="todos">Todos los productos</option>
+                            <option value="cysprex">CYSPREX®</option>
+                            <option value="lubryn">Lubryn-E®</option>
+                        </select>
+                    </div>
+                    <div style="flex:1;min-width:220px;">
+                        <label
+                            style="font-family:var(--font-heading);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-gray-600);display:block;margin-bottom:.5rem;">Buscar
+                            farmacia</label>
+                        <input type="text" id="filtro-nombre" oninput="filtrarFarmacias()"
+                            placeholder="Nombre de la farmacia..."
+                            style="width:100%;padding:.75rem 1rem;border:2px solid var(--color-gray-200);border-radius:8px;font-family:var(--font-body);font-size:.95rem;color:var(--color-dark);outline:none;">
+                    </div>
+                    <button onclick="resetFiltros()"
+                        style="padding:.75rem 1.5rem;background:var(--color-primary);color:var(--color-dark);font-family:var(--font-heading);font-weight:700;font-size:.875rem;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;transition:all .2s;">Limpiar
+                        filtros</button>
+                </div>
+                <p id="resultado-count"
+                    style="margin-top:1rem;font-size:.875rem;color:var(--color-gray-600);font-weight:500;"></p>
             </div>
-            <div style="flex:1;min-width:220px;">
-              <label style="font-family:var(--font-heading);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-gray-600);display:block;margin-bottom:.5rem;">Producto</label>
-              <select id="filtro-producto" onchange="filtrarFarmacias()" style="width:100%;padding:.75rem 1rem;border:2px solid var(--color-gray-200);border-radius:8px;font-family:var(--font-body);font-size:.95rem;color:var(--color-dark);background:#fff;cursor:pointer;outline:none;">
-                <option value="todos">Todos los productos</option>
-                <option value="cysprex">CYSPREX®</option>
-                <option value="lubryn">Lubryn-E®</option>
-              </select>
+
+            <!-- Grid -->
+            <div id="farmacias-grid"
+                style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;"></div>
+
+            <!-- No results -->
+            <div id="sin-resultados" style="display:none;text-align:center;padding:4rem 2rem;">
+                <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="1.5"
+                    style="margin:0 auto 1rem;display:block;">
+                    <circle cx="11" cy="11" r="8" />
+                    <path d="M21 21l-4.35-4.35" />
+                </svg>
+                <h3 style="color:var(--color-gray-600);margin-bottom:.5rem;">No se encontraron farmacias</h3>
+                <p style="color:var(--color-gray-500);">Intenta con otros filtros o contáctanos para más información.
+                </p>
             </div>
-            <div style="flex:1;min-width:220px;">
-              <label style="font-family:var(--font-heading);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-gray-600);display:block;margin-bottom:.5rem;">Buscar farmacia</label>
-              <input type="text" id="filtro-nombre" oninput="filtrarFarmacias()" placeholder="Nombre de la farmacia..." style="width:100%;padding:.75rem 1rem;border:2px solid var(--color-gray-200);border-radius:8px;font-family:var(--font-body);font-size:.95rem;color:var(--color-dark);outline:none;">
+
+            <!-- CTA no está tu farmacia -->
+            <div
+                style="margin-top:3rem;background:linear-gradient(135deg,var(--color-dark) 0%,#2a2a2a 100%);border-radius:16px;padding:2.5rem;text-align:center;">
+                <span
+                    style="display:inline-block;padding:.4rem 1rem;background:rgba(154,205,50,.2);color:var(--color-primary);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:4px;margin-bottom:1rem;">¿Eres
+                    farmaceútico?</span>
+                <h3 style="color:#fff;font-size:1.5rem;margin-bottom:.75rem;">¿Tu farmacia no está en la lista?</h3>
+                <p style="color:#adb5bd;margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto;">Si
+                    deseas unirte a nuestra red de farmacias aliadas o distribuir nuestros productos, contáctanos y con
+                    gusto te asesoramos.</p>
+                <a href="https://wa.me/593987646968?text=Hola,%20me%20gustaría%20ser%20farmacia%20aliada%20de%20PROFARNOVA"
+                    target="_blank" rel="noopener" class="btn btn-primary">Contactar por WhatsApp</a>
             </div>
-            <button onclick="resetFiltros()" style="padding:.75rem 1.5rem;background:var(--color-primary);color:var(--color-dark);font-family:var(--font-heading);font-weight:700;font-size:.875rem;border-radius:8px;border:none;cursor:pointer;white-space:nowrap;transition:all .2s;">Limpiar filtros</button>
-          </div>
-          <p id="resultado-count" style="margin-top:1rem;font-size:.875rem;color:var(--color-gray-600);font-weight:500;"></p>
         </div>
-
-        <!-- Grid -->
-        <div id="farmacias-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1.5rem;"></div>
-
-        <!-- No results -->
-        <div id="sin-resultados" style="display:none;text-align:center;padding:4rem 2rem;">
-          <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="1.5" style="margin:0 auto 1rem;display:block;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
-          <h3 style="color:var(--color-gray-600);margin-bottom:.5rem;">No se encontraron farmacias</h3>
-          <p style="color:var(--color-gray-500);">Intenta con otros filtros o contáctanos para más información.</p>
-        </div>
-
-        <!-- CTA no está tu farmacia -->
-        <div style="margin-top:3rem;background:linear-gradient(135deg,var(--color-dark) 0%,#2a2a2a 100%);border-radius:16px;padding:2.5rem;text-align:center;">
-          <span style="display:inline-block;padding:.4rem 1rem;background:rgba(154,205,50,.2);color:var(--color-primary);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:2px;border-radius:4px;margin-bottom:1rem;">¿Eres farmaceútico?</span>
-          <h3 style="color:#fff;font-size:1.5rem;margin-bottom:.75rem;">¿Tu farmacia no está en la lista?</h3>
-          <p style="color:#adb5bd;margin-bottom:1.5rem;max-width:500px;margin-left:auto;margin-right:auto;">Si deseas unirte a nuestra red de farmacias aliadas o distribuir nuestros productos, contáctanos y con gusto te asesoramos.</p>
-          <a href="https://wa.me/593987646968?text=Hola,%20me%20gustaría%20ser%20farmacia%20aliada%20de%20PROFARNOVA" target="_blank" rel="noopener" class="btn btn-primary">Contactar por WhatsApp</a>
-        </div>
-      </div>
     </section>
 
     <!-- Footer -->
@@ -214,11 +244,19 @@
                     <img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="footer-logo">
                     <p>Empresa farmacéutica ecuatoriana comprometida con la innovación, calidad y bienestar.</p>
                     <div class="social-links">
-                        <a href="https://www.facebook.com/profile.php?id=61580824846911" target="_blank" rel="noopener" class="social-icon" aria-label="Facebook">
-                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        <a href="https://www.facebook.com/profile.php?id=61580824846911" target="_blank" rel="noopener"
+                            class="social-icon" aria-label="Facebook">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                            </svg>
                         </a>
-                        <a href="https://www.instagram.com/p/DYfFq89kndU/" target="_blank" rel="noopener" class="social-icon" aria-label="Instagram">
-                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                        <a href="https://www.instagram.com/p/DYfFq89kndU/" target="_blank" rel="noopener"
+                            class="social-icon" aria-label="Instagram">
+                            <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+                                <path
+                                    d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -252,142 +290,153 @@
             </div>
             <div class="footer-bottom">
                 <p>© 2024 PROFARNOVA. Todos los derechos reservados.</p>
-                <p>Registro Sanitario ARCSA | Distribuido en Ecuador<a href="admin.html" id="hidden-admin-dot" style="color:inherit;text-decoration:none;cursor:default;opacity:.6;font-size:inherit;display:inline-block;">.</a></p>
-                <p style="margin-top:.8rem;font-size:.9rem;opacity:.95;font-weight:500;">Desarrollado por <a href="https://jiyanedesign.com" target="_blank" rel="noopener" class="designer-link">JiyaneDesign</a></p>
+                <p>Registro Sanitario ARCSA | Distribuido en Ecuador<a href="admin.html" id="hidden-admin-dot"
+                        style="color:inherit;text-decoration:none;cursor:default;opacity:.6;font-size:inherit;display:inline-block;">.</a>
+                </p>
+                <p style="margin-top:.8rem;font-size:.9rem;opacity:.95;font-weight:500;">Desarrollado por <a
+                        href="https://jiyanedesign.com" target="_blank" rel="noopener"
+                        class="designer-link">JiyaneDesign</a></p>
             </div>
         </div>
     </footer>
 
     <!-- WhatsApp Floating -->
-    <a href="https://wa.me/593987646968?text=Hola,%20me%20gustaría%20información%20sobre%20dónde%20comprar%20productos%20PROFARNOVA" class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+    <a href="https://wa.me/593987646968?text=Hola,%20me%20gustaría%20información%20sobre%20dónde%20comprar%20productos%20PROFARNOVA"
+        class="whatsapp-float" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z" />
+        </svg>
     </a>
 
     <!-- Scroll Top -->
     <button class="scroll-top" id="scrollTop" aria-label="Volver arriba">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 15l-6-6-6 6"/></svg>
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M18 15l-6-6-6 6" />
+        </svg>
     </button>
 
     <script src="scripts.js?v=4.0"></script>
     <script>
-    // =============================================
-    // DATOS DE FARMACIAS - Carga desde API o fallback
-    // =============================================
-    const FARMACIAS_FALLBACK = [
-        { id:1, nombre:"Farmacia Cruz Azul - La Mariscal", ciudad:"quito", sector:"La Mariscal", direccion:"Av. Amazonas N24-196 y Colón, La Mariscal", telefono:"+593 2 256 1234", whatsapp:"593225561234", horario:"Lun-Vie 8:00-20:00 | Sáb 9:00-18:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Av.+Amazonas+N24-196+Quito", logo:"https://upload.wikimedia.org/wikipedia/commons/a/a2/Logotipo_Farmacias_Cruz_Azul.png" },
-        { id:2, nombre:"Farmacia Comunitaria - La Carolina", ciudad:"quito", sector:"La Carolina", direccion:"Av. Naciones Unidas E3-33 y Av. Shyris, La Carolina", telefono:"+593 2 244 5678", whatsapp:"593224445678", horario:"Lun-Dom 7:00-22:00", productos:["cysprex"], maps:"https://maps.google.com/?q=Av.+Naciones+Unidas+Quito" },
-        { id:3, nombre:"Farmacia Sana Sana - Cumbayá", ciudad:"quito", sector:"Cumbayá", direccion:"Calle Francisco de Orellana y Diego de Vasquez, Cumbayá", telefono:"+593 2 289 3456", whatsapp:"593228893456", horario:"Lun-Sáb 8:00-21:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Cumbaya+Quito" },
-        { id:4, nombre:"Farmacia Medicity - Kennedy", ciudad:"guayaquil", sector:"Kennedy Norte", direccion:"Av. Francisco de Orellana y Justino Cornejo, Kennedy Norte", telefono:"+593 4 268 7890", whatsapp:"593426687890", horario:"Lun-Dom 8:00-22:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Kennedy+Norte+Guayaquil" },
-        { id:5, nombre:"Boticas & Salud - Urdesa", ciudad:"guayaquil", sector:"Urdesa", direccion:"Circunvalación Sur 717 y Víctor Emilio Estrada, Urdesa", telefono:"+593 4 238 1122", whatsapp:"593423811221", horario:"Lun-Sáb 8:00-20:00", productos:["lubryn"], maps:"https://maps.google.com/?q=Urdesa+Guayaquil" },
-        { id:6, nombre:"Farmacia Pasteur - Samborondón", ciudad:"guayaquil", sector:"La Puntilla", direccion:"Av. Jaime Roldós Aguilera, La Puntilla, Samborondón", telefono:"+593 4 371 9900", whatsapp:"593437199001", horario:"Lun-Dom 7:00-23:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Samborondon+Guayaquil" },
-        { id:7, nombre:"Farmacia Cruz Azul - El Centro", ciudad:"cuenca", sector:"Centro Histórico", direccion:"Calle Bolívar 7-79 y Luis Cordero, Centro Histórico", telefono:"+593 7 284 5566", whatsapp:"593728455661", horario:"Lun-Vie 8:00-20:00 | Sáb 9:00-17:00", productos:["cysprex"], maps:"https://maps.google.com/?q=Calle+Bolivar+Cuenca" },
-        { id:8, nombre:"Farmacia Fybeca - Mall del Río", ciudad:"cuenca", sector:"Mall del Río", direccion:"Av. De las Américas y Tarqui, Mall del Río, Cuenca", telefono:"+593 7 408 0000", whatsapp:"593740800001", horario:"Lun-Dom 9:00-21:00", productos:["cysprex","lubryn"], maps:"https://maps.google.com/?q=Mall+del+Rio+Cuenca" }
-    ];
+        // =============================================
+        // DATOS DE FARMACIAS - Carga desde API o fallback
+        // =============================================
+        const FARMACIAS_FALLBACK = [
+            { id: 1, nombre: "Farmacia Cruz Azul - La Mariscal", ciudad: "quito", sector: "La Mariscal", direccion: "Av. Amazonas N24-196 y Colón, La Mariscal", telefono: "+593 2 256 1234", whatsapp: "593225561234", horario: "Lun-Vie 8:00-20:00 | Sáb 9:00-18:00", productos: ["cysprex", "lubryn"], maps: "https://maps.google.com/?q=Av.+Amazonas+N24-196+Quito", logo: "https://upload.wikimedia.org/wikipedia/commons/a/a2/Logotipo_Farmacias_Cruz_Azul.png" },
+            { id: 2, nombre: "Farmacia Comunitaria - La Carolina", ciudad: "quito", sector: "La Carolina", direccion: "Av. Naciones Unidas E3-33 y Av. Shyris, La Carolina", telefono: "+593 2 244 5678", whatsapp: "593224445678", horario: "Lun-Dom 7:00-22:00", productos: ["cysprex"], maps: "https://maps.google.com/?q=Av.+Naciones+Unidas+Quito" },
+            { id: 3, nombre: "Farmacia Sana Sana - Cumbayá", ciudad: "quito", sector: "Cumbayá", direccion: "Calle Francisco de Orellana y Diego de Vasquez, Cumbayá", telefono: "+593 2 289 3456", whatsapp: "593228893456", horario: "Lun-Sáb 8:00-21:00", productos: ["cysprex", "lubryn"], maps: "https://maps.google.com/?q=Cumbaya+Quito" },
+            { id: 4, nombre: "Farmacia Medicity - Kennedy", ciudad: "guayaquil", sector: "Kennedy Norte", direccion: "Av. Francisco de Orellana y Justino Cornejo, Kennedy Norte", telefono: "+593 4 268 7890", whatsapp: "593426687890", horario: "Lun-Dom 8:00-22:00", productos: ["cysprex", "lubryn"], maps: "https://maps.google.com/?q=Kennedy+Norte+Guayaquil" },
+            { id: 5, nombre: "Boticas & Salud - Urdesa", ciudad: "guayaquil", sector: "Urdesa", direccion: "Circunvalación Sur 717 y Víctor Emilio Estrada, Urdesa", telefono: "+593 4 238 1122", whatsapp: "593423811221", horario: "Lun-Sáb 8:00-20:00", productos: ["lubryn"], maps: "https://maps.google.com/?q=Urdesa+Guayaquil" },
+            { id: 6, nombre: "Farmacia Pasteur - Samborondón", ciudad: "guayaquil", sector: "La Puntilla", direccion: "Av. Jaime Roldós Aguilera, La Puntilla, Samborondón", telefono: "+593 4 371 9900", whatsapp: "593437199001", horario: "Lun-Dom 7:00-23:00", productos: ["cysprex", "lubryn"], maps: "https://maps.google.com/?q=Samborondon+Guayaquil" },
+            { id: 7, nombre: "Farmacia Cruz Azul - El Centro", ciudad: "cuenca", sector: "Centro Histórico", direccion: "Calle Bolívar 7-79 y Luis Cordero, Centro Histórico", telefono: "+593 7 284 5566", whatsapp: "593728455661", horario: "Lun-Vie 8:00-20:00 | Sáb 9:00-17:00", productos: ["cysprex"], maps: "https://maps.google.com/?q=Calle+Bolivar+Cuenca" },
+            { id: 8, nombre: "Farmacia Fybeca - Mall del Río", ciudad: "cuenca", sector: "Mall del Río", direccion: "Av. De las Américas y Tarqui, Mall del Río, Cuenca", telefono: "+593 7 408 0000", whatsapp: "593740800001", horario: "Lun-Dom 9:00-21:00", productos: ["cysprex", "lubryn"], maps: "https://maps.google.com/?q=Mall+del+Rio+Cuenca" }
+        ];
 
-    let todasFarmacias = [];
+        let todasFarmacias = [];
 
-    async function cargarFarmacias() {
-        try {
-            const apiUrl = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
-                ? 'http://localhost:5000/api/farmacias'
-                : '/api/farmacias';
-            const res = await fetch(apiUrl);
-            if (!res.ok) throw new Error('API no disponible');
-            todasFarmacias = await res.json();
-        } catch {
-            todasFarmacias = FARMACIAS_FALLBACK;
+        async function cargarFarmacias() {
+            try {
+                const apiUrl = window.location.origin.includes('localhost') || window.location.origin.includes('127.0.0.1')
+                    ? 'http://localhost:5000/api/farmacias'
+                    : '/api/farmacias';
+                const res = await fetch(apiUrl);
+                if (!res.ok) throw new Error('API no disponible');
+                todasFarmacias = await res.json();
+            } catch {
+                todasFarmacias = FARMACIAS_FALLBACK;
+            }
+            document.getElementById('stat-farmacias').textContent = todasFarmacias.length + '+';
+
+            const selectCiudad = document.getElementById('filtro-ciudad');
+            const selectProducto = document.getElementById('filtro-producto');
+            const urlParams = new URLSearchParams(window.location.search);
+            const paramCiudad = urlParams.get('ciudad');
+            const paramProducto = urlParams.get('producto');
+
+            const ciudadesUnicas = [...new Set(todasFarmacias.map(f => f.ciudad.toLowerCase().trim()))].sort();
+            document.getElementById('stat-ciudades').textContent = ciudadesUnicas.length;
+
+            let htmlOpts = '<option value="todas">Todas las ciudades</option>';
+            ciudadesUnicas.forEach(c => {
+                htmlOpts += `<option value="${c}">${c.charAt(0).toUpperCase() + c.slice(1)}</option>`;
+            });
+            selectCiudad.innerHTML = htmlOpts;
+
+            if (paramCiudad) {
+                const found = ciudadesUnicas.find(c => c === paramCiudad.toLowerCase().trim());
+                if (found) selectCiudad.value = found;
+            }
+
+            if (paramProducto) {
+                const prodVal = paramProducto.toLowerCase() === 'cysprex' ? 'cysprex' : (paramProducto.toLowerCase() === 'lubryn-e' ? 'lubryn' : 'todos');
+                selectProducto.value = prodVal;
+            }
+
+            filtrarFarmacias();
         }
-        document.getElementById('stat-farmacias').textContent = todasFarmacias.length + '+';
 
-        const selectCiudad = document.getElementById('filtro-ciudad');
-        const selectProducto = document.getElementById('filtro-producto');
-        const urlParams = new URLSearchParams(window.location.search);
-        const paramCiudad = urlParams.get('ciudad');
-        const paramProducto = urlParams.get('producto');
+        function renderFarmacias(lista) {
+            const grid = document.getElementById('farmacias-grid');
+            const sinRes = document.getElementById('sin-resultados');
+            const count = document.getElementById('resultado-count');
+            if (!lista.length) {
+                grid.innerHTML = '';
+                sinRes.style.display = 'block';
+                count.textContent = '';
+                return;
+            }
+            sinRes.style.display = 'none';
+            count.textContent = `Mostrando ${lista.length} farmacia${lista.length !== 1 ? 's' : ''}`;
 
-        const ciudadesUnicas = [...new Set(todasFarmacias.map(f => f.ciudad.toLowerCase().trim()))].sort();
-        
-        let htmlOpts = '<option value="todas">Todas las ciudades</option>';
-        ciudadesUnicas.forEach(c => {
-            htmlOpts += `<option value="${c}">${c.charAt(0).toUpperCase() + c.slice(1)}</option>`;
-        });
-        selectCiudad.innerHTML = htmlOpts;
-        
-        if (paramCiudad) {
-            const found = ciudadesUnicas.find(c => c === paramCiudad.toLowerCase().trim());
-            if (found) selectCiudad.value = found;
-        }
+            grid.innerHTML = lista.map(f => {
+                const tags = f.productos.map(p => `<span style="padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-weight:700;background:${p === 'cysprex' ? 'rgba(124,181,24,.15)' : 'rgba(26,26,26,.08)'};color:${p === 'cysprex' ? 'var(--color-primary-dark)' : 'var(--color-dark)'};">${p === 'cysprex' ? 'CYSPREX®' : 'Lubryn-E®'}</span>`).join('');
+                const storeIcon = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(154,205,50,.6)" stroke-width="1.5" style="flex-shrink:0"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`;
 
-        if (paramProducto) {
-            const prodVal = paramProducto.toLowerCase() === 'cysprex' ? 'cysprex' : (paramProducto.toLowerCase() === 'lubryn-e' ? 'lubryn' : 'todos');
-            selectProducto.value = prodVal;
-        }
-
-        filtrarFarmacias();
-    }
-
-    function renderFarmacias(lista) {
-        const grid = document.getElementById('farmacias-grid');
-        const sinRes = document.getElementById('sin-resultados');
-        const count = document.getElementById('resultado-count');
-        if (!lista.length) {
-            grid.innerHTML = '';
-            sinRes.style.display = 'block';
-            count.textContent = '';
-            return;
-        }
-        sinRes.style.display = 'none';
-        count.textContent = `Mostrando ${lista.length} farmacia${lista.length !== 1 ? 's' : ''}`;
-
-        grid.innerHTML = lista.map(f => {
-            const tags = f.productos.map(p => `<span style="padding:.2rem .6rem;border-radius:4px;font-size:.7rem;font-weight:700;background:${p==='cysprex'?'rgba(124,181,24,.15)':'rgba(26,26,26,.08)'};color:${p==='cysprex'?'var(--color-primary-dark)':'var(--color-dark)'};">${p==='cysprex'?'CYSPREX®':'Lubryn-E®'}</span>`).join('');
-            const storeIcon = `<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(154,205,50,.6)" stroke-width="1.5" style="flex-shrink:0"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>`;
-
-            // La URL del logo ya viene completa desde el servidor
-            const logoHtml = f.logo
-                ? `<div style="flex-shrink:0;width:110px;height:70px;border-radius:10px;overflow:hidden;">
+                // La URL del logo ya viene completa desde el servidor
+                const logoHtml = f.logo
+                    ? `<div style="flex-shrink:0;width:110px;height:70px;border-radius:10px;overflow:hidden;">
                     <img src="${f.logo}" alt="${f.nombre}" onerror="this.parentElement.style.display='none'" style="width:100%;height:100%;object-fit:contain;display:block;">
                    </div>`
-                : `<div style="flex-shrink:0;width:46px;height:46px;display:flex;align-items:center;justify-content:center;">${storeIcon}</div>`;
+                    : `<div style="flex-shrink:0;width:46px;height:46px;display:flex;align-items:center;justify-content:center;">${storeIcon}</div>`;
 
-            const sectorHtml = f.sector ? ` <span style="color:rgba(255,255,255,0.5);font-size:.65rem;margin-left:4px;">- ${f.sector.toUpperCase()}</span>` : '';
+                const sectorHtml = f.sector ? ` <span style="color:rgba(255,255,255,0.5);font-size:.65rem;margin-left:4px;">- ${f.sector.toUpperCase()}</span>` : '';
 
-            // Campos opcionales: solo aparecen si tienen datos
-            const telefonoHtml = f.telefono ? `
+                // Campos opcionales: solo aparecen si tienen datos
+                const telefonoHtml = f.telefono ? `
                         <div style="display:flex;gap:.75rem;align-items:center;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-dark)" stroke-width="2" style="flex-shrink:0;"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
                             <a href="tel:${f.telefono}" style="font-size:.875rem;color:var(--color-primary-dark);font-weight:600;">${f.telefono}</a>
                         </div>` : '';
 
-            const horarioHtml = f.horario ? `
+                const horarioHtml = f.horario ? `
                         <div style="display:flex;gap:.75rem;align-items:center;">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary-dark)" stroke-width="2" style="flex-shrink:0;"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
                             <span style="font-size:.8rem;color:var(--color-gray-600);">${f.horario}</span>
                         </div>` : '';
 
-            const mapsBtn = f.maps ? `
+                const mapsBtn = f.maps ? `
                         <a href="${f.maps}" target="_blank" rel="noopener" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem .75rem;background:var(--color-primary);color:var(--color-dark);font-family:var(--font-heading);font-size:.78rem;font-weight:700;border-radius:6px;text-decoration:none;">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
                             Ver en Mapa
                         </a>` : '';
 
-            const waBtn = f.whatsapp ? `
+                const waBtn = f.whatsapp ? `
                         <a href="https://wa.me/${f.whatsapp}?text=Hola,%20busco%20productos%20PROFARNOVA" target="_blank" rel="noopener" style="flex:1;display:inline-flex;align-items:center;justify-content:center;gap:.4rem;padding:.55rem .75rem;background:#25D366;color:#fff;font-family:var(--font-heading);font-size:.78rem;font-weight:700;border-radius:6px;text-decoration:none;">
                             <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
                             WhatsApp
                         </a>` : '';
 
-            const botonesHtml = (mapsBtn || waBtn) ? `
+                const botonesHtml = (mapsBtn || waBtn) ? `
                     <div style="display:flex;gap:.5rem;flex-wrap:wrap;margin-top:1rem;">
                         ${mapsBtn}
                         ${waBtn}
                     </div>` : '';
 
-            return `
+                return `
             <div class="farmacia-card" data-ciudad="${f.ciudad}" data-productos="${f.productos.join(',')}" data-nombre="${f.nombre.toLowerCase()}">
                 <div style="background:linear-gradient(135deg,var(--color-dark) 0%,#2a2a2a 100%);padding:1.25rem 1.5rem;border-radius:12px 12px 0 0;display:flex;justify-content:space-between;align-items:center;gap:1rem;">
                     <div>
-                        <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-primary);display:flex;align-items:center;margin-bottom:.25rem;">${f.ciudad.charAt(0).toUpperCase()+f.ciudad.slice(1)}${sectorHtml}</span>
+                        <span style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--color-primary);display:flex;align-items:center;margin-bottom:.25rem;">${f.ciudad.charAt(0).toUpperCase() + f.ciudad.slice(1)}${sectorHtml}</span>
                         <h3 style="color:#fff;font-size:.95rem;font-family:var(--font-heading);margin:0;line-height:1.3;">${f.nombre}</h3>
                     </div>
                     ${logoHtml}
@@ -405,45 +454,46 @@
                     ${botonesHtml}
                 </div>
             </div>`;
-        }).join('');
-    }
+            }).join('');
+        }
 
-    function filtrarFarmacias() {
-        const ciudad = document.getElementById('filtro-ciudad').value;
-        const producto = document.getElementById('filtro-producto').value;
-        const nombre = document.getElementById('filtro-nombre').value.toLowerCase().trim();
-        const resultado = todasFarmacias.filter(f => {
-            const okCiudad = ciudad === 'todas' || f.ciudad.toLowerCase().trim() === ciudad;
-            const okProd = producto === 'todos' || f.productos.includes(producto);
-            const okNombre = !nombre || f.nombre.toLowerCase().includes(nombre);
-            return okCiudad && okProd && okNombre;
-        });
-        renderFarmacias(resultado);
-    }
+        function filtrarFarmacias() {
+            const ciudad = document.getElementById('filtro-ciudad').value;
+            const producto = document.getElementById('filtro-producto').value;
+            const nombre = document.getElementById('filtro-nombre').value.toLowerCase().trim();
+            const resultado = todasFarmacias.filter(f => {
+                const okCiudad = ciudad === 'todas' || f.ciudad.toLowerCase().trim() === ciudad;
+                const okProd = producto === 'todos' || f.productos.includes(producto);
+                const okNombre = !nombre || f.nombre.toLowerCase().includes(nombre);
+                return okCiudad && okProd && okNombre;
+            });
+            renderFarmacias(resultado);
+        }
 
-    function resetFiltros() {
-        document.getElementById('filtro-ciudad').value = 'todas';
-        document.getElementById('filtro-producto').value = 'todos';
-        document.getElementById('filtro-nombre').value = '';
-        renderFarmacias(todasFarmacias);
-    }
+        function resetFiltros() {
+            document.getElementById('filtro-ciudad').value = 'todas';
+            document.getElementById('filtro-producto').value = 'todos';
+            document.getElementById('filtro-nombre').value = '';
+            renderFarmacias(todasFarmacias);
+        }
 
-    // Header scroll
-    const header = document.getElementById('header');
-    window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
+        // Header scroll
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 50));
 
-    // Scroll top
-    const scrollTopBtn = document.getElementById('scrollTop');
-    window.addEventListener('scroll', () => scrollTopBtn.classList.toggle('visible', window.scrollY > 400));
-    scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        // Scroll top
+        const scrollTopBtn = document.getElementById('scrollTop');
+        window.addEventListener('scroll', () => scrollTopBtn.classList.toggle('visible', window.scrollY > 400));
+        scrollTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-    // Mobile menu
-    const menuToggle = document.getElementById('menuToggle');
-    const nav = document.getElementById('nav');
-    if (menuToggle) menuToggle.addEventListener('click', () => { nav.classList.toggle('open'); menuToggle.classList.toggle('active'); });
+        // Mobile menu
+        const menuToggle = document.getElementById('menuToggle');
+        const nav = document.getElementById('nav');
+        if (menuToggle) menuToggle.addEventListener('click', () => { nav.classList.toggle('open'); menuToggle.classList.toggle('active'); });
 
-    // Init
-    cargarFarmacias();
+        // Init
+        cargarFarmacias();
     </script>
 </body>
+
 </html>
