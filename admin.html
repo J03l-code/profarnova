@@ -90,7 +90,7 @@
     
     <!-- TOP NAVBAR -->
     <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <div class="w-full px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div class="flex items-center gap-3">
           <img src="assets/profarnova-logo.png" alt="PROFARNOVA" class="h-9 w-auto" />
           <span class="text-xl font-extrabold text-slate-900 tracking-tight">
@@ -114,7 +114,7 @@
     </header>
 
     <!-- WRAPPER -->
-    <div class="flex-1 flex flex-col md:flex-row max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 gap-8">
+    <div class="flex-1 flex flex-col md:flex-row w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 gap-8">
       
       <!-- SIDEBAR -->
       <aside class="w-full md:w-64 flex flex-col gap-4">
@@ -755,8 +755,11 @@
             <input type="url" id="form-farmacia-maps" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="https://maps.google.com/?q=...">
           </div>
           <div class="col-span-2">
-            <label class="block text-xs font-bold text-slate-500 mb-1">URL del Logo (Opcional)</label>
-            <input type="url" id="form-farmacia-logo" class="w-full px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="https://ejemplo.com/logo.png">
+            <label class="block text-xs font-bold text-slate-500 mb-1">Logo de Farmacia (Subir Imagen o URL)</label>
+            <div class="flex gap-2">
+              <input type="file" id="form-farmacia-logo-file" accept="image/*" class="w-1/2 px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50">
+              <input type="url" id="form-farmacia-logo" class="w-1/2 px-3 py-2 border border-slate-200 rounded-lg text-sm bg-slate-50" placeholder="O si usas URL: https://ejemplo.com/logo.png">
+            </div>
           </div>
           <div class="col-span-2">
             <label class="block text-xs font-bold text-slate-500 mb-2">Productos Disponibles</label>
@@ -1431,6 +1434,7 @@
       document.getElementById('farmacia-modal-title').textContent = 'Añadir Farmacia';
       document.getElementById('form-farmacia-id').value = '';
       document.getElementById('farmacia-form-elem').reset();
+      document.getElementById('form-farmacia-logo-file').value = '';
       document.getElementById('form-farmacia-activa').checked = true;
       document.getElementById('farmacia-modal').classList.remove('hidden');
     }
@@ -1451,6 +1455,7 @@
       document.getElementById('form-farmacia-horario').value = f.horario || '';
       document.getElementById('form-farmacia-maps').value = f.maps || '';
       document.getElementById('form-farmacia-logo').value = f.logo || '';
+      document.getElementById('form-farmacia-logo-file').value = '';
       
       const prods = f.productos || [];
       document.getElementById('prod-cysprex').checked = prods.includes('cysprex');
@@ -1481,8 +1486,30 @@
         activa: document.getElementById('form-farmacia-activa').checked ? 1 : 0
       };
 
+      const fileInput = document.getElementById('form-farmacia-logo-file');
+      
       try {
-        await apiRequest(id ? 'PUT' : 'POST', id ? `/farmacias/${id}` : '/farmacias', body);
+        if (fileInput.files.length > 0) {
+          const formData = new FormData();
+          Object.keys(body).forEach(key => {
+            if (key === 'productos') {
+              formData.append(key, JSON.stringify(body[key]));
+            } else {
+              formData.append(key, body[key]);
+            }
+          });
+          formData.append('logo_file', fileInput.files[0]);
+
+          const res = await fetch(`${API_URL}${id ? `/farmacias/${id}` : '/farmacias'}`, {
+            method: id ? 'PUT' : 'POST',
+            headers: { 'Authorization': `Bearer ${authToken}` },
+            body: formData
+          });
+          const data = await res.json().catch(() => ({}));
+          if (!res.ok) throw new Error(data.error || `Error ${res.status}`);
+        } else {
+          await apiRequest(id ? 'PUT' : 'POST', id ? `/farmacias/${id}` : '/farmacias', body);
+        }
         showToast(id ? 'Farmacia actualizada.' : 'Farmacia creada.');
         closeFarmaciaModal();
         loadAllData();
