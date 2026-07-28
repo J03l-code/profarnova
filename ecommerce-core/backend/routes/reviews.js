@@ -24,10 +24,31 @@ router.get('/product/:sku', async (req, res) => {
 
 // SUBMIT A NEW REVIEW (Public)
 router.post('/', async (req, res) => {
-  const { product_sku, client_name, client_email, rating, comment } = req.body;
+  const { product_sku, client_name, client_email, rating, comment, recaptchaToken } = req.body;
 
   if (!product_sku || !client_name || !rating || !comment) {
     return res.status(400).json({ error: 'Producto, Nombre, Calificación y Comentario son obligatorios.' });
+  }
+
+  if (!recaptchaToken) {
+    return res.status(400).json({ error: 'Falta el token de verificación de seguridad (reCAPTCHA).' });
+  }
+
+  // Verify reCAPTCHA token
+  try {
+    const secretKey = process.env.RECAPTCHA_SECRET_KEY;
+    const verifyUrl = `https://www.google.com/recaptcha/api/siteverify?secret=${secretKey}&response=${recaptchaToken}`;
+    
+    const recaptchaRes = await fetch(verifyUrl, { method: 'POST' });
+    const recaptchaData = await recaptchaRes.json();
+
+    if (!recaptchaData.success || recaptchaData.score < 0.5) {
+      console.warn('reCAPTCHA verification failed:', recaptchaData);
+      return res.status(403).json({ error: 'La verificación de seguridad falló o detectó actividad sospechosa (Bot).' });
+    }
+  } catch (recaptchaErr) {
+    console.error('Error verifying reCAPTCHA:', recaptchaErr);
+    return res.status(500).json({ error: 'Error interno en la verificación de seguridad reCAPTCHA.' });
   }
 
   const numRating = parseInt(rating, 10);

@@ -30,6 +30,9 @@
 
     <link rel="stylesheet" href="cysprex.css?v=2.0">
 
+    <!-- Google reCAPTCHA v3 -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6LcLSmotAAAAAL37oHqRvzJS0Szosp82qF87YPrz"></script>
+
     <!-- Schema.org Product -->
     <script type="application/ld+json">
     {
@@ -692,42 +695,54 @@
 
             // Submit Review Form
             const form = document.getElementById('product-review-form');
-            form.addEventListener('submit', async (e) => {
+            form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 
                 const btn = form.querySelector('button[type="submit"]');
                 btn.disabled = true;
-                btn.textContent = 'Enviando...';
+                btn.textContent = 'Verificando seguridad...';
 
-                const body = {
-                    product_sku: productSku,
-                    client_name: document.getElementById('review-client-name').value,
-                    client_email: document.getElementById('review-client-email').value,
-                    rating: parseInt(ratingInput.value),
-                    comment: document.getElementById('review-client-comment').value
-                };
+                grecaptcha.ready(() => {
+                    grecaptcha.execute('6LcLSmotAAAAAL37oHqRvzJS0Szosp82qF87YPrz', {action: 'submit_review'}).then(async (token) => {
+                        btn.textContent = 'Enviando...';
 
-                try {
-                    const res = await fetch(`${apiUrl}/reviews`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
+                        const body = {
+                            product_sku: productSku,
+                            client_name: document.getElementById('review-client-name').value,
+                            client_email: document.getElementById('review-client-email').value,
+                            rating: parseInt(ratingInput.value),
+                            comment: document.getElementById('review-client-comment').value,
+                            recaptchaToken: token
+                        };
+
+                        try {
+                            const res = await fetch(`${apiUrl}/reviews`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(body)
+                            });
+                            
+                            const data = await res.json();
+                            if (!res.ok) throw new Error(data.error || 'Failed to submit review');
+
+                            alert('¡Gracias! Tu reseña ha sido enviada con éxito y se publicará tras ser aprobada por el administrador.');
+                            form.reset();
+                            updateFormStars(5);
+                            ratingInput.value = 5;
+
+                        } catch (err) {
+                            alert(err.message || 'Ocurrió un error al enviar la reseña.');
+                        } finally {
+                            btn.disabled = false;
+                            btn.textContent = 'Enviar Reseña';
+                        }
+                    }).catch((recaptchaErr) => {
+                        console.error('reCAPTCHA execution error:', recaptchaErr);
+                        alert('Error al realizar la verificación de seguridad reCAPTCHA.');
+                        btn.disabled = false;
+                        btn.textContent = 'Enviar Reseña';
                     });
-                    
-                    const data = await res.json();
-                    if (!res.ok) throw new Error(data.error || 'Failed to submit review');
-
-                    alert('¡Gracias! Tu reseña ha sido enviada con éxito y se publicará tras ser aprobada por el administrador.');
-                    form.reset();
-                    updateFormStars(5);
-                    ratingInput.value = 5;
-
-                } catch (err) {
-                    alert(err.message || 'Ocurrió un error al enviar la reseña.');
-                } finally {
-                    btn.disabled = false;
-                    btn.textContent = 'Enviar Reseña';
-                }
+                });
             });
         });
     </script>
