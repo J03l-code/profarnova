@@ -8,12 +8,12 @@ lerna-debug.log*
 node_modules/
 
 # Environment variables
-.env
+# .env (removed from ignore to allow git deployment)
 .env.local
 .env.development.local
 .env.test.local
 .env.production.local
-**/.env
+# **/.env (removed from ignore to allow git deployment)
 **/.env*.local
 
 # Editor directories and files
